@@ -1,0 +1,1334 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Security evaluation checklist &#8212; Data Safe Haven  documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/overrides.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'deployment/security_checklist';</script>
+    <script src="../_static/toggle.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Processes" href="../processes/index.html" />
+    <link rel="prev" title="Deploy an SRE with Microsoft RDS" href="deploy_sre_microsoft_rds.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../_static/logo_turing_light.png" class="logo__image only-light" alt="Logo image">
+    <img src="../_static/logo_turing_dark.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../overview/index.html">
+                        Overview
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../design/index.html">
+                        Design
+                    </a>
+                </li>
+                
+
+                <li class="nav-item current active">
+                    <a class="nav-link" href="index.html">
+                        Deployment
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../processes/index.html">
+                        Processes
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../roles/index.html">
+                        Roles
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/alan-turing-institute/data-safe-haven" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../overview/index.html">
+                        Overview
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../design/index.html">
+                        Design
+                    </a>
+                </li>
+                
+
+                <li class="nav-item current active">
+                    <a class="nav-link" href="index.html">
+                        Deployment
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../processes/index.html">
+                        Processes
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../roles/index.html">
+                        Roles
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/alan-turing-institute/data-safe-haven" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+    <div class="bd-toc-item navbar-nav">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="deploy_shm.html">Deploy a Safe Haven Management Environment (SHM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_srd_image.html">Build an SRE compute image</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="deploy_sre.html">Deploy a Secure Research Environment (SRE)</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="deploy_sre_apache_guacamole.html">Deploy an SRE with Apache Guacamole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy_sre_microsoft_rds.html">Deploy an SRE with Microsoft RDS</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Security evaluation checklist</a></li>
+</ul>
+
+    </div>
+</nav>
+    </div>
+    <div class="sidebar-start-items__item">
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book fa-fw left"></span>
+      <span class="left">Currently reading: <strong>v4.0.0</strong></span>
+      <span class="fa fa-caret-down right"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+           <strong> 
+          <dd><a href="/data-safe-haven/v4.0.0/index.html">v4.0.0</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/data-safe-haven/develop/index.html">develop</a></dd>
+          
+        
+      </dl>
+      
+      
+    </div>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-downloads" role="note" aria-label="downloads">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-file-pdf fa-fw left"></span>
+      <span class="left">Download PDF resources</span>
+      <span class="fa fa-caret-down right"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        
+          <dd><a href="/data-safe-haven/v4.0.0/pdf/data_safe_haven_user_guide_guacamole.pdf">User guide (Apache Guacamole)</a></dd>
+        
+          <dd><a href="/data-safe-haven/v4.0.0/pdf/data_safe_haven_user_guide_msrds.pdf">User guide (Microsoft RDS)</a></dd>
+        
+      </dl>
+    </div>
+  </div>
+  
+
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="security-evaluation-checklist">
+<span id="deployment-security-checklist"></span><h1>Security evaluation checklist<a class="headerlink" href="#security-evaluation-checklist" title="Permalink to this heading">#</a></h1>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>This security checklist is used by the Alan Turing Institute to evaluate compliance with our default controls.
+Organisations are responsible for making their own decisions about the suitability of any of our default controls and should treat this checklist as an example, not a template to follow.</p>
+</div>
+<p>In this check list we aim to <strong>evaluate</strong> our deployment against the <a class="reference internal" href="../design/security/reference_configuration.html#design-turing-security-configuration"><span class="std std-ref">security configuration</span></a> that we apply at the Alan Turing Institute.
+The security checklist currently focuses on checks that can evaluate these security requirements for <a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a> (or greater) SREs (with some steps noted as specific to a tier):</p>
+<section id="how-to-use-this-checklist">
+<h2>How to use this checklist<a class="headerlink" href="#how-to-use-this-checklist" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Ensure you have an SHM and attached SRE(s) that you wish to test.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some parts of the checklist are only relevant when there are multiple SREs attached to the same SHM.</p>
+</div>
+<ul class="simple">
+<li><p>Work your way through the actions described in each section, taking care to notice each time you see a 📷 or a ✅ and the word <strong>Verify</strong>:</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>📷 Where you see the camera icon, there should be accompanying screenshot(s) of evidence for this item in the checklist (you may wish to save your own equivalent screenshots as evidence)</p></li>
+<li><p>✅ This indicates a checklist item for which a screenshot is either not appropriate or difficult</p></li>
+</ul>
+</div>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Deployed SHM</strong> that you are testing</p></li>
+<li><p><strong>Deployed SRE A</strong> that is attached to the SHM</p></li>
+<li><p><strong>Deployed SRE B</strong> that is attached to the same SHM</p></li>
+<li><p><strong>VPN access</strong> to the SHM that you are testing</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul class="simple">
+<li><p>If you haven’t already, you’ll need download a VPN certificate and configure <a class="reference internal" href="deploy_shm.html#deploy-shm-vpn"><span class="std std-ref">VPN access</span></a> for the SHM</p></li>
+<li><p>Make sure you can use Remote Desktop to log in to the <a class="reference internal" href="deploy_shm.html#roles-system-deployer-shm-remote-desktop"><span class="std std-ref">domain controller (DC1)</span></a> and the <a class="reference internal" href="deploy_shm.html#roles-system-deployer-shm-remote-desktop-nps"><span class="std std-ref">network policy server (NPS)</span></a>.</p></li>
+</ul>
+</div>
+<p>The following users will be needed for this checklist</p>
+<ul class="simple">
+<li><p><strong>SRE standard user</strong> who is a member of the <strong>SRE A</strong> research users group</p>
+<ul>
+<li><p>Create a new user <strong>without</strong> MFA</p>
+<ul>
+<li><p>Following the SRE deployment instructions for setting up a <a class="reference internal" href="deploy_sre_apache_guacamole.html#deploy-sre-apache-guacamole-create-user-account"><span class="std std-ref">non privileged user account</span></a>, create an account but <strong>do not</strong> add them to any <code class="docutils literal notranslate"><span class="pre">SG</span> <span class="pre">&lt;SRE</span> <span class="pre">ID&gt;</span> <span class="pre">Research</span> <span class="pre">Users</span></code> group.</p></li>
+<li><p>Visit <a class="reference external" href="https://aka.ms/sspr"><code class="docutils literal notranslate"><span class="pre">https://aka.ms/sspr</span></code></a> in an incognito browser</p></li>
+<li><p>Attempt to login and reset password, but <strong>do not complete MFA</strong> (see <a class="reference internal" href="../roles/researcher/user_guide_guacamole.html#roles-researcher-user-guide-setup-mfa"><span class="std std-ref">these steps</span></a>)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../roles/system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a> who has <code class="docutils literal notranslate"><span class="pre">Contributor</span></code> permissions (or higher) on the underlying Azure subscription</p></li>
+<li><p><strong>Data provider</strong> who has no accounts on the Safe Haven system</p></li>
+</ul>
+</section>
+<section id="multifactor-authentication-and-password-strength">
+<h2>1. Multifactor authentication and password strength<a class="headerlink" href="#multifactor-authentication-and-password-strength" title="Permalink to this heading">#</a></h2>
+<section id="turing-configuration-setting">
+<h3>Turing configuration setting:<a class="headerlink" href="#turing-configuration-setting" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Users must set up MFA before accessing the secure analysis environment.</p></li>
+<li><p>Users cannot access the environment without MFA.</p></li>
+<li><p>Users are required/advised to create passwords of a certain strength.</p></li>
+</ul>
+</section>
+<section id="implication">
+<h3>Implication:<a class="headerlink" href="#implication" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Users are required to authenticate with Multi-factor Authentication (MFA) in order to access the secure analysis environment.</p></li>
+<li><p>Passwords are strong</p></li>
+</ul>
+</section>
+<section id="verify-by">
+<h3>Verify by:<a class="headerlink" href="#verify-by" title="Permalink to this heading">#</a></h3>
+<section id="check-non-group-user-cannot-access-the-apps">
+<h4>Check: Non-group user cannot access the apps<a class="headerlink" href="#check-non-group-user-cannot-access-the-apps" title="Permalink to this heading">#</a></h4>
+<p>Attempt to login to the remote desktop web client as the <strong>SRE standard user</strong></p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>📷 <b>Verify that:</b></p>
+<p>🍐 <strong>Guacamole</strong>:</p>
+<details><summary>user is prompted to setup MFA</summary>
+<img alt="Guacamole MFA setup prompt" class="align-center" src="../_images/login_no_mfa_guacamole.png" />
+</details>
+<p>🍱 <strong>Microsoft Remote Desktop</strong>:</p>
+<details><summary>login works but apps cannot be viewed</summary>
+<img alt="Microsoft RDS dashboard with no apps" class="align-center" src="../_images/login_no_mfa_msrds.png" />
+</details>
+</div>
+</section>
+<section id="check-membership-of-the-correct-group-is-insufficient-to-give-access">
+<h4>Check: Membership of the correct group is insufficient to give access<a class="headerlink" href="#check-membership-of-the-correct-group-is-insufficient-to-give-access" title="Permalink to this heading">#</a></h4>
+<p>Add the <strong>SRE standard user</strong> to the relevant <code class="docutils literal notranslate"><span class="pre">Research</span> <span class="pre">Users</span></code> group under <code class="docutils literal notranslate"><span class="pre">Safe</span> <span class="pre">Haven</span> <span class="pre">Security</span> <span class="pre">Groups</span></code> on the domain controller.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>📷 <b>Verify that:</b></p>
+<p>🍐 <strong>Guacamole</strong>:</p>
+<details><summary>user is prompted to setup MFA</summary>
+<img alt="Guacamole MFA setup prompt" class="align-center" src="../_images/login_no_mfa_guacamole.png" />
+</details>
+<p>🍱 <strong>Microsoft Remote Desktop</strong>:</p>
+<details><summary>login works and apps can be viewed</summary>
+<img alt="Microsoft RDS dashboard with apps" class="align-center" src="../_images/msrds_dashboard_with_apps.png" />
+</details>
+<details><summary>attempting to login to SRD Main fails</summary>
+<img alt="Microsoft RDS failed to connect" class="align-center" src="../_images/msrds_failed_to_connect.png" />
+</details>
+</div>
+</section>
+<section id="user-can-self-register-for-mfa">
+<h4>User can self-register for MFA<a class="headerlink" href="#user-can-self-register-for-mfa" title="Permalink to this heading">#</a></h4>
+<p>Check that the <strong>SRE standard user</strong> is able to successfully set up MFA</p>
+<ul class="simple">
+<li><p>Visit <a class="reference external" href="https://aka.ms/mfasetup"><code class="docutils literal notranslate"><span class="pre">https://aka.ms/mfasetup</span></code></a> in an incognito browser</p></li>
+<li><p>Login as the user you set up</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> user is guided to set up MFA</p>
+</div>
+<ul class="simple">
+<li><p>Set up MFA as per <a class="reference internal" href="../roles/researcher/user_guide_guacamole.html#roles-researcher-user-guide-setup-mfa"><span class="std std-ref">the user guide instructions</span></a>.</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>📷 <b>Verify that:</b></p>
+<details><summary>MFA setup is successful</summary>
+<img alt="AAD additional security verification" class="align-center" src="../_images/aad_additional_security_verification.png" />
+</details>
+</div>
+</section>
+<section id="user-can-login-after-setting-up-mfa">
+<h4>User can login after setting up MFA<a class="headerlink" href="#user-can-login-after-setting-up-mfa" title="Permalink to this heading">#</a></h4>
+<p>Check that the <strong>SRE standard user</strong> can authenticate with MFA.</p>
+<ul class="simple">
+<li><p>Login to the remote desktop web client as the <strong>SRE standard user</strong>.</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>📷 <b>Verify that:</b></p>
+<p>🍐 <strong>Guacamole</strong>:</p>
+<details><summary>you are prompted for MFA and can respond</summary>
+<img alt="AAD MFA approve sign-in request" class="align-center" src="../_images/aad_mfa_approve_signin_request.png" />
+</details>
+<p>🍱 <strong>Microsoft Remote Desktop</strong>:</p>
+<details><summary>you are prompted for MFA and can respond when attempting to log in to <i>SRD Main (Desktop)</i></summary>
+<img alt="AAD MFA approve sign-in request" class="align-center" src="../_images/aad_mfa_approve_signin_request.png" />
+</details>
+</div>
+</section>
+<section id="authenticated-user-can-access-the-secure-research-desktop-srd-desktop">
+<h4>Authenticated user can access the Secure Research Desktop (SRD) desktop<a class="headerlink" href="#authenticated-user-can-access-the-secure-research-desktop-srd-desktop" title="Permalink to this heading">#</a></h4>
+<p>Check that the <strong>SRE standard user</strong> can access the Secure Research Desktop (SRD) desktop.</p>
+<ul class="simple">
+<li><p>Login to the remote desktop web client as the <strong>SRE standard user</strong>.</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>📷 <b>Verify that:</b></p>
+<p>🍐 <strong>Guacamole</strong>:</p>
+<details><summary>you can connect to <i>Desktop: Ubuntu0</i></summary>
+<img alt="SRD desktop" class="align-center" src="../_images/guacamole_srd_desktop.png" />
+</details>
+<p>🍱 <strong>Microsoft Remote Desktop</strong>:</p>
+<details><summary>you can connect to <i>SRD Main (Desktop)</i></summary>
+<img alt="SRD desktop" class="align-center" src="../_images/msrds_srd_desktop.png" />
+</details>
+</div>
+</section>
+</section>
+</section>
+<section id="isolated-network">
+<h2>2. Isolated Network<a class="headerlink" href="#isolated-network" title="Permalink to this heading">#</a></h2>
+<section id="id1">
+<h3>Turing configuration setting:<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="../roles/researcher/index.html#role-researcher"><span class="std std-ref">Researchers</span></a> cannot access any part of the network from outside the network.</p></li>
+<li><p>VMs in the SHM are only accessible by <a class="reference internal" href="../roles/system_manager/index.html#role-system-manager"><span class="std std-ref">System Managers</span></a> using the management VPN.</p></li>
+<li><p>Whilst in the network, one cannot use the internet to connect outside the network.</p></li>
+<li><p>SREs in the same SHM are isolated from one another.</p></li>
+</ul>
+</section>
+<section id="id2">
+<h3>Implication:<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The Data Safe Haven network is isolated from external connections (both <a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a> and <a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a>)</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>Verify by:<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<section id="connect-to-shm-vms-if-and-only-if-connected-to-the-shm-vpn">
+<h4>Connect to SHM VMs if and only if connected to the SHM VPN:<a class="headerlink" href="#connect-to-shm-vms-if-and-only-if-connected-to-the-shm-vpn" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Connect to the SHM VPN</p></li>
+<li><p>Attempt to connect to the SHM DC and SHM NPS</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> connection works</p>
+</div>
+<ul class="simple">
+<li><p>Disconnect from the SHM VPN</p></li>
+<li><p>Attempt to connect to the SHM DC and SHM NPS</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> connection fails</p>
+</div>
+</section>
+<section id="fail-to-connect-to-the-internet-from-within-an-srd-on-the-sre-network">
+<h4>Fail to connect to the internet from within an SRD on the SRE network<a class="headerlink" href="#fail-to-connect-to-the-internet-from-within-an-srd-on-the-sre-network" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Login as a user to an SRD from within the SRE by using the web client.</p></li>
+<li><p>Choose your favourite three websites and attempt to access the internet using a browser</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>📷 <b>Verify that:</b></p>
+<details><summary>browsing to the website fails</i></summary>
+<img alt="SRD no internet" class="align-center" src="../_images/srd_no_internet.png" />
+</details>
+<details><summary>you cannot access the website using curl</summary>
+<img alt="SRD no curl" class="align-center" src="../_images/srd_no_curl.png" />
+</details>
+<details><summary>you cannot look up the IP address for the website using nslookup</summary>
+<img alt="SRD no curl" class="align-center" src="../_images/srd_no_nslookup.png" />
+</details>
+</div>
+</section>
+<section id="sres-are-isolated-from-one-another">
+<h4>SREs are isolated from one another<a class="headerlink" href="#sres-are-isolated-from-one-another" title="Permalink to this heading">#</a></h4>
+<p>Check that users cannot connect from one SRE to another one in the same SHM, even if they have access to both SREs</p>
+<ul class="simple">
+<li><p>Ensure that the <strong>SRE standard user</strong> is a member of the research users group for both <strong>SRE A</strong> and <strong>SRE B</strong></p></li>
+<li><p>Log in to an SRD in <strong>SRE A</strong> as the <strong>SRE standard user</strong> using the web client.</p></li>
+<li><p>Open the <code class="docutils literal notranslate"><span class="pre">Terminal</span></code> app from the dock at the bottom of the screen and enter <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-v</span> <span class="pre">-o</span> <span class="pre">ConnectTimeout=10</span> <span class="pre">&lt;IP</span> <span class="pre">address&gt;</span></code> where the IP address is one for an SRD in SRE B (you can find this in the Azure portal)</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>📷 <b>Verify that:</b></p>
+<details><summary>SSH connection fails</i></summary>
+<img alt="SSH connection failure" class="align-center" src="../_images/ssh_connection_fail.png" />
+</details>
+</div>
+<ul class="simple">
+<li><p>Check that users cannot copy files from one SRE to another one in the same SHM</p>
+<ul>
+<li><p>Log in to an SRD in <strong>SRE A</strong> as the <strong>SRE standard user</strong> using the web client.</p></li>
+<li><p>In a separate browser window, do the same for <strong>SRE B</strong>.</p></li>
+<li><p>Attempt to copy and paste a file from one SRE desktop to another</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> copy-and-paste is not possible</p>
+</div>
+<ul class="simple">
+<li><p>Check that the network rules are set appropriately to block outgoing traffic</p></li>
+<li><p>Visit the portal and find <code class="docutils literal notranslate"><span class="pre">NSG_SHM_&lt;SHM</span> <span class="pre">ID&gt;_SRE_&lt;SRE</span> <span class="pre">ID&gt;_COMPUTE</span></code>, then click on <code class="docutils literal notranslate"><span class="pre">Settings</span> <span class="pre">&gt;</span> <span class="pre">Outbound</span> <span class="pre">security</span> <span class="pre">rules</span></code></p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>📷 <b>Verify that:</b></p>
+<details><summary>there exists an NSG rule with Destination <i>Internet</i> and Action <i>Deny</i> and that no higher priority rule allows connection to the internet.</summary>
+<img alt="NSG outbound access" class="align-center" src="../_images/nsg_outbound_access.png" />
+</details>
+</div>
+</section>
+</section>
+</section>
+<section id="user-devices">
+<h2>3. User devices<a class="headerlink" href="#user-devices" title="Permalink to this heading">#</a></h2>
+<section id="id4">
+<h3>Turing configuration setting:<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Managed devices must be provided by an approved organisation and the user must not have administrator access to them.</p></li>
+<li><p>Network rules for higher tier environments permit access only from IP ranges corresponding to <code class="docutils literal notranslate"><span class="pre">Restricted</span></code> networks that only permit managed devices to connect.</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>Implication:<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>At <a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a>, only managed devices can connect to the Data Safe Haven environment.</p></li>
+<li><p>At <a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a>, any device can connect to the Data Safe Haven environment (with VPN connection and correct credentials).</p></li>
+</ul>
+</section>
+<section id="id6">
+<h3>Verify by:<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<section id="user-devices-policy-tier-2">
+<h4>User devices (<a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a>)<a class="headerlink" href="#user-devices-policy-tier-2" title="Permalink to this heading">#</a></h4>
+<p>One can connect regardless of device as long as one has an allow-listed IP address and credentials</p>
+<ul class="simple">
+<li><p>Using a <strong>personal device</strong>, connect to the environment using an allow-listed IP address and credentials</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> connection succeeds</p>
+</div>
+<ul class="simple">
+<li><p>Using a <strong>managed device</strong>, connect to the environment using an allow-listed IP address and credentials.</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> connection succeeds</p>
+</div>
+</section>
+<section id="user-devices-policy-tier-3">
+<h4>User devices (<a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a>)<a class="headerlink" href="#user-devices-policy-tier-3" title="Permalink to this heading">#</a></h4>
+<p>All managed devices should be provided by a known IT team at an approved organisation.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> the IT team of the approved organisation take responsibility for managing the device.</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> the user does not have administrator permissions on the device.</p>
+</div>
+<p>A device is able to connect to the environment if and only if it is managed (with correct VPN and credentials)</p>
+<ul class="simple">
+<li><p>Using a <strong>personal device</strong>, attempt to connect to the environment using the correct VPN and credentials</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> connection fails</p>
+</div>
+<ul class="simple">
+<li><p>Using a <strong>managed device</strong>, attempt to connect to the environment using the correct VPN and credentials</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> connection succeeds</p>
+</div>
+</section>
+<section id="network-rules-policy-tier-2-and-above">
+<h4>Network rules (<a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a> and above):<a class="headerlink" href="#network-rules-policy-tier-2-and-above" title="Permalink to this heading">#</a></h4>
+<p>There are network rules permitting access to the remote desktop gateway from allow-listed IP addresses only</p>
+<ul class="simple">
+<li><p>Navigate to the NSG for this SRE in the portal:</p>
+<ul>
+<li><p>🍱 <strong>Microsoft Remote Desktop:</strong> <code class="docutils literal notranslate"><span class="pre">NSG_SHM_&lt;SHM</span> <span class="pre">ID&gt;_SRE_&lt;SRE</span> <span class="pre">ID&gt;_RDS_SERVER</span></code></p></li>
+<li><p>🍐 <strong>Guacamole:</strong> <code class="docutils literal notranslate"><span class="pre">NSG_SHM_&lt;SHM</span> <span class="pre">ID&gt;_SRE_&lt;SRE</span> <span class="pre">ID&gt;_GUACAMOLE</span></code></p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>📷 <b>Verify that:</b></p>
+<details><summary>the NSG has network rules allowing <b>inbound</b> access from allow-listed IP addresses only</summary>
+<img alt="NSG inbound access" class="align-center" src="../_images/nsg_inbound_access.png" />
+</details>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> all other NSGs (apart from <code class="docutils literal notranslate"><span class="pre">NSG_SHM*&lt;SHM</span> <span class="pre">ID&gt;_SRE_&lt;SRE</span> <span class="pre">ID&gt;\_DEPLOYMENT</span></code>) have an inbound <code class="docutils literal notranslate"><span class="pre">Deny</span> <span class="pre">All</span></code> rule and no higher priority rule allowing inbound connections from outside the Virtual Network (apart from the Admin VPN in some cases).</p>
+</div>
+</section>
+</section>
+</section>
+<section id="physical-security">
+<h2>4. Physical security<a class="headerlink" href="#physical-security" title="Permalink to this heading">#</a></h2>
+<section id="id7">
+<h3>Turing configuration setting:<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Medium security research spaces control the possibility of unauthorised viewing.</p></li>
+<li><p>Card access or other means of restricting entry to only known researchers (such as the signing in of guests on a known list) is required.</p></li>
+<li><p>Screen adaptations or desk partitions can be adopted in open-plan spaces if there is a high risk of “visual eavesdropping”.</p></li>
+<li><p>Firewall rules for the Environments can permit access only from Restricted network IP ranges corresponding to these research spaces.</p></li>
+</ul>
+</section>
+<section id="id8">
+<h3>Implication:<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>At <a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a> access is limited to certain secure physical spaces</p></li>
+</ul>
+</section>
+<section id="id9">
+<h3>Verify by:<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<section id="physical-security-policy-tier-3">
+<h4>Physical security (<a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a>)<a class="headerlink" href="#physical-security-policy-tier-3" title="Permalink to this heading">#</a></h4>
+<p>Connection from outside the secure physical space is not possible.</p>
+<ul class="simple">
+<li><p>Attempt to connect to the <a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a> SRE web client from home using a managed device and the correct VPN connection and credentials</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> connection fails</p>
+</div>
+<p>Connection from within the secure physical space is possible.</p>
+<ul class="simple">
+<li><p>Attempt to connect from research office using a managed device and the correct VPN connection and credentials</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> connection succeeds</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> check the network IP ranges corresponding to the research spaces and compare against the IPs accepted by the firewall.</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> confirm in person that physical measures such as screen adaptions or desk partitions are present if risk of visual eavesdropping is high.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="remote-connections">
+<h2>5. Remote connections<a class="headerlink" href="#remote-connections" title="Permalink to this heading">#</a></h2>
+<section id="id10">
+<h3>Turing configuration setting:<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>User can connect via remote desktop but cannot connect through other means such as <code class="docutils literal notranslate"><span class="pre">SSH</span></code></p></li>
+</ul>
+</section>
+<section id="id11">
+<h3>Implication:<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Connections can only be made via remote desktop (<a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a> and above)</p></li>
+</ul>
+</section>
+<section id="id12">
+<h3>Verify by:<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h3>
+<section id="ssh-connection-is-not-possible">
+<h4>SSH connection is not possible<a class="headerlink" href="#ssh-connection-is-not-possible" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Attempt to login as the <strong>SRE standard user</strong> via <code class="docutils literal notranslate"><span class="pre">SSH</span></code> with <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">&lt;user.name&gt;&#64;&lt;SRE</span> <span class="pre">ID&gt;.&lt;safe</span> <span class="pre">haven</span> <span class="pre">domain&gt;</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-v</span> <span class="pre">-o</span> <span class="pre">ConnectTimeout=10</span> <span class="pre">ada.lovelace&#64;sandbox.turingsafehaven.ac.uk</span></code>)</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>📷 <b>Verify that:</b></p>
+<details><summary>SSH login by fully-qualified domain name fails</summary>
+<img alt="SRD SSH connection by FQDN not possible" class="align-center" src="../_images/srd_no_ssh_by_fqdn.png" />
+</details>
+</div>
+<ul class="simple">
+<li><p>Find the public IP address for the remote desktop server VM by searching for this VM in the portal, then looking at <code class="docutils literal notranslate"><span class="pre">Connect</span></code> under <code class="docutils literal notranslate"><span class="pre">Settings</span></code>.</p>
+<ul>
+<li><p>🍐 <strong>Guacamole:</strong> VM name will be <code class="docutils literal notranslate"><span class="pre">GUACAMOLE-SRE-&lt;SRE</span> <span class="pre">ID&gt;</span></code></p></li>
+<li><p>🍱 <strong>Microsoft Remote Desktop:</strong> VM name will be <code class="docutils literal notranslate"><span class="pre">RDG-SRE-&lt;SRE</span> <span class="pre">ID&gt;</span></code></p></li>
+</ul>
+</li>
+<li><p>Attempt to login as the <strong>SRE standard user</strong> via <code class="docutils literal notranslate"><span class="pre">SSH</span></code> with <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">&lt;user.name&gt;&#64;&lt;public</span> <span class="pre">IP&gt;</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">ada.lovelace&#64;8.8.8.8</span></code>)</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>📷 <b>Verify that:</b></p>
+<details><summary>SSH login by public IP address fails</summary>
+<img alt="SRD SSH connection by IP address not possible" class="align-center" src="../_images/srd_no_ssh_by_ip.png" />
+</details>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> the remote desktop server (<code class="docutils literal notranslate"><span class="pre">RDG-SRE-&lt;SRE</span> <span class="pre">ID&gt;</span></code>) is the only SRE resource with a public IP address</p>
+</div>
+</section>
+</section>
+</section>
+<section id="copy-and-paste">
+<h2>6. Copy-and-paste<a class="headerlink" href="#copy-and-paste" title="Permalink to this heading">#</a></h2>
+<section id="id13">
+<h3>Turing configuration setting:<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Users cannot copy something from outside the network and paste it into the network.</p></li>
+<li><p>Users cannot copy something from within the network and paste it outside the network.</p></li>
+</ul>
+</section>
+<section id="id14">
+<h3>Implication:<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Copy and paste is disabled on the remote desktop</p></li>
+</ul>
+</section>
+<section id="id15">
+<h3>Verify by:<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h3>
+<section id="users-are-unable-to-copy-and-paste-between-the-srd-and-their-local-device">
+<h4>Users are unable to copy-and-paste between the SRD and their local device<a class="headerlink" href="#users-are-unable-to-copy-and-paste-between-the-srd-and-their-local-device" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Copy some text from your deployment device</p></li>
+<li><p>Login to an SRD as the <strong>SRE standard user</strong> via the remote desktop web client</p></li>
+<li><p>Open up a notepad or terminal on the SRD and attempt to paste the text to it.</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> paste fails</p>
+</div>
+<ul class="simple">
+<li><p>Write some next in the note pad or terminal of the SRD and copy it</p></li>
+<li><p>Attempt to copy the text externally to deployment device (e.g. into URL of browser)</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> paste fails</p>
+</div>
+</section>
+<section id="users-can-copy-between-vms-inside-the-network">
+<h4>Users can copy between VMs inside the network<a class="headerlink" href="#users-can-copy-between-vms-inside-the-network" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Login to an SRD as the <strong>SRE standard user</strong> via the remote desktop web client</p></li>
+<li><p>Open up a notepad or terminal on the SRD and attempt to paste the text to it.</p></li>
+<li><p>In another tab or browser connect to a different SRD (or to the same VM via the SSH connection) using the remote desktop web client</p></li>
+<li><p>Attempt to paste the text to it.</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> paste succeeds</p>
+</div>
+</section>
+</section>
+</section>
+<section id="data-ingress">
+<h2>7. Data ingress<a class="headerlink" href="#data-ingress" title="Permalink to this heading">#</a></h2>
+<section id="id16">
+<h3>Turing configuration setting:<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Prior to access to the ingress volume being provided, the <a class="reference internal" href="../roles/data_provider_representative/index.html#role-data-provider-representative"><span class="std std-ref">Dataset Provider Representative</span></a> must provide the IP address(es) from which data will be uploaded and an email address to which a secure upload token can be sent.</p></li>
+<li><p>Once these details have been received, the data ingress volume should be opened for data upload.</p></li>
+</ul>
+<p>To minimise the risk of unauthorised access to the dataset while the ingress volume is open for uploads, the following security measures are in place:</p>
+<ul class="simple">
+<li><p>Access to the ingress volume is restricted to a limited range of IP addresses associated with the <strong>Dataset Provider</strong> and the <strong>host organisation</strong>.</p></li>
+<li><p>The <a class="reference internal" href="../roles/data_provider_representative/index.html#role-data-provider-representative"><span class="std std-ref">Dataset Provider Representative</span></a> receives a write-only upload token.</p>
+<ul>
+<li><p>This allows them to upload, verify and modify the uploaded data, but does not viewing or download of the data.</p></li>
+<li><p>This provides protection against an unauthorised party accessing the data, even they gain access to the upload token.</p></li>
+</ul>
+</li>
+<li><p>The upload token expires after a time-limited upload window.</p></li>
+<li><p>The upload token is transferred to the Dataset Provider via a secure email system.</p></li>
+</ul>
+</section>
+<section id="id17">
+<h3>Implication:<a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>All data transfer to the Data Safe Haven should be via our secure data transfer process, which gives the <a class="reference internal" href="../roles/data_provider_representative/index.html#role-data-provider-representative"><span class="std std-ref">Dataset Provider Representative</span></a> time-limited, write-only access to a dedicated data ingress volume from a specific location.</p></li>
+<li><p>Data is stored securely until approved for user access.</p></li>
+</ul>
+</section>
+<section id="id18">
+<h3>Verify by:<a class="headerlink" href="#id18" title="Permalink to this heading">#</a></h3>
+<p>To test all the above, you will need to act both as the <a class="reference internal" href="../roles/system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a> and <a class="reference internal" href="../roles/data_provider_representative/index.html#role-data-provider-representative"><span class="std std-ref">Dataset Provider Representative</span></a>:</p>
+<section id="check-that-the-role-system-manager-can-send-a-secure-upload-token-to-the-role-data-provider-representative-over-secure-email">
+<h4>Check that the <a class="reference internal" href="../roles/system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a> can send a secure upload token to the <a class="reference internal" href="../roles/data_provider_representative/index.html#role-data-provider-representative"><span class="std std-ref">Dataset Provider Representative</span></a> over secure email<a class="headerlink" href="#check-that-the-role-system-manager-can-send-a-secure-upload-token-to-the-role-data-provider-representative-over-secure-email" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Use the IP address of your own device in place of that of the data provider</p></li>
+<li><p>Generate a secure upload token with write-only permissions following the instructions in the <a class="reference internal" href="../roles/system_manager/manage_data.html#roles-system-manager-data-ingress"><span class="std std-ref">administrator document</span></a>.</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> the secure upload token is successfully created.</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> you are able to send a secure email containing this token (e.g. send it to your own email for testing purposes).</p>
+</div>
+</section>
+<section id="ensure-that-data-ingress-works-only-for-connections-from-the-accepted-ip-address-range">
+<h4>Ensure that data ingress works only for connections from the accepted IP address range<a class="headerlink" href="#ensure-that-data-ingress-works-only-for-connections-from-the-accepted-ip-address-range" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>As the <a class="reference internal" href="../roles/data_provider_representative/index.html#role-data-provider-representative"><span class="std std-ref">Dataset Provider Representative</span></a>, ensure you’re working from a device that has an allow-listed IP address</p></li>
+<li><p>Using the secure upload token with write-only permissions and limited time period that you set up in the previous step, follow the <span class="xref std std-ref">ingress instructions for the data provider</span></p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> writing succeeds by uploading a file</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> attempting to open or download any of the files results in the following error: <code class="docutils literal notranslate"><span class="pre">Failed</span> <span class="pre">to</span> <span class="pre">start</span> <span class="pre">transfer:</span> <span class="pre">Insufficient</span> <span class="pre">credentials.</span></code> under the <code class="docutils literal notranslate"><span class="pre">Activities</span></code> pane at the bottom of the MS Azure Storage Explorer window.</p>
+</div>
+<ul class="simple">
+<li><p>Switch to a device that lacks an allow-listed IP address (or change your IP with a VPN)</p></li>
+<li><p>Attempt to write to the ingress volume via the test device</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> the access token fails.</p>
+</div>
+</section>
+<section id="check-that-the-upload-fails-if-the-token-has-expired">
+<h4>Check that the upload fails if the token has expired<a class="headerlink" href="#check-that-the-upload-fails-if-the-token-has-expired" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Create a write-only token with short duration</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> you can connect and write with the token during the duration</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> you cannot connect and write with the token after the duration has expired</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> the overall ingress works by uploading different kinds of files, e.g. data, images, scripts (if appropriate).</p>
+</div>
+</section>
+</section>
+</section>
+<section id="data-egress">
+<h2>8. Data egress<a class="headerlink" href="#data-egress" title="Permalink to this heading">#</a></h2>
+<section id="id19">
+<h3>Turing configuration setting:<a class="headerlink" href="#id19" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Users can write to the <code class="docutils literal notranslate"><span class="pre">/output</span></code> volume</p></li>
+<li><p>A <a class="reference internal" href="../roles/system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a> can view and download data in the <code class="docutils literal notranslate"><span class="pre">/output</span></code> volume via <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Storage</span> <span class="pre">Explorer</span></code>.</p></li>
+</ul>
+</section>
+<section id="id20">
+<h3>Implication:<a class="headerlink" href="#id20" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>SREs contain an <code class="docutils literal notranslate"><span class="pre">/output</span></code> volume, in which SRE users can store data designated for egress.</p></li>
+</ul>
+</section>
+<section id="id21">
+<h3>Verify by:<a class="headerlink" href="#id21" title="Permalink to this heading">#</a></h3>
+<section id="confirm-that-a-non-privileged-user-is-able-to-read-the-different-storage-volumes-and-write-to-output">
+<h4>Confirm that a non-privileged user is able to read the different storage volumes and write to output<a class="headerlink" href="#confirm-that-a-non-privileged-user-is-able-to-read-the-different-storage-volumes-and-write-to-output" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Login to an SRD as the <strong>SRE standard user</strong> via the remote desktop web client</p></li>
+<li><p>Open up a file explorer and search for the various storage volumes</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> the <code class="docutils literal notranslate"><span class="pre">/output</span></code> volume exists and can be read and written to</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> the permissions of other storage volumes match that <a class="reference internal" href="../roles/researcher/user_guide_guacamole.html#role-researcher-user-guide-shared-storage"><span class="std std-ref">described in the user guide</span></a>.</p>
+</div>
+</section>
+<section id="confirm-that-the-different-volumes-exist-in-blob-storage-and-that-logging-on-requires-domain-admin-permissions">
+<h4>Confirm that the different volumes exist in blob storage and that logging on requires domain admin permissions<a class="headerlink" href="#confirm-that-the-different-volumes-exist-in-blob-storage-and-that-logging-on-requires-domain-admin-permissions" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>As the <a class="reference internal" href="../roles/system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a>, follow the instructions in the <a class="reference internal" href="../roles/system_manager/manage_data.html#roles-system-manager-data-egress"><span class="std std-ref">administrator document</span></a> on how to access files set for egress with <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Storage</span> <span class="pre">Explorer</span></code>.</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> you can see the files written to the <code class="docutils literal notranslate"><span class="pre">/output</span></code> storage volume (including any you created as a non-privileged user in step 1)</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> a written file can be taken out of the environment via download</p>
+</div>
+</section>
+</section>
+</section>
+<section id="software-ingress">
+<h2>9. Software ingress<a class="headerlink" href="#software-ingress" title="Permalink to this heading">#</a></h2>
+<section id="id22">
+<h3>Turing configuration setting:<a class="headerlink" href="#id22" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>For <a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-0"><span class="std std-ref">Tier 0</span></a> and <a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-1"><span class="std std-ref">Tier 1</span></a> environments, outbound internet access means users can directly download their software from the internet.</p></li>
+<li><p>For <a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a> or higher environments we use the secure data transfer process.</p></li>
+<li><p>Installation during deployment</p>
+<ul>
+<li><p>If known in advance, software can be installed during SRD deployment whilst there is still internet access, but before project data is added. Once the software is installed, the SRD undergoes ingress into the environment with a one way lock.</p></li>
+</ul>
+</li>
+<li><p>Installation after deployment</p>
+<ul>
+<li><p>Once an SRD has been deployed into the analysis environment it cannot be moved out. There is no outbound internet access.</p></li>
+<li><p>Software is added via ingress in a similar manner to data:</p>
+<ul>
+<li><p>Researchers are provided temporary write-only access to the software ingress volume.</p></li>
+<li><p>The access is then revoked and the software is then reviewed.</p></li>
+<li><p>If it passes review, the software is moved into the environment.</p></li>
+</ul>
+</li>
+<li><p>If the software requires administrator rights to install, a <a class="reference internal" href="../roles/system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a> must do this. Otherwise, the researcher can do this themselves.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id23">
+<h3>Implication:<a class="headerlink" href="#id23" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The base SRD provided in the SREs comes with a wide range of common data science software pre-installed, as well as package mirrors.</p></li>
+<li><p>Additional software must be added separately via ingress.</p></li>
+</ul>
+</section>
+<section id="id24">
+<h3>Verify by:<a class="headerlink" href="#id24" title="Permalink to this heading">#</a></h3>
+<section id="check-that-some-software-tools-were-installed-as-expected-during-deployment">
+<h4>Check that some software tools were installed as expected during deployment<a class="headerlink" href="#check-that-some-software-tools-were-installed-as-expected-during-deployment" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Login to an SRD as the <strong>SRE standard user</strong> via the remote desktop web client</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>📷 <b>Verify that:</b></p>
+<details><summary>the following programmes can be opened without issue: <i>DBeaver</i>, <i>RStudio</i>, <i>PyCharm</i> and <i>Visual Studio Code</i></summary>
+<img alt="SRD installed software" class="align-center" src="../_images/srd_installed_software.png" />
+</details>
+</div>
+</section>
+<section id="check-that-it-s-possible-to-grant-and-revoke-software-ingress-capability">
+<h4>Check that it’s possible to grant and revoke software ingress capability<a class="headerlink" href="#check-that-it-s-possible-to-grant-and-revoke-software-ingress-capability" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Follow the instructions in the <a class="reference internal" href="../roles/system_manager/manage_data.html#roles-system-manager-software-ingress"><span class="std std-ref">Safe Haven Administrator Documentation</span></a>:</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> you can generate a temporary write-only upload token</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> you can upload software as a non-admin with this token, but write access is revoked after the temporary token has expired</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> software uploaded to the by a non-admin can be read by administrators</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>✅ <strong>Verify that:</strong> the <strong>SRE standard user</strong> cannot install software that requires administrator rights (e.g. anything that is installed with <code class="docutils literal notranslate"><span class="pre">apt</span></code>)</p>
+</div>
+</section>
+</section>
+</section>
+<section id="software-package-repositories">
+<h2>10. Software package repositories<a class="headerlink" href="#software-package-repositories" title="Permalink to this heading">#</a></h2>
+<section id="id25">
+<h3>Turing configuration setting::<a class="headerlink" href="#id25" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a>: The user can access any package from our mirrors. They can freely use these packages without restriction.</p></li>
+<li><p><a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a>: The user can only access a specific pre-agreed set of packages. They will be unable to download any package not on the allowed list.</p></li>
+</ul>
+</section>
+<section id="id26">
+<h3>Implication:<a class="headerlink" href="#id26" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a>: User can access all packages from PyPI/CRAN</p></li>
+<li><p><a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a>: User can only access approved packages from PyPI/CRAN. Allowed list is in <code class="docutils literal notranslate"><span class="pre">environment_configs/package_lists</span></code></p></li>
+</ul>
+</section>
+<section id="id27">
+<h3>Verify by:<a class="headerlink" href="#id27" title="Permalink to this heading">#</a></h3>
+<section id="policy-tier-2-download-a-package-that-is-not-on-the-allow-list">
+<h4><a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a>: Download a package that is <strong>not</strong> on the allow list<a class="headerlink" href="#policy-tier-2-download-a-package-that-is-not-on-the-allow-list" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Login as the <strong>SRE standard user</strong> into an SRD via remote desktop web client</p></li>
+<li><p>Open up a terminal</p></li>
+<li><p>Attempt to install a package on the allowed list that is not included out-of-the-box (for example, try <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">aero-calc</span></code>)</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>📷 <b>Verify that:</b></p>
+<details><summary>you can install the package</summary>
+<img alt="SRD PyPI Tier 2" class="align-center" src="../_images/srd_pypi_tier2_allowed.png" />
+</details>
+</div>
+<ul class="simple">
+<li><p>Attempt to install any package that is not on the allowed list (for example, try <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">awscli</span></code>)</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>📷 <b>Verify that:</b></p>
+<details><summary>you can install the package</summary>
+<img alt="SRD PyPI Tier 2" class="align-center" src="../_images/srd_pypi_tier2_denied.png" />
+</details>
+</div>
+</section>
+<section id="policy-tier-3-download-a-package-on-the-allow-list-and-one-not-on-the-allow-list">
+<h4><a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a>: Download a package on the allow list and one <strong>not</strong> on the allow list<a class="headerlink" href="#policy-tier-3-download-a-package-on-the-allow-list-and-one-not-on-the-allow-list" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Login as the <strong>SRE standard user</strong> into an SRD via remote desktop web client</p></li>
+<li><p>Attempt to install a package on the allowed list that is not included out-of-the-box (for example, try <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">aero-calc</span></code>)</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>📷 <b>Verify that:</b></p>
+<details><summary>you can install the package</summary>
+<img alt="SRD PyPI Tier 3" class="align-center" src="../_images/srd_pypi_tier3_allowed.png" />
+</details>
+</div>
+<ul class="simple">
+<li><p>Then attempt to download a package that is not included in the allowed list (for example, try <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">awscli</span></code>)</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>📷 <b>Verify that:</b></p>
+<details><summary>you cannot install the package</summary>
+<img alt="SRD PyPI Tier 3" class="align-center" src="../_images/srd_pypi_tier3_denied.png" />
+</details>
+</div>
+</section>
+</section>
+</section>
+<section id="firewall-controls">
+<h2>11. Firewall controls<a class="headerlink" href="#firewall-controls" title="Permalink to this heading">#</a></h2>
+<section id="id28">
+<h3>Turing configuration setting:<a class="headerlink" href="#id28" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Whilst all user access VMs are entirely blocked off from the internet, this is not the case for administrator access VMs such as the SHM-DC, SRE DATA server.</p></li>
+<li><p>An Azure Firewall governs the internet access provided to these VMs, limiting them mostly to downloading Windows updates.</p></li>
+</ul>
+</section>
+<section id="id29">
+<h3>Implication:<a class="headerlink" href="#id29" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>An <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Firewall</span></code> ensures that the administrator VMs have the minimal level of internet access required to function.</p></li>
+</ul>
+</section>
+<section id="id30">
+<h3>Verify by:<a class="headerlink" href="#id30" title="Permalink to this heading">#</a></h3>
+<section id="admin-has-limited-access-to-the-internet">
+<h4>Admin has limited access to the internet<a class="headerlink" href="#admin-has-limited-access-to-the-internet" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>As the <a class="reference internal" href="../roles/system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a> use Remote Desktop to connect to the SHM domain controller VM</p></li>
+<li><p>Attempt to connect to a non-approved site, such as <code class="docutils literal notranslate"><span class="pre">www.google.com</span></code></p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>📷 <b>Verify that:</b></p>
+<details><summary>connection fails</summary>
+<img alt="SHM DC website denied" class="align-center" src="../_images/shmdc_website_deny.png" />
+</details>
+</div>
+</section>
+<section id="admin-can-download-windows-updates">
+<h4>Admin can download Windows updates<a class="headerlink" href="#admin-can-download-windows-updates" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>As the <a class="reference internal" href="../roles/system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a> use Remote Desktop to connect to the SHM domain controller VM</p></li>
+<li><p>Click on <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">-&gt;</span> <span class="pre">Settings-&gt;</span> <span class="pre">Update</span> <span class="pre">&amp;</span> <span class="pre">Security</span></code></p></li>
+<li><p>Click the <code class="docutils literal notranslate"><span class="pre">Download</span></code> button</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>📷 <b>Verify that:</b></p>
+<details><summary>updates download and install successfully</summary>
+<img alt="SHM DC update allowed" class="align-center" src="../_images/shmdc_windows_update.png" />
+</details>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="deploy_sre_microsoft_rds.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Deploy an SRE with Microsoft RDS</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="../processes/index.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Processes</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+
+<div class="tocsection editthispage">
+    <a href="https://github.com/alan-turing-institute/data-safe-haven/edit/develop/docs/deployment/security_checklist.md">
+        <i class="fa-solid fa-pencil"></i> Edit this page
+    </a>
+</div>
+
+</div>
+
+<div class="toc-item">
+  
+<div class="tocsection sourcelink">
+    <a href="../_sources/deployment/security_checklist.md.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright CC-BY-4.0 2022, The Alan Turing Institute..<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a> 5.2.3.
+    Hosted by <a href="https://pages.github.com/">GitHub Pages</a>.
+    <br>
+</p>
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

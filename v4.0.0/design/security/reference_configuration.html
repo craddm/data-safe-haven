@@ -1,0 +1,713 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Turing security configuration &#8212; Data Safe Haven  documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/overrides.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'design/security/reference_configuration';</script>
+    <script src="../../_static/toggle.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Deployment" href="../../deployment/index.html" />
+    <link rel="prev" title="Built-in technical controls" href="technical_controls.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../_static/logo_turing_light.png" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/logo_turing_dark.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../overview/index.html">
+                        Overview
+                    </a>
+                </li>
+                
+
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        Design
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../deployment/index.html">
+                        Deployment
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../processes/index.html">
+                        Processes
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../roles/index.html">
+                        Roles
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/alan-turing-institute/data-safe-haven" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../overview/index.html">
+                        Overview
+                    </a>
+                </li>
+                
+
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        Design
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../deployment/index.html">
+                        Deployment
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../processes/index.html">
+                        Processes
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../roles/index.html">
+                        Roles
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/alan-turing-institute/data-safe-haven" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+    <div class="bd-toc-item navbar-nav">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../architecture/index.html">Architecture</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../architecture/shm_details.html">Safe Haven Management design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../architecture/sre_details.html">Secure research environment design</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Security</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="objectives.html">Security objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical_controls.html">Built-in technical controls</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Turing security configuration</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav>
+    </div>
+    <div class="sidebar-start-items__item">
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book fa-fw left"></span>
+      <span class="left">Currently reading: <strong>v4.0.0</strong></span>
+      <span class="fa fa-caret-down right"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+           <strong> 
+          <dd><a href="/data-safe-haven/v4.0.0/index.html">v4.0.0</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/data-safe-haven/develop/index.html">develop</a></dd>
+          
+        
+      </dl>
+      
+      
+    </div>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-downloads" role="note" aria-label="downloads">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-file-pdf fa-fw left"></span>
+      <span class="left">Download PDF resources</span>
+      <span class="fa fa-caret-down right"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        
+          <dd><a href="/data-safe-haven/v4.0.0/pdf/data_safe_haven_user_guide_guacamole.pdf">User guide (Apache Guacamole)</a></dd>
+        
+          <dd><a href="/data-safe-haven/v4.0.0/pdf/data_safe_haven_user_guide_msrds.pdf">User guide (Microsoft RDS)</a></dd>
+        
+      </dl>
+    </div>
+  </div>
+  
+
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="turing-security-configuration">
+<span id="design-turing-security-configuration"></span><h1>Turing security configuration<a class="headerlink" href="#turing-security-configuration" title="Permalink to this heading">#</a></h1>
+<p>The set of controls applied at the Alan Turing Institute are discussed here, together with their implications.</p>
+<section id="multifactor-authentication-and-password-strength">
+<h2>1. Multifactor authentication and password strength<a class="headerlink" href="#multifactor-authentication-and-password-strength" title="Permalink to this heading">#</a></h2>
+<section id="turing-configuration-setting">
+<h3>Turing configuration setting:<a class="headerlink" href="#turing-configuration-setting" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Users must set up MFA before accessing the secure analysis environment.</p></li>
+<li><p>Users cannot access the environment without MFA.</p></li>
+<li><p>Users are required to create passwords that meet the <a class="reference external" href="https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-sspr-policy">Azure Active Directory policy</a> requirements.</p></li>
+</ul>
+</section>
+<section id="implication">
+<h3>Implication:<a class="headerlink" href="#implication" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Users will need multi-factor authentication (MFA) in order to access the secure analysis environment.</p></li>
+<li><p>Users will have strong passwords.</p></li>
+</ul>
+</section>
+</section>
+<section id="isolated-network">
+<h2>2. Isolated Network<a class="headerlink" href="#isolated-network" title="Permalink to this heading">#</a></h2>
+<section id="id1">
+<h3>Turing configuration setting:<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../roles/researcher/index.html#role-researcher"><span class="std std-ref">Researchers</span></a> cannot access any part of the network from outside the network.</p></li>
+<li><p>VMs in the SHM are only accessible by <a class="reference internal" href="../../roles/system_manager/index.html#role-system-manager"><span class="std std-ref">System Managers</span></a> using the management VPN.</p></li>
+<li><p>Whilst in the network, one cannot use the internet to connect outside the network (for <a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a> and <a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a>).</p></li>
+<li><p>SREs in the same SHM are isolated from one another.</p></li>
+</ul>
+</section>
+<section id="id2">
+<h3>Implication:<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>SREs at <a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a> and <a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a> are isolated from external connections.</p></li>
+</ul>
+</section>
+</section>
+<section id="user-devices">
+<h2>3. User devices<a class="headerlink" href="#user-devices" title="Permalink to this heading">#</a></h2>
+<section id="id3">
+<h3>Turing configuration setting:<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Managed devices must be provided by an approved organisation and the user must not have administrator access to them.</p></li>
+<li><p>Network rules for higher tier environments permit access only from IP ranges corresponding to <code class="docutils literal notranslate"><span class="pre">Restricted</span></code> networks that only permit managed devices to connect.</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>Implication:<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>At <a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a>, only Turing managed devices can connect to the Data Safe Haven environment.</p></li>
+<li><p>At <a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a>, only user devices authenticated against the Turing VPN can connect to the Data Safe Haven environment.</p></li>
+</ul>
+</section>
+</section>
+<section id="physical-security">
+<h2>4. Physical security<a class="headerlink" href="#physical-security" title="Permalink to this heading">#</a></h2>
+<section id="id5">
+<h3>Turing configuration setting:<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Medium security research spaces control the possibility of unauthorised viewing.</p></li>
+<li><p>Card access or other means of restricting entry to only known researchers (such as the signing in of guests on a known list) is required.</p></li>
+<li><p>Screen adaptations or desk partitions should be adopted in open-plan spaces if there is a high risk of unauthorised people viewing the user’s screen.</p></li>
+<li><p>Firewall rules for the SREs only permit access from <code class="docutils literal notranslate"><span class="pre">Restricted</span></code> network IP ranges corresponding to these research spaces.</p></li>
+</ul>
+</section>
+<section id="id6">
+<h3>Implication:<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>At <a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a> access is limited to certain secure physical spaces.</p></li>
+</ul>
+</section>
+</section>
+<section id="remote-connections">
+<h2>5. Remote connections<a class="headerlink" href="#remote-connections" title="Permalink to this heading">#</a></h2>
+<section id="id7">
+<h3>Turing configuration setting:<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Connections can only be made through the remote desktop gateway, other means such as <code class="docutils literal notranslate"><span class="pre">SSH</span></code> are forbidden.</p></li>
+<li><p>The gateway URL is only accessible from approved IP addresses.</p></li>
+</ul>
+</section>
+<section id="id8">
+<h3>Implication:<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Users can only connect through a browser from an approved IP address.</p></li>
+</ul>
+</section>
+</section>
+<section id="copy-and-paste">
+<h2>6. Copy-and-paste<a class="headerlink" href="#copy-and-paste" title="Permalink to this heading">#</a></h2>
+<section id="id9">
+<h3>Turing configuration setting:<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Users cannot copy something from outside the network and paste it into the network (<a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a> and <a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a>).</p></li>
+<li><p>Users cannot copy something from within the network and paste it outside the network (<a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a> and <a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a>).</p></li>
+</ul>
+</section>
+<section id="id10">
+<h3>Implication:<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Copy and paste is disabled on the remote desktop for <a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a> and <a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a>.</p></li>
+</ul>
+</section>
+</section>
+<section id="data-ingress">
+<h2>7. Data ingress<a class="headerlink" href="#data-ingress" title="Permalink to this heading">#</a></h2>
+<section id="id11">
+<h3>Turing configuration setting:<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Prior to access to the ingress volume being provided, the <a class="reference internal" href="../../roles/data_provider_representative/index.html#role-data-provider-representative"><span class="std std-ref">Dataset Provider Representative</span></a> must provide the IP address(es) from which data will be uploaded and an email address to which a secure upload token can be sent.</p></li>
+<li><p>Once these details have been received, the data ingress volume should be opened for data upload.</p></li>
+</ul>
+<p>To minimise the risk of unauthorised access to the dataset while the ingress volume is open for uploads, the following security measures are in place:</p>
+<ul class="simple">
+<li><p>Access to the ingress volume is restricted to a limited range of IP addresses associated with the <strong>Dataset Provider</strong> and the <strong>host organisation</strong>.</p></li>
+<li><p>The <a class="reference internal" href="../../roles/data_provider_representative/index.html#role-data-provider-representative"><span class="std std-ref">Dataset Provider Representative</span></a> receives a write-only upload token.</p>
+<ul>
+<li><p>This allows them to upload, verify and modify the uploaded data, but does not viewing or download of the data.</p></li>
+<li><p>This provides protection against an unauthorised party accessing the data, even if they gain access to the upload token.</p></li>
+</ul>
+</li>
+<li><p>The upload token expires after a time-limited upload window.</p></li>
+<li><p>The upload token is transferred to the Dataset Provider via a secure email system.</p></li>
+</ul>
+</section>
+<section id="id12">
+<h3>Implication:<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>All data transfer to the Data Safe Haven will be carried out via a secure data transfer process, which gives the <a class="reference internal" href="../../roles/data_provider_representative/index.html#role-data-provider-representative"><span class="std std-ref">Dataset Provider Representative</span></a> time-limited, write-only access to a dedicated data ingress volume from a specific location.</p></li>
+<li><p>Data is stored securely until approved for user access.</p></li>
+</ul>
+</section>
+</section>
+<section id="data-egress">
+<h2>8. Data egress<a class="headerlink" href="#data-egress" title="Permalink to this heading">#</a></h2>
+<section id="id13">
+<h3>Turing configuration setting::<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Users can write to the <code class="docutils literal notranslate"><span class="pre">/output</span></code> volume.</p></li>
+<li><p>A <a class="reference internal" href="../../roles/system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a> can view and download data in the <code class="docutils literal notranslate"><span class="pre">/output</span></code> volume via <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Storage</span> <span class="pre">Explorer</span></code>.</p></li>
+</ul>
+</section>
+<section id="id14">
+<h3>Implication:<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>SRE users can mark data as ready for egress approval by placing it in the <code class="docutils literal notranslate"><span class="pre">/output</span></code> volume.</p></li>
+</ul>
+</section>
+</section>
+<section id="software-ingress">
+<h2>9. Software ingress<a class="headerlink" href="#software-ingress" title="Permalink to this heading">#</a></h2>
+<section id="id15">
+<h3>Turing configuration setting:<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>For <a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-0"><span class="std std-ref">Tier 0</span></a> and <a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-1"><span class="std std-ref">Tier 1</span></a> environments, outbound internet access means users can directly download their software from the internet.</p></li>
+<li><p>For <a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a> or higher environments we use a secure data transfer process.</p></li>
+<li><p>Installation during deployment</p>
+<ul>
+<li><p>If known in advance, software can be installed during SRD deployment whilst there is still internet access, but before project data is added. Once the software is installed, the SRD undergoes ingress into the environment with a one way lock.</p></li>
+</ul>
+</li>
+<li><p>Installation after deployment</p>
+<ul>
+<li><p>Once an SRD has been deployed into the analysis environment it cannot be moved out. There is no outbound internet access.</p></li>
+<li><p>Software is added via ingress in a similar manner to data:</p>
+<ul>
+<li><p>Researchers are provided temporary write-only access to the software ingress volume.</p></li>
+<li><p>The access is then revoked and the software is then reviewed.</p></li>
+<li><p>If it passes review, the software is moved into the environment.</p></li>
+</ul>
+</li>
+<li><p>If the software requires administrator rights to install, a <a class="reference internal" href="../../roles/system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a> must do this. Otherwise, the researcher can do this themselves.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id16">
+<h3>Implication:<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The base SRD provided in the SREs comes with a wide range of common data science software pre-installed, as well as package mirrors.</p></li>
+<li><p>Additional software must be added separately via ingress.</p></li>
+</ul>
+</section>
+</section>
+<section id="software-package-repositories">
+<h2>10. Software package repositories<a class="headerlink" href="#software-package-repositories" title="Permalink to this heading">#</a></h2>
+<section id="id17">
+<h3>Turing configuration setting:<a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a>: The user can access any package via our repositories. They can freely use these packages without restriction.</p></li>
+<li><p><a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a>: The user can only access a specific pre-agreed set of packages. They will be unable to download any package not on the allowed list.</p></li>
+</ul>
+</section>
+<section id="id18">
+<h3>Implication:<a class="headerlink" href="#id18" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a>: User can access all packages from PyPI/CRAN.</p></li>
+<li><p><a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a>: User can only access approved packages from PyPI/CRAN. Allowed list is in <code class="docutils literal notranslate"><span class="pre">environment_configs/package_lists</span></code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="firewall-controls">
+<h2>11. Firewall controls<a class="headerlink" href="#firewall-controls" title="Permalink to this heading">#</a></h2>
+<section id="id19">
+<h3>Turing configuration setting:<a class="headerlink" href="#id19" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>An <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Firewall</span></code> ensures that all VMs within the safe haven have the minimal level of internet access required to function.</p></li>
+</ul>
+</section>
+<section id="id20">
+<h3>Implication:<a class="headerlink" href="#id20" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Research accessible SRD VMs can only access a limited set of domains required for managing software and virus definition updates.</p></li>
+<li><p>Administrator accessible VMs can access additional domains required to perform their functionality (e.g. user authentication, providing SRD VMs access to authorised packages)</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="technical_controls.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Built-in technical controls</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="../../deployment/index.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Deployment</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+
+<div class="tocsection editthispage">
+    <a href="https://github.com/alan-turing-institute/data-safe-haven/edit/develop/docs/design/security/reference_configuration.md">
+        <i class="fa-solid fa-pencil"></i> Edit this page
+    </a>
+</div>
+
+</div>
+
+<div class="toc-item">
+  
+<div class="tocsection sourcelink">
+    <a href="../../_sources/design/security/reference_configuration.md.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright CC-BY-4.0 2022, The Alan Turing Institute..<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a> 5.2.3.
+    Hosted by <a href="https://pages.github.com/">GitHub Pages</a>.
+    <br>
+</p>
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

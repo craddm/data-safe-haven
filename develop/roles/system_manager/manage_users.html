@@ -1,0 +1,814 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Managing Data Safe Haven users &#8212; Data Safe Haven  documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/overrides.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'roles/system_manager/manage_users';</script>
+    <script src="../../_static/toggle.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Managing data ingress and egress" href="manage_data.html" />
+    <link rel="prev" title="System Manager" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../_static/logo_turing_light.png" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/logo_turing_dark.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../overview/index.html">
+                        Overview
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../design/index.html">
+                        Design
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../deployment/index.html">
+                        Deployment
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../processes/index.html">
+                        Processes
+                    </a>
+                </li>
+                
+
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        Roles
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/alan-turing-institute/data-safe-haven" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../overview/index.html">
+                        Overview
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../design/index.html">
+                        Design
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../deployment/index.html">
+                        Deployment
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../processes/index.html">
+                        Processes
+                    </a>
+                </li>
+                
+
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        Roles
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/alan-turing-institute/data-safe-haven" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+    <div class="bd-toc-item navbar-nav">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../data_provider_representative/index.html">Dataset Provider Representative</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../investigator/index.html">Investigator</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../investigator/data_ingress.html">Data ingress process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../investigator/data_egress.html">Data egress process</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../programme_manager/index.html">Programme Manager</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../project_manager/index.html">Project Manager</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../project_manager/project_lifecycle.html">Project lifecycle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_manager/data_ingress.html">Data ingress process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_manager/data_egress.html">Data egress process</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../referee/index.html">Referee</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../researcher/index.html">Researcher</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../researcher/user_guide.html">User guide</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../researcher/user_guide_guacamole.html">User Guide: Apache Guacamole</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../researcher/user_guide_msrds.html">User Guide: Microsoft Remote Desktop</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../researcher/available_software.html">Available software</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">System Manager</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Managing Data Safe Haven users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage_data.html">Managing data ingress and egress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage_costs.html">Managing costs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migrate_an_shm.html">Migrating an SHM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage_deployments.html">Managing Data Safe Haven deployments</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav>
+    </div>
+    <div class="sidebar-start-items__item">
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book fa-fw left"></span>
+      <span class="left">Currently reading: <strong>develop</strong></span>
+      <span class="fa fa-caret-down right"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/data-safe-haven/v4.0.0/index.html">v4.0.0</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/data-safe-haven/develop/index.html">develop</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+    </div>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-downloads" role="note" aria-label="downloads">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-file-pdf fa-fw left"></span>
+      <span class="left">Download PDF resources</span>
+      <span class="fa fa-caret-down right"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        
+          <dd><a href="/data-safe-haven/develop/pdf/data_safe_haven_user_guide_guacamole.pdf">User guide (Apache Guacamole)</a></dd>
+        
+          <dd><a href="/data-safe-haven/develop/pdf/data_safe_haven_user_guide_msrds.pdf">User guide (Microsoft RDS)</a></dd>
+        
+      </dl>
+    </div>
+  </div>
+  
+
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="managing-data-safe-haven-users">
+<span id="administrator-manage-users"></span><h1>Managing Data Safe Haven users<a class="headerlink" href="#managing-data-safe-haven-users" title="Permalink to this heading">#</a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This document assumes that you already have access to a <a class="reference internal" href="../../deployment/deploy_shm.html#deploy-shm"><span class="std std-ref">Safe Haven Management (SHM) environment</span></a> and one or more <a class="reference internal" href="../../deployment/deploy_sre.html#deploy-sre"><span class="std std-ref">Secure Research Environments (SREs)</span></a> that are linked to it.</p>
+</div>
+<section id="create-new-users">
+<h2>🔰 Create new users<a class="headerlink" href="#create-new-users" title="Permalink to this heading">#</a></h2>
+<p>Users should be created on the main domain controller (DC1) in the SHM and synchronised to Azure Active Directory.
+A helper script for doing this is already uploaded to the domain controller - you will need to prepare a <code class="docutils literal notranslate"><span class="pre">CSV</span></code> file in the appropriate format for it.</p>
+</section>
+<section id="generate-user-details-csv-file">
+<h2>📜 Generate user details CSV file<a class="headerlink" href="#generate-user-details-csv-file" title="Permalink to this heading">#</a></h2>
+<section id="using-data-classification-app">
+<h3>🚗 Using data classification app<a class="headerlink" href="#using-data-classification-app" title="Permalink to this heading">#</a></h3>
+<ul>
+<li><p>Follow the <a class="reference external" href="https://github.com/alan-turing-institute/data-classification-app">instructions in the classification app documentation</a> to create users</p>
+<ul class="simple">
+<li><p>Users can be created in bulk by selecting <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">User</span> <span class="pre">&gt;</span> <span class="pre">Import</span> <span class="pre">user</span> <span class="pre">list</span></code> and uploading a spreadsheet of user details</p></li>
+<li><p>Users can also be created individually by selecting <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">User</span> <span class="pre">&gt;</span> <span class="pre">Create</span> <span class="pre">Single</span> <span class="pre">User</span></code></p></li>
+</ul>
+</li>
+<li><p>After creating users, export the <code class="docutils literal notranslate"><span class="pre">UserCreate.csv</span></code> file</p>
+<ul class="simple">
+<li><p>To export all users, select <code class="docutils literal notranslate"><span class="pre">Users</span> <span class="pre">&gt;</span> <span class="pre">Export</span> <span class="pre">UserCreate.csv</span></code></p></li>
+<li><p>To export only users for a particular project, select <code class="docutils literal notranslate"><span class="pre">Projects</span> <span class="pre">&gt;</span> <span class="pre">(Project</span> <span class="pre">Name)</span> <span class="pre">&gt;</span> <span class="pre">Export</span> <span class="pre">UserCreate.csv</span></code></p></li>
+</ul>
+</li>
+<li><p>Upload the user details CSV file to a sensible location on the SHM domain controller</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We suggest using <code class="docutils literal notranslate"><span class="pre">C:\Installation\YYYYDDMM-HHMM_user_details.csv</span></code> but this is up to you</p>
+</div>
+</li>
+</ul>
+</section>
+<section id="manually-edit-csv">
+<h3>✋ Manually edit CSV<a class="headerlink" href="#manually-edit-csv" title="Permalink to this heading">#</a></h3>
+<p>On the <strong>SHM domain controller (DC1)</strong>.</p>
+<ul>
+<li><p>Make a new copy of the user details template file from <code class="docutils literal notranslate"><span class="pre">C:\Installation\user_details_template.csv</span></code></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>We suggest naming this <code class="docutils literal notranslate"><span class="pre">YYYYDDMM-HHMM_user_details.csv</span></code> but this is up to you</p>
+</div>
+</li>
+<li><p>Remove the example user and add the required details for each user</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">SamAccountName</span></code>: Log in username <strong>without</strong> the <code class="docutils literal notranslate"><span class="pre">&#64;&lt;SRE</span> <span class="pre">domain&gt;</span></code> part.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>We recommend using <code class="docutils literal notranslate"><span class="pre">firstname.lastname</span></code> format.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Ensure that <code class="docutils literal notranslate"><span class="pre">SamAccountName</span></code> has a maximum of <strong>20 characters</strong> from the 7-bit ASCII set (unaccented letters, numbers and some punctuation) or synchronisation will fail.</p>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GivenName</span></code>: User’s first / given name</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Ensure that <code class="docutils literal notranslate"><span class="pre">GivenName</span></code> uses only characters from the 7-bit ASCII set (unaccented letters, numbers and some punctuation) or synchronisation will fail.</p>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Surname</span></code>: User’s last name / surname</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Ensure that <code class="docutils literal notranslate"><span class="pre">Surname</span></code> uses only characters from the 7-bit ASCII set (unaccented letters, numbers and some punctuation) or synchronisation will fail.</p>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Mobile</span></code>: Phone number to use for initial password reset.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul class="simple">
+<li><p>This must include country code in the format <code class="docutils literal notranslate"><span class="pre">+&lt;country-code&gt;</span> <span class="pre">&lt;local</span> <span class="pre">number&gt;</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">+44</span> <span class="pre">7123456789</span></code>).</p></li>
+<li><p>Include a space between the country code and local number parts but no other spaces.</p></li>
+<li><p>Remove the leading <code class="docutils literal notranslate"><span class="pre">0</span></code> from local number if present.</p></li>
+<li><p>This can be a landline or or mobile but must be accessible to the user when resetting their password and setting up MFA.</p></li>
+<li><p>Users can add the authenticator app and/or additional phone numbers during MFA self-registration.</p></li>
+</ul>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SecondaryEmail</span></code>: An existing organisational email address for the user.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is <strong>not</strong> uploaded to their Data Safe Haven user account but is needed when sending account activation messages.</p>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GroupName</span></code>: [Optional] The name of the Active Directory security group(s) that the users should be added to (eg. <code class="docutils literal notranslate"><span class="pre">SG</span> <span class="pre">SANDBOX</span> <span class="pre">Research</span> <span class="pre">Users</span></code> ).</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If the user needs to be added to multiple groups, separate them with a pipe-character ( <code class="docutils literal notranslate"><span class="pre">|</span></code> ).</p>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="create-and-synchronise-users">
+<h2>🔄 Create and synchronise users<a class="headerlink" href="#create-and-synchronise-users" title="Permalink to this heading">#</a></h2>
+<p>Upload the user details <code class="docutils literal notranslate"><span class="pre">CSV</span></code> file to a sensible location on the SHM domain controller (recommended: <code class="docutils literal notranslate"><span class="pre">C:\Installation</span></code>).
+This can be done by copying and pasting the file from your deployment device to the SHM DC.</p>
+<ul class="simple">
+<li><p>Log into the <strong>SHM primary domain controller</strong> (<code class="docutils literal notranslate"><span class="pre">DC1-SHM-&lt;SHM</span> <span class="pre">ID&gt;</span></code>) VM using the login credentials <a class="reference internal" href="../../deployment/deploy_shm.html#roles-system-deployer-shm-remote-desktop"><span class="std std-ref">stored in Azure Key Vault</span></a></p></li>
+<li><p>Open a <code class="docutils literal notranslate"><span class="pre">Powershell</span></code> command window with elevated privileges</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">C:\Installation\CreateUsers.ps1</span> <span class="pre">&lt;path_to_user_details_file&gt;</span></code></p></li>
+<li><p>This script will add the users and trigger synchronisation with Azure Active Directory</p></li>
+<li><p>It will still take around 5 minutes for the changes to propagate</p></li>
+</ul>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>If you get the message <code class="docutils literal notranslate"><span class="pre">New-ADUser</span> <span class="pre">:</span> <span class="pre">The</span> <span class="pre">specified</span> <span class="pre">account</span> <span class="pre">already</span> <span class="pre">exists</span></code> you should first check to see whether that user actually does already exist!
+Once you’re certain that you’re adding a new user, make sure that the following fields are unique across all users in the Active Directory.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SamAccountName</span></code></p>
+<ul>
+<li><p>Specified explicitly in the <code class="docutils literal notranslate"><span class="pre">CSV</span></code> file.</p></li>
+<li><p>If this is already in use, consider something like <code class="docutils literal notranslate"><span class="pre">firstname.middle.initials.lastname</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DistinguishedName</span></code></p>
+<ul>
+<li><p>Formed of <code class="docutils literal notranslate"><span class="pre">CN=&lt;DisplayName&gt;,&lt;OUPath&gt;</span></code> by <code class="docutils literal notranslate"><span class="pre">Active</span> <span class="pre">Directory</span></code> on user creation.</p></li>
+<li><p>If this is in use, consider changing <code class="docutils literal notranslate"><span class="pre">DisplayName</span></code> from <code class="docutils literal notranslate"><span class="pre">&lt;GivenName&gt;</span> <span class="pre">&lt;Surname&gt;</span></code> to <code class="docutils literal notranslate"><span class="pre">&lt;GivenName&gt;</span> <span class="pre">&lt;middle</span> <span class="pre">initials&gt;</span> <span class="pre">&lt;Surname&gt;</span></code> .</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<ul class="simple">
+<li><p>These domain administrator credentials have complete control over creating and deleting users as well as assigning them to groups</p></li>
+<li><p>Do not use them except where specified and never write them down!</p></li>
+<li><p>Be particularly careful never to use them to log in to any user-accessible VMs (such as the SRDs)</p></li>
+</ul>
+</div>
+</section>
+<section id="assign-mfa-licences">
+<h2>📲 Assign MFA licences<a class="headerlink" href="#assign-mfa-licences" title="Permalink to this heading">#</a></h2>
+<section id="manually-add-licence-to-each-user">
+<h3>✋ Manually add licence to each user<a class="headerlink" href="#manually-add-licence-to-each-user" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Login into the Azure Portal and connect to the correct AAD</p></li>
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Active</span> <span class="pre">Directory</span></code></p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Manage</span> <span class="pre">&gt;</span> <span class="pre">Licenses</span> <span class="pre">&gt;</span> <span class="pre">All</span> <span class="pre">Products</span></code></p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Active</span> <span class="pre">Directory</span> <span class="pre">Premium</span> <span class="pre">P1</span></code></p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Assign</span></code></p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Users</span> <span class="pre">and</span> <span class="pre">groups</span></code></p></li>
+<li><p>Select the users you have recently created and click <code class="docutils literal notranslate"><span class="pre">Select</span></code></p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Assign</span></code> to complete the process</p></li>
+</ul>
+</section>
+<section id="automatically-assign-licences-to-users">
+<h3>🚗 Automatically assign licences to users<a class="headerlink" href="#automatically-assign-licences-to-users" title="Permalink to this heading">#</a></h3>
+<p>To automatically assign licences to all local <code class="docutils literal notranslate"><span class="pre">Active</span> <span class="pre">Directory</span></code> users that do not currently have a licence in <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Active</span> <span class="pre">Directory</span></code>.</p>
+<ul class="simple">
+<li><p>Ensure you have the same version of the Data Safe Haven repository as was used by your deployment team</p></li>
+<li><p>Open a <code class="docutils literal notranslate"><span class="pre">Powershell</span></code> terminal and navigate to the <code class="docutils literal notranslate"><span class="pre">deployment/administration</span></code> directory within the Data Safe Haven repository</p></li>
+<li><p>Run the <code class="docutils literal notranslate"><span class="pre">./SHM_Add_AAD_Licences.ps1</span> <span class="pre">-tenantId</span> <span class="pre">&lt;Tenant</span> <span class="pre">ID&gt;</span></code> script, where <code class="docutils literal notranslate"><span class="pre">&lt;Tenant</span> <span class="pre">ID&gt;</span></code> is the ID of the Azure tenant belonging to the SHM you want to add the licences to</p></li>
+</ul>
+</section>
+</section>
+<section id="user-activation">
+<h2>🏃 User activation<a class="headerlink" href="#user-activation" title="Permalink to this heading">#</a></h2>
+<p>We recommend using email to send connection details to new users.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is not a security risk since:</p>
+<ul class="simple">
+<li><p>we are not sending passwords in this email</p></li>
+<li><p>the user needs access to their previously-provided phone number in order to set their account password and MFA</p></li>
+</ul>
+</div>
+<p>A sample email might look like the following</p>
+<blockquote>
+<div><p>Dear &lt;participant name&gt;,</p>
+<p>Welcome to &lt;event name&gt;! You’ve been given access to a Data Safe Haven managed by &lt;organisation name&gt;.
+Please find a PDF version of our user guide attached.
+You should start by following the instructions about setting up your account and enabling multi-factor authentication (MFA).</p>
+<p>Your username is: &lt;username&#64;domain&gt;
+Your Safe Haven is hosted at: &lt;URL&gt;</p>
+<p>The Safe Haven is only accessible from certain networks and may also involve physical location restrictions.</p>
+<p>–details about network and location/VPN restrictions here–</p>
+</div></blockquote>
+</section>
+<section id="common-user-problems">
+<h2>👷 Common user problems<a class="headerlink" href="#common-user-problems" title="Permalink to this heading">#</a></h2>
+<p>One of the most common user issues is that they are unable to log in to the environment.
+Here we go through the login procedure and discuss possible problems at each step</p>
+<section id="expired-webclient-certificate">
+<h3>🌘 Expired webclient certificate<a class="headerlink" href="#expired-webclient-certificate" title="Permalink to this heading">#</a></h3>
+<p>If the certificate for the SRE domain has expired, users will not be able to login.</p>
+<img alt="Login failure - expired certificate" class="align-center" src="../../_images/login_certificate_expiry.png" />
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>Solution</strong>: Replace the SSL certificate with a new one</p>
+<ul class="simple">
+<li><p>Ensure you have the same version of the Data Safe Haven repository as was used by your deployment team</p></li>
+<li><p>Open a <code class="docutils literal notranslate"><span class="pre">Powershell</span></code> terminal and navigate to the <code class="docutils literal notranslate"><span class="pre">deployment/secure_research_environment/setup</span></code> directory within the Data Safe Haven repository</p></li>
+<li><p>Ensure you are logged into the <code class="docutils literal notranslate"><span class="pre">Azure</span></code> within <code class="docutils literal notranslate"><span class="pre">Powershell</span></code> using the command: <code class="docutils literal notranslate"><span class="pre">Connect-AzAccount</span></code></p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">./Update_SRE_RDS_Ssl_Certificate.ps1</span> <span class="pre">-sreId</span> <span class="pre">&lt;SRE</span> <span class="pre">ID&gt;</span></code>, where the SRE ID is the one specified in the config</p></li>
+</ul>
+</div>
+</section>
+<section id="unable-to-log-into-remote-desktop-gateway">
+<h3>🔴 Unable to log into remote desktop gateway<a class="headerlink" href="#unable-to-log-into-remote-desktop-gateway" title="Permalink to this heading">#</a></h3>
+<p>If users give the wrong username or password they will not be able to progress past the login screen.</p>
+<img alt="Login failure - wrong password" class="align-center" src="../../_images/login_password_login.png" />
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>Solution</strong>: Check user credentials, password may need to be reset.</p>
+</div>
+</section>
+<section id="unable-to-open-any-remote-apps">
+<h3>🚋 Unable to open any remote apps<a class="headerlink" href="#unable-to-open-any-remote-apps" title="Permalink to this heading">#</a></h3>
+<p>Users are stuck at the <code class="docutils literal notranslate"><span class="pre">Opening</span> <span class="pre">remote</span> <span class="pre">port</span></code> message and never receive the MFA prompt.</p>
+<img alt="Login failure - no MFA prompt" class="align-center" src="../../_images/srd_login_opening_port.png" />
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>Solution</strong>: Check MFA setup</p>
+<ul class="simple">
+<li><p>Ensure that the user has been assigned a license in Azure Active Directory</p></li>
+<li><p>Check that the user has set up MFA (at <a class="reference external" href="https://aka.ms/mfasetup">https://aka.ms/mfasetup</a> ) and is using the phone-call or app authentication method</p></li>
+</ul>
+</div>
+</section>
+<section id="xrdp-login-failure-on-the-srd">
+<h3>⁉️ xrdp login failure on the SRD<a class="headerlink" href="#xrdp-login-failure-on-the-srd" title="Permalink to this heading">#</a></h3>
+<p>If users can get to the login screen:</p>
+<img alt="SRD login screen" class="align-center" src="../../_images/srd_login_prompt.png" />
+<p>but then see this error message:</p>
+<img alt="SRD login failure" class="align-center" src="../../_images/srd_login_failure1.png" />
+<p>there are a couple of possible causes.</p>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p><strong>Problem</strong>: the username or password was incorrectly entered</p>
+<p><strong>Solution</strong>: check username and password</p>
+<ul class="simple">
+<li><p>Confirm that the username and password have been correctly typed</p></li>
+<li><p>Confirm that there are no unsupported special characters in the password</p></li>
+<li><p>Reset the account if there is no other solution</p></li>
+</ul>
+</div>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p><strong>Problem</strong>: the computer is unable to communicate with the login server</p>
+<p><strong>Solution</strong>: run diagnostics</p>
+<ul class="simple">
+<li><p>This can happen for a variety of reasons (DNS problems, broken services on the SRD etc.)</p></li>
+<li><p>Run the script under <code class="docutils literal notranslate"><span class="pre">deployment/administration/SRE_SRD_Remote_Diagnostics.ps1</span></code>, providing the group and last IP octet of the problematic SRD</p></li>
+<li><p>This will run a series of diagnostics intended to fix some common problems including</p>
+<ul>
+<li><p>LDAP configuration</p></li>
+<li><p>DNS configuration</p></li>
+<li><p>SSS configuration</p></li>
+<li><p>File mounting configuration</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="unable-to-install-from-package-mirrors">
+<h3>☁️ Unable to install from package mirrors<a class="headerlink" href="#unable-to-install-from-package-mirrors" title="Permalink to this heading">#</a></h3>
+<p>If it is not possible to install packages from the package mirrors then this may be for one of the following reasons:</p>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p><strong>Problem</strong>: Mirror VNet is not correctly peered</p>
+<p><strong>Solution</strong>: Re-run the network configuration script.</p>
+<p>On your <strong>deployment machine</strong>.</p>
+<ul class="simple">
+<li><p>Ensure you have the same version of the Data Safe Haven repository as was used by your deployment team</p></li>
+<li><p>Open a <code class="docutils literal notranslate"><span class="pre">Powershell</span></code> terminal and navigate to the <code class="docutils literal notranslate"><span class="pre">deployment/secure_research_environment/setup</span></code> directory within the Data Safe Haven repository</p></li>
+<li><p>Ensure you are logged into <code class="docutils literal notranslate"><span class="pre">Azure</span></code> within <code class="docutils literal notranslate"><span class="pre">Powershell</span></code> using the command: <code class="docutils literal notranslate"><span class="pre">Connect-AzAccount</span></code></p>
+<ul>
+<li><p>NB. If your account is a guest in additional Azure tenants, you may need to add the <code class="docutils literal notranslate"><span class="pre">-Tenant</span> <span class="pre">&lt;Tenant</span> <span class="pre">ID&gt;</span></code> flag, where <code class="docutils literal notranslate"><span class="pre">&lt;Tenant</span> <span class="pre">ID&gt;</span></code> is the ID of the Azure tenant you want to deploy into.</p></li>
+</ul>
+</li>
+<li><p>Run the <code class="docutils literal notranslate"><span class="pre">./Apply_Network_Configuration.ps1</span> <span class="pre">-sreId</span> <span class="pre">&lt;SRE</span> <span class="pre">ID&gt;</span></code> script, where the SRE ID is the one specified in the config</p></li>
+</ul>
+</div>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p><strong>Problem</strong>: Internal mirror does not have the required package</p>
+<p><strong>Solution</strong>: Check package availability</p>
+<p>To diagnose this, log into the <code class="docutils literal notranslate"><span class="pre">Internal</span></code> mirror using the Serial Console through the <code class="docutils literal notranslate"><span class="pre">Azure</span></code> portal.
+Check the packages directory (i.e. <code class="docutils literal notranslate"><span class="pre">/datadrive/mirrordaemon/pypi/web/packages</span></code> for PyPI or <code class="docutils literal notranslate"><span class="pre">/datadrive/mirrordaemon/www/cran</span></code> for CRAN)</p>
+<img alt="Internal mirror package list" class="align-center" src="../../_images/internal_mirror_packages.png" />
+</div>
+<p>If the requested package <strong>should</strong> be available (i.e. it is on the appropriate allowlist), then you can force a mirror update by rebooting the <code class="docutils literal notranslate"><span class="pre">EXTERNAL</span></code> mirrors.
+This will trigger the following actions:</p>
+<ol class="arabic simple">
+<li><p>Synchronisation of the external mirror with the remote, internet repository (a <code class="docutils literal notranslate"><span class="pre">pull</span></code> update)</p></li>
+<li><p>Synchronisation of the internal mirror with the external mirror (a <code class="docutils literal notranslate"><span class="pre">push</span></code> update)</p></li>
+</ol>
+<p>This may take an hour or two but should solve the missing package problem.</p>
+</section>
+</section>
+</section>
+
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="index.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">System Manager</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="manage_data.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Managing data ingress and egress</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+
+<div class="tocsection editthispage">
+    <a href="https://github.com/alan-turing-institute/data-safe-haven/edit/develop/docs/roles/system_manager/manage_users.md">
+        <i class="fa-solid fa-pencil"></i> Edit this page
+    </a>
+</div>
+
+</div>
+
+<div class="toc-item">
+  
+<div class="tocsection sourcelink">
+    <a href="../../_sources/roles/system_manager/manage_users.md.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright CC-BY-4.0 2022, The Alan Turing Institute..<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a> 5.2.3.
+    Hosted by <a href="https://pages.github.com/">GitHub Pages</a>.
+    <br>
+</p>
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

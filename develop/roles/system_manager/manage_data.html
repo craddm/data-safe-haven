@@ -1,0 +1,737 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Managing data ingress and egress &#8212; Data Safe Haven  documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/overrides.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'roles/system_manager/manage_data';</script>
+    <script src="../../_static/toggle.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Managing costs" href="manage_costs.html" />
+    <link rel="prev" title="Managing Data Safe Haven users" href="manage_users.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../_static/logo_turing_light.png" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/logo_turing_dark.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../overview/index.html">
+                        Overview
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../design/index.html">
+                        Design
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../deployment/index.html">
+                        Deployment
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../processes/index.html">
+                        Processes
+                    </a>
+                </li>
+                
+
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        Roles
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/alan-turing-institute/data-safe-haven" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../overview/index.html">
+                        Overview
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../design/index.html">
+                        Design
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../deployment/index.html">
+                        Deployment
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../processes/index.html">
+                        Processes
+                    </a>
+                </li>
+                
+
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        Roles
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/alan-turing-institute/data-safe-haven" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+    <div class="bd-toc-item navbar-nav">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../data_provider_representative/index.html">Dataset Provider Representative</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../investigator/index.html">Investigator</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../investigator/data_ingress.html">Data ingress process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../investigator/data_egress.html">Data egress process</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../programme_manager/index.html">Programme Manager</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../project_manager/index.html">Project Manager</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../project_manager/project_lifecycle.html">Project lifecycle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_manager/data_ingress.html">Data ingress process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_manager/data_egress.html">Data egress process</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../referee/index.html">Referee</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../researcher/index.html">Researcher</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../researcher/user_guide.html">User guide</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../researcher/user_guide_guacamole.html">User Guide: Apache Guacamole</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../researcher/user_guide_msrds.html">User Guide: Microsoft Remote Desktop</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../researcher/available_software.html">Available software</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">System Manager</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="manage_users.html">Managing Data Safe Haven users</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Managing data ingress and egress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage_costs.html">Managing costs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migrate_an_shm.html">Migrating an SHM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage_deployments.html">Managing Data Safe Haven deployments</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav>
+    </div>
+    <div class="sidebar-start-items__item">
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book fa-fw left"></span>
+      <span class="left">Currently reading: <strong>develop</strong></span>
+      <span class="fa fa-caret-down right"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/data-safe-haven/v4.0.0/index.html">v4.0.0</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/data-safe-haven/develop/index.html">develop</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+    </div>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-downloads" role="note" aria-label="downloads">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-file-pdf fa-fw left"></span>
+      <span class="left">Download PDF resources</span>
+      <span class="fa fa-caret-down right"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        
+          <dd><a href="/data-safe-haven/develop/pdf/data_safe_haven_user_guide_guacamole.pdf">User guide (Apache Guacamole)</a></dd>
+        
+          <dd><a href="/data-safe-haven/develop/pdf/data_safe_haven_user_guide_msrds.pdf">User guide (Microsoft RDS)</a></dd>
+        
+      </dl>
+    </div>
+  </div>
+  
+
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="managing-data-ingress-and-egress">
+<span id="administrator-manage-data"></span><h1>Managing data ingress and egress<a class="headerlink" href="#managing-data-ingress-and-egress" title="Permalink to this heading">#</a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This document assumes that you already have access to a <a class="reference internal" href="../../deployment/deploy_shm.html#deploy-shm"><span class="std std-ref">Safe Haven Management (SHM) environment</span></a> and one or more <a class="reference internal" href="../../deployment/deploy_sre.html#deploy-sre"><span class="std std-ref">Secure Research Environments (SREs)</span></a> that are linked to it.</p>
+</div>
+<section id="data-ingress">
+<span id="roles-system-manager-data-ingress"></span><h2>Data Ingress<a class="headerlink" href="#data-ingress" title="Permalink to this heading">#</a></h2>
+<p>It is the data provider’s responsibility to upload the data required by the safe haven.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Any data ingress must be signed off by the <a class="reference internal" href="../data_provider_representative/index.html#role-data-provider-representative"><span class="std std-ref">Dataset Provider Representative</span></a>, <a class="reference internal" href="../investigator/index.html#role-investigator"><span class="std std-ref">Investigator</span></a> and <a class="reference internal" href="../referee/index.html#role-referee"><span class="std std-ref">Referee</span></a> (if applicable).</p>
+</div>
+<p>The following steps show how to generate a temporary write-only upload token that can be securely sent to the data provider, enabling them to upload the data:</p>
+<ul class="simple">
+<li><p>In the Azure portal select <code class="docutils literal notranslate"><span class="pre">Subscriptions</span></code> then navigate to the subscription containing the relevant SHM</p></li>
+<li><p>Search for the resource group: <code class="docutils literal notranslate"><span class="pre">RG_SHM_&lt;SHM</span> <span class="pre">ID&gt;_PERSISTENT_DATA</span></code>, then click through to the storage account called: <code class="docutils literal notranslate"><span class="pre">&lt;SHM</span> <span class="pre">ID&gt;&lt;SRE</span> <span class="pre">ID&gt;data&lt;storage</span> <span class="pre">suffix&gt;</span></code> (where <code class="docutils literal notranslate"><span class="pre">&lt;storage</span> <span class="pre">suffix&gt;</span></code> is a random string)</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Networking</span></code> under <code class="docutils literal notranslate"><span class="pre">Settings</span></code> and paste the data provider’s IP address as one of those allowed under the <code class="docutils literal notranslate"><span class="pre">Firewall</span></code> header, then hit the save icon in the top left</p></li>
+<li><p>From the <code class="docutils literal notranslate"><span class="pre">Overview</span></code> tab, click the link to <code class="docutils literal notranslate"><span class="pre">Containers</span></code> (in the middle of the page)</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">ingress</span></code></p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Shared</span> <span class="pre">access</span> <span class="pre">signature</span></code> under <code class="docutils literal notranslate"><span class="pre">Settings</span></code> and do the following:</p>
+<ul>
+<li><p>Under <code class="docutils literal notranslate"><span class="pre">Permissions</span></code>, check these boxes:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Write</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">List</span></code></p></li>
+</ul>
+</li>
+<li><p>Set a 24 hour time window in the <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">and</span> <span class="pre">expiry</span> <span class="pre">date/time</span></code> (or an appropriate length of time)</p></li>
+<li><p>Leave everything else as default and click <code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">SAS</span> <span class="pre">token</span> <span class="pre">and</span> <span class="pre">URL</span></code></p></li>
+<li><p>Copy the <code class="docutils literal notranslate"><span class="pre">Blob</span> <span class="pre">SAS</span> <span class="pre">URL</span></code></p></li>
+</ul>
+</li>
+<li><p>Send the <code class="docutils literal notranslate"><span class="pre">Blob</span> <span class="pre">SAS</span> <span class="pre">URL</span></code> to the data provider via secure email (for example, you could use the <a class="reference external" href="https://www.egress.com/">Egress secure email</a> service)</p></li>
+<li><p>The data provider should now be able to upload data by following <a class="reference internal" href="../../processes/data_ingress.html#process-data-ingress"><span class="std std-ref">these instructions</span></a></p></li>
+<li><p>You can validate successful data ingress by logging into the SRD for the SRE and checking the <code class="docutils literal notranslate"><span class="pre">/data</span></code> volume, where you should be able to view the data that the data provider has uploaded</p></li>
+</ul>
+</section>
+<section id="software-ingress">
+<span id="roles-system-manager-software-ingress"></span><h2>Software Ingress<a class="headerlink" href="#software-ingress" title="Permalink to this heading">#</a></h2>
+<p>Software ingress is performed in a similar manner to data.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Software ingress must go through the same approval process as is the case for data ingress, including sign-off from the <a class="reference internal" href="../data_provider_representative/index.html#role-data-provider-representative"><span class="std std-ref">Dataset Provider Representative</span></a>, <a class="reference internal" href="../investigator/index.html#role-investigator"><span class="std std-ref">Investigator</span></a> and <a class="reference internal" href="../referee/index.html#role-referee"><span class="std std-ref">Referee</span></a> (if applicable).</p>
+</div>
+<ul class="simple">
+<li><p>Follow the same steps as for <a class="reference internal" href="#roles-system-manager-data-ingress"><span class="std std-ref">data ingress</span></a> above to provide temporary write access, but set the time window for the SAS token to a shorter period (e.g. several hours)</p></li>
+<li><p>Share the token with the <a class="reference internal" href="../investigator/index.html#role-investigator"><span class="std std-ref">Investigator</span></a>, so they can install software within the time window</p></li>
+<li><p>The <a class="reference internal" href="../investigator/index.html#role-investigator"><span class="std std-ref">Investigator</span></a> can perform software ingress via <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Storage</span> <span class="pre">Explorer</span></code> (for instance as a zip file), by following the same instructions as <a class="reference internal" href="../../processes/data_ingress.html#process-data-ingress"><span class="std std-ref">the data provider</span></a></p></li>
+</ul>
+</section>
+<section id="data-egress">
+<span id="roles-system-manager-data-egress"></span><h2>Data egress<a class="headerlink" href="#data-egress" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>In the Azure portal select <code class="docutils literal notranslate"><span class="pre">Subscriptions</span></code> then navigate to the subscription containing the relevant SHM</p></li>
+<li><p>Search for the resource group: <code class="docutils literal notranslate"><span class="pre">RG_SHM_&lt;SHM</span> <span class="pre">ID&gt;_PERSISTENT_DATA</span></code>, then click through to the storage account called: <code class="docutils literal notranslate"><span class="pre">&lt;SHM</span> <span class="pre">ID&gt;&lt;SRE</span> <span class="pre">ID&gt;data&lt;storage</span> <span class="pre">suffix&gt;</span></code> (where <code class="docutils literal notranslate"><span class="pre">&lt;storage</span> <span class="pre">suffix&gt;</span></code> is a random string)</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Networking</span></code> under <code class="docutils literal notranslate"><span class="pre">Settings</span></code> to check the list of pre-approved IP addresses allowed under the <code class="docutils literal notranslate"><span class="pre">Firewall</span></code> header and check your own IP address to ensure you are connecting from one of these</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Containers</span></code> under <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">storage</span></code></p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">egress</span></code></p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Shared</span> <span class="pre">access</span> <span class="pre">signature</span></code> under <code class="docutils literal notranslate"><span class="pre">Settings</span></code> and do the following:</p>
+<ul>
+<li><p>Under <code class="docutils literal notranslate"><span class="pre">Permissions</span></code>, check these boxes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Read</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">List</span></code></p></li>
+</ul>
+</li>
+<li><p>Set a time window in the <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">and</span> <span class="pre">expiry</span> <span class="pre">date/time</span></code> that gives you enough time to extract the data</p></li>
+<li><p>Leave everything else as default click <code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">SAS</span> <span class="pre">token</span> <span class="pre">and</span> <span class="pre">URL</span></code></p>
+<img alt="Read-only SAS token" class="align-center" src="../../_images/read_only_sas_token.png" />
+</li>
+<li><p>Leave this portal window open and move to the next step</p></li>
+</ul>
+</li>
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Storage</span> <span class="pre">Explorer</span></code> (<a class="reference external" href="https://azure.microsoft.com/en-us/products/storage/storage-explorer/">download</a> it if you don’t have it)</p></li>
+<li><p>Click the socket image on the left hand side</p>
+<img alt="Azure Storage Explorer connection" class="align-center" src="../../_images/azure_storage_explorer_connect.png" />
+</li>
+<li><p>On <code class="docutils literal notranslate"><span class="pre">Select</span> <span class="pre">Resource</span></code>, choose <code class="docutils literal notranslate"><span class="pre">Blob</span> <span class="pre">container</span></code></p></li>
+<li><p>On <code class="docutils literal notranslate"><span class="pre">Select</span> <span class="pre">Connection</span> <span class="pre">Method</span></code>, choose <code class="docutils literal notranslate"><span class="pre">Shared</span> <span class="pre">access</span> <span class="pre">signature</span> <span class="pre">URL</span> <span class="pre">(SAS)</span></code> and hit <code class="docutils literal notranslate"><span class="pre">Next</span></code></p>
+<img alt="Connect with SAS token" class="align-center" src="../../_images/connect_azure_storage.png" />
+</li>
+<li><p>On <code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">Connection</span> <span class="pre">Info</span></code>:</p>
+<ul class="simple">
+<li><p>Set the <code class="docutils literal notranslate"><span class="pre">Display</span> <span class="pre">name</span></code> to “egress” (or choose an informative name)</p></li>
+<li><p>Copy the <code class="docutils literal notranslate"><span class="pre">Blob</span> <span class="pre">SAS</span> <span class="pre">URL</span></code> from your Azure portal session into the <code class="docutils literal notranslate"><span class="pre">Blob</span> <span class="pre">container</span> <span class="pre">SAS</span> <span class="pre">URL</span></code> box and hit <code class="docutils literal notranslate"><span class="pre">Next</span></code></p></li>
+</ul>
+</li>
+<li><p>On the <code class="docutils literal notranslate"><span class="pre">Summary</span></code> page, hit <code class="docutils literal notranslate"><span class="pre">Connect</span></code></p></li>
+<li><p>On the left hand side, the connection should show up under <code class="docutils literal notranslate"><span class="pre">Local</span> <span class="pre">&amp;</span> <span class="pre">Attached</span> <span class="pre">&gt;</span> <span class="pre">Storage</span> <span class="pre">Accounts</span> <span class="pre">&gt;</span> <span class="pre">(Attached</span> <span class="pre">Containers)</span> <span class="pre">&gt;</span> <span class="pre">Blob</span> <span class="pre">Containers</span> <span class="pre">&gt;</span> <span class="pre">ingress</span> <span class="pre">(SAS)</span></code></p></li>
+<li><p>You should now be able to securely download the data from the Safe Haven’s output volume by highlighting the relevant file(s) and hitting the <code class="docutils literal notranslate"><span class="pre">Download</span></code> button</p></li>
+</ul>
+<section id="the-output-volume">
+<h3>The output volume<a class="headerlink" href="#the-output-volume" title="Permalink to this heading">#</a></h3>
+<p>Once you have set up the egress connection in <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Storage</span> <span class="pre">Explorer</span></code>, you should be able to view data from the <strong>output volume</strong>, a read-write area intended for the extraction of results, such as figures for publication.
+On the SRD, this volume is <code class="docutils literal notranslate"><span class="pre">/output</span></code> and is shared between all SRDs in an SRE.
+For more info on shared SRE storage volumes, consult the <a class="reference internal" href="../researcher/user_guide_guacamole.html#role-researcher-user-guide-shared-storage"><span class="std std-ref">Safe Haven User Guide</span></a>.</p>
+</section>
+</section>
+<section id="backup">
+<h2>🗄️ Backup<a class="headerlink" href="#backup" title="Permalink to this heading">#</a></h2>
+<section id="restoring-blobs">
+<h3>🗃️ Restoring blobs<a class="headerlink" href="#restoring-blobs" title="Permalink to this heading">#</a></h3>
+<p>Blob containers in backed up storage accounts are protected by <a class="reference external" href="https://learn.microsoft.com/en-us/azure/backup/blob-backup-overview#how-operational-backup-works">operational backup</a>.
+It is possible to restore the state of the blobs to an earlier point in time, up to twelve weeks in the past.</p>
+<p>The blob containers covered by the protection for each SRE are the</p>
+<ul class="simple">
+<li><p>ingress container (mounted at <code class="docutils literal notranslate"><span class="pre">/data</span></code>)</p></li>
+<li><p>egress container (mounted at <code class="docutils literal notranslate"><span class="pre">/output</span></code>)</p></li>
+<li><p>backup container (mounted at <code class="docutils literal notranslate"><span class="pre">/backup</span></code>)</p></li>
+</ul>
+<p>To restore these containers to a previous point in time:</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Blobs are restored ‘in place’.
+The current state will be overwritten by the point which you restore to.</p>
+</div>
+<ul>
+<li><p>In the Azure portal select <code class="docutils literal notranslate"><span class="pre">Subscriptions</span></code> then navigate to the subscription containing the relevant SRE</p></li>
+<li><p>Search for the resource group: <code class="docutils literal notranslate"><span class="pre">RG_SHM_&lt;SHM</span> <span class="pre">ID&gt;_SRE_&lt;SRE</span> <span class="pre">ID&gt;_BACKUP</span></code>, then click on the storage account called: <code class="docutils literal notranslate"><span class="pre">bv-&lt;shm</span> <span class="pre">id&gt;-sre-&lt;sre</span> <span class="pre">id&gt;</span></code></p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Backup</span> <span class="pre">instances</span></code> under <code class="docutils literal notranslate"><span class="pre">Manage</span></code> in the left-hand menu</p></li>
+<li><p>Ensure that the <code class="docutils literal notranslate"><span class="pre">Datasource</span> <span class="pre">type</span></code> filter is set to <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Blobs</span> <span class="pre">(Azure</span> <span class="pre">Storage)</span></code></p>
+<img alt="Selecting blob backup instances" class="align-center" src="../../_images/backup_instances_blobs.png" />
+</li>
+<li><p>Click on the storage-account backup instance</p></li>
+<li><p>Select a point in the past to restore to and click <code class="docutils literal notranslate"><span class="pre">Restore</span></code></p>
+<img alt="Selecting blob backup restore point" class="align-center" src="../../_images/backup_select_restore_time_blobs.png" />
+</li>
+<li><p>Click on <code class="docutils literal notranslate"><span class="pre">Next:</span> <span class="pre">Restore</span> <span class="pre">Parameters</span></code></p></li>
+<li><p>You can now choose whether to restore all, or a subset of the containers. In the example below the ‘egress’ and ‘backup’ containers are selected</p></li>
+<li><p>Click on <code class="docutils literal notranslate"><span class="pre">Validate</span></code></p>
+<img alt="Selecting blob containers to restore and validating" class="align-center" src="../../_images/backup_select_containers_validate_blobs.png" />
+</li>
+<li><p>Click on <code class="docutils literal notranslate"><span class="pre">Next:</span> <span class="pre">Review</span> <span class="pre">+</span> <span class="pre">restore</span></code></p></li>
+<li><p>Click on <code class="docutils literal notranslate"><span class="pre">Restore</span></code></p></li>
+</ul>
+</section>
+<section id="restoring-disks">
+<h3>💿 Restoring disks<a class="headerlink" href="#restoring-disks" title="Permalink to this heading">#</a></h3>
+<p>Backed up disks have incremental snapshots taken daily.
+These snapshots are stored in the backup resource group,<code class="docutils literal notranslate"><span class="pre">RG_SHM_&lt;SHM</span> <span class="pre">ID&gt;_SRE_&lt;SRE</span> <span class="pre">ID&gt;_BACKUP</span></code>.</p>
+<p>The disks covered by the protection for each SRE are the</p>
+<ul class="simple">
+<li><p>GitLab data disk</p></li>
+<li><p>CodiMD data disk</p></li>
+<li><p>CoCalc data disk</p></li>
+<li><p>PostgreSQL data disk</p></li>
+<li><p>MSSQL data disk</p></li>
+</ul>
+<p>To restore a disk:</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Restoring a disk creates a new disk object from the incremental snapshots.
+You will need to specify where to create the disk and its name.
+You will also need to attach the disk to any virtual machines which should use
+it and enroll the new disk into the backup system.</p>
+</div>
+<ul>
+<li><p>In the Azure portal select <code class="docutils literal notranslate"><span class="pre">Subscriptions</span></code> then navigate to the subscription containing the relevant SRE</p></li>
+<li><p>Search for the resource group: <code class="docutils literal notranslate"><span class="pre">RG_SHM_&lt;SHM</span> <span class="pre">ID&gt;_SRE_&lt;SRE</span> <span class="pre">ID&gt;_BACKUP</span></code>, then click on the storage account called: `bv-<shm id>-sre-<sre id></p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Backup</span> <span class="pre">instances</span></code> under <code class="docutils literal notranslate"><span class="pre">Manage</span></code> in the left-hand menu</p></li>
+<li><p>Ensure that the <code class="docutils literal notranslate"><span class="pre">Datasource</span> <span class="pre">type</span></code> filter is set to <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Disks</span></code></p>
+<img alt="Selecting disk backup instances" class="align-center" src="../../_images/backup_instances_disks.png" />
+</li>
+<li><p>Click on the disk to restore</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Restore</span></code></p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Select</span> <span class="pre">restore</span> <span class="pre">point</span></code> to choose which snapshot to revert to and click <code class="docutils literal notranslate"><span class="pre">Select</span></code>. By default only snapshots from the last 30 days are displayed but this can be adjusted</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Next:</span> <span class="pre">Restore</span> <span class="pre">Parameters</span></code></p></li>
+<li><p>Enter the subscription and resource group in which to create the new disk; these should match the original disk</p></li>
+<li><p>Enter a name for the new disk and click <code class="docutils literal notranslate"><span class="pre">Validate</span></code></p>
+<img alt="Configuring and validating disk backup" class="align-center" src="../../_images/backup_select_snapshot_validate_disks.png" />
+</li>
+<li><p>Click on <code class="docutils literal notranslate"><span class="pre">Next:</span> <span class="pre">Review</span> <span class="pre">+</span> <span class="pre">restore</span></code></p></li>
+<li><p>Click on <code class="docutils literal notranslate"><span class="pre">Restore</span></code></p></li>
+<li><p>Wait for the restoration to finish. You can monitor the progress on the backup instance page on the Azure portal</p>
+<img alt="../../_images/backup_progress_disk_1.png" class="align-center" src="../../_images/backup_progress_disk_1.png" />
+<img alt="../../_images/backup_progress_disk_2.png" class="align-center" src="../../_images/backup_progress_disk_2.png" />
+<img alt="../../_images/backup_progress_disk_3.png" class="align-center" src="../../_images/backup_progress_disk_3.png" />
+</li>
+<li><p>Navigate to the resource group where the new disk has been created</p></li>
+<li><p>Select the virtual machine that the old disk is attached to and click <code class="docutils literal notranslate"><span class="pre">Disks</span></code> in the left-hand menu</p></li>
+<li><p>Take note of the old disks <code class="docutils literal notranslate"><span class="pre">LUN</span></code></p></li>
+<li><p>Remove the old disk by clicking the ‘X’ at the right-hand side of the disk table</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Save</span></code></p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Attach</span> <span class="pre">existing</span> <span class="pre">disks</span></code> and select the disk you restored</p></li>
+<li><p>Ensure the restored disk has the same ‘LUN’ as the old disk</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Save</span></code></p>
+<img alt="The state before swapping in the restored disk" class="align-center" src="../../_images/backup_swap_disk_before.png" />
+<img alt="The state after swapping in the restored disk" class="align-center" src="../../_images/backup_swap_disk_after.png" />
+</li>
+<li><p>Restart the virtual machine</p></li>
+</ul>
+</section>
+<section id="enrolling-restored-disks-for-backup">
+<h3>💿 Enrolling restored disks for backup<a class="headerlink" href="#enrolling-restored-disks-for-backup" title="Permalink to this heading">#</a></h3>
+<p>On your <strong>deployment machine</strong>.</p>
+<ul>
+<li><p>Ensure you have the same version of the Data Safe Haven repository as was used by your deployment team</p></li>
+<li><p>Open a <code class="docutils literal notranslate"><span class="pre">Powershell</span></code> terminal and navigate to the <code class="docutils literal notranslate"><span class="pre">deployment/administration</span></code> directory within the Data Safe Haven repository</p></li>
+<li><p>Ensure you are logged into <code class="docutils literal notranslate"><span class="pre">Azure</span></code> within <code class="docutils literal notranslate"><span class="pre">Powershell</span></code> using the command: <code class="docutils literal notranslate"><span class="pre">Connect-AzAccount</span></code>. This command will give you a URL and a short alphanumeric code. You will need to visit that URL in a web browser and enter the code</p></li>
+<li><p>NB. If your account is a guest in additional Azure tenants, you may need to add the <code class="docutils literal notranslate"><span class="pre">-Tenant</span> <span class="pre">&lt;Tenant</span> <span class="pre">ID&gt;</span></code> flag, where <code class="docutils literal notranslate"><span class="pre">&lt;Tenant</span> <span class="pre">ID&gt;</span></code> is the ID of the Azure tenant you want to deploy into</p></li>
+<li><p>Note the name of the restored disk and the name of the resource group it belongs to</p></li>
+<li><p>Run the following script subsituting <resource group name> and <disk name> with the names of the resource group and disk respectively:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">./</span><span class="n">SRE_Enroll_Disk_Backup</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-shmId</span> <span class="p">&lt;</span><span class="n">SHM</span> <span class="n">ID</span><span class="p">&gt;</span> <span class="n">-sreId</span> <span class="p">&lt;</span><span class="n">SRE</span> <span class="n">ID</span><span class="p">&gt;</span> <span class="n">-resourceGroup</span>
+<span class="p">&lt;</span><span class="n">resource</span> <span class="nb">group </span><span class="n">name</span><span class="p">&gt;</span> <span class="n">-diskName</span> <span class="p">&lt;</span><span class="n">disk</span> <span class="n">name</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<section id="updating-allowed-repository-packages">
+<h2>📦 Updating allowed repository packages<a class="headerlink" href="#updating-allowed-repository-packages" title="Permalink to this heading">#</a></h2>
+<p>For a <a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a> SRE, only the packages named in the allowlists at <code class="docutils literal notranslate"><span class="pre">environment_configs/package_lists/</span></code> can be installed by users.</p>
+<p>To update the allowlists on an SHM, you should use the <code class="docutils literal notranslate"><span class="pre">SHM_Package_Repository_Update_Allowlists.ps1</span></code> script.</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">PS</span><span class="p">&gt;</span> <span class="p">/</span><span class="n">deployment</span><span class="p">/</span><span class="n">administration</span><span class="p">/</span><span class="n">SHM_Package_Repository_Update_Allowlists</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-shmId</span> <span class="p">&lt;</span><span class="n">SHM</span> <span class="n">ID</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>By default, this script will use the allowlists present in <code class="docutils literal notranslate"><span class="pre">environment_configs/package_lists/</span></code> but you may use the <code class="docutils literal notranslate"><span class="pre">-allowlistDirectory</span></code> option to specify another directory containing the allowlists.
+It is assumed that the allowlists will have the same names as those in in <code class="docutils literal notranslate"><span class="pre">environment_configs/package_lists/</span></code>.</p>
+</section>
+</section>
+
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="manage_users.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Managing Data Safe Haven users</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="manage_costs.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Managing costs</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+
+<div class="tocsection editthispage">
+    <a href="https://github.com/alan-turing-institute/data-safe-haven/edit/develop/docs/roles/system_manager/manage_data.md">
+        <i class="fa-solid fa-pencil"></i> Edit this page
+    </a>
+</div>
+
+</div>
+
+<div class="toc-item">
+  
+<div class="tocsection sourcelink">
+    <a href="../../_sources/roles/system_manager/manage_data.md.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright CC-BY-4.0 2022, The Alan Turing Institute..<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a> 5.2.3.
+    Hosted by <a href="https://pages.github.com/">GitHub Pages</a>.
+    <br>
+</p>
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,728 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Build an SRE compute image &#8212; Data Safe Haven  documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/overrides.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'deployment/build_srd_image';</script>
+    <script src="../_static/toggle.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Deploy a Secure Research Environment (SRE)" href="deploy_sre.html" />
+    <link rel="prev" title="Deploy a Safe Haven Management Environment (SHM)" href="deploy_shm.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../_static/logo_turing_light.png" class="logo__image only-light" alt="Logo image">
+    <img src="../_static/logo_turing_dark.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../overview/index.html">
+                        Overview
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../design/index.html">
+                        Design
+                    </a>
+                </li>
+                
+
+                <li class="nav-item current active">
+                    <a class="nav-link" href="index.html">
+                        Deployment
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../processes/index.html">
+                        Processes
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../roles/index.html">
+                        Roles
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/alan-turing-institute/data-safe-haven" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../overview/index.html">
+                        Overview
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../design/index.html">
+                        Design
+                    </a>
+                </li>
+                
+
+                <li class="nav-item current active">
+                    <a class="nav-link" href="index.html">
+                        Deployment
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../processes/index.html">
+                        Processes
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../roles/index.html">
+                        Roles
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/alan-turing-institute/data-safe-haven" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+    <div class="bd-toc-item navbar-nav">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="deploy_shm.html">Deploy a Safe Haven Management Environment (SHM)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Build an SRE compute image</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="deploy_sre.html">Deploy a Secure Research Environment (SRE)</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="deploy_sre_apache_guacamole.html">Deploy an SRE with Apache Guacamole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy_sre_microsoft_rds.html">Deploy an SRE with Microsoft RDS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="security_checklist.html">Security evaluation checklist</a></li>
+</ul>
+
+    </div>
+</nav>
+    </div>
+    <div class="sidebar-start-items__item">
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book fa-fw left"></span>
+      <span class="left">Currently reading: <strong>develop</strong></span>
+      <span class="fa fa-caret-down right"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/data-safe-haven/v4.0.0/index.html">v4.0.0</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/data-safe-haven/develop/index.html">develop</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+    </div>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-downloads" role="note" aria-label="downloads">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-file-pdf fa-fw left"></span>
+      <span class="left">Download PDF resources</span>
+      <span class="fa fa-caret-down right"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        
+          <dd><a href="/data-safe-haven/develop/pdf/data_safe_haven_user_guide_guacamole.pdf">User guide (Apache Guacamole)</a></dd>
+        
+          <dd><a href="/data-safe-haven/develop/pdf/data_safe_haven_user_guide_msrds.pdf">User guide (Microsoft RDS)</a></dd>
+        
+      </dl>
+    </div>
+  </div>
+  
+
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="build-an-sre-compute-image">
+<h1>Build an SRE compute image<a class="headerlink" href="#build-an-sre-compute-image" title="Permalink to this heading">#</a></h1>
+<p>These instructions will walk you through creating a new VM image for use in the secure research environment.</p>
+<section id="explanation-of-symbols-used-in-this-guide">
+<h2>Explanation of symbols used in this guide<a class="headerlink" href="#explanation-of-symbols-used-in-this-guide" title="Permalink to this heading">#</a></h2>
+<div class="admonition-powershell-command admonition">
+<p class="admonition-title">Powershell command</p>
+<p><img alt="Powershell: estimate of time needed" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=powershell&amp;label=local&amp;color=blue&amp;message=estimate%20of%20time%20needed" /></p>
+<ul>
+<li><p>This indicates a <code class="docutils literal notranslate"><span class="pre">Powershell</span></code> command which you will need to run locally on your machine</p></li>
+<li><p>Ensure you have checked out (or downloaded) the appropriate tag of the Safe Haven repository from <a class="github reference external" href="https://github.com/alan-turing-institute/data-safe-haven">alan-turing-institute/data-safe-haven</a>.</p></li>
+<li><p>Open a <code class="docutils literal notranslate"><span class="pre">Powershell</span></code> terminal and navigate to the indicated directory of your locally checked-out version of the Safe Haven repository</p></li>
+<li><p>Ensure that you are logged into Azure by running the <code class="docutils literal notranslate"><span class="pre">Connect-AzAccount</span></code> command</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If your account is a guest in additional Azure tenants, you may need to add the <code class="docutils literal notranslate"><span class="pre">-Tenant</span> <span class="pre">&lt;Tenant</span> <span class="pre">ID&gt;</span></code> flag, where <code class="docutils literal notranslate"><span class="pre">&lt;Tenant</span> <span class="pre">ID&gt;</span></code> is the ID of the Azure tenant you want to deploy into.</p>
+</div>
+</li>
+<li><p>This command will give you a URL and a short alphanumeric code.</p></li>
+<li><p>Go to URL in a web browser, enter the code and log in to your account on Azure.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you have several Azure accounts, make sure you use one that has permissions to make changes to the subscription you are using</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonition-remote-command admonition">
+<p class="admonition-title">Remote command</p>
+<p><img alt="Remote: estimate of time needed" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=microsoft-onedrive&amp;label=remote&amp;color=blue&amp;message=estimate%20of%20time%20needed" /></p>
+<ul class="simple">
+<li><p>This indicates a command which you will need to run remotely on an Azure virtual machine (VM) using <code class="docutils literal notranslate"><span class="pre">Microsoft</span> <span class="pre">Remote</span> <span class="pre">Desktop</span></code></p></li>
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">Microsoft</span> <span class="pre">Remote</span> <span class="pre">Desktop</span></code> and click <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Desktop</span></code> / <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">PC</span></code></p></li>
+<li><p>Enter the private IP address of the VM that you need to connect to in the <code class="docutils literal notranslate"><span class="pre">PC</span> <span class="pre">name</span></code> field (this can be found by looking in the Azure portal)</p></li>
+<li><p>Enter the name of the VM (for example <code class="docutils literal notranslate"><span class="pre">DC1-SHM-PROJECT</span></code>) in the <code class="docutils literal notranslate"><span class="pre">Friendly</span> <span class="pre">name</span></code> field</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Add</span></code></p></li>
+<li><p>Ensure you are connected to the SHM VPN that you have set up</p></li>
+<li><p>Double click on the desktop that appears under <code class="docutils literal notranslate"><span class="pre">Saved</span> <span class="pre">Desktops</span></code> or <code class="docutils literal notranslate"><span class="pre">PCs</span></code>.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">username</span></code> and <code class="docutils literal notranslate"><span class="pre">password</span></code> specified by the appropriate section of the guide</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you see a warning dialog that the certificate cannot be verified as root, accept this and continue.</p>
+</div>
+</div>
+<div class="admonition-azure-portal-operation admonition">
+<p class="admonition-title">Azure Portal operation</p>
+<p><img alt="Portal: estimate of time needed" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=microsoft-azure&amp;label=portal&amp;color=blue&amp;message=estimate%20of%20time%20needed" /></p>
+<ul class="simple">
+<li><p>This indicates an operation which needs to be carried out in the <a class="reference external" href="https://portal.azure.com"><code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Portal</span></code></a> using a web browser on your local machine.</p></li>
+<li><p>You will need to login to the portal using an account with privileges to make the necessary changes to the resources you are altering</p></li>
+</ul>
+</div>
+<div class="admonition-azure-active-directory-operation admonition">
+<p class="admonition-title">Azure Active Directory operation</p>
+<p><img alt="Azure AD: estimate of time needed" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=microsoft-academic&amp;label=Azure%20AD&amp;color=blue&amp;message=estimate%20of%20time%20needed" /></p>
+<ul class="simple">
+<li><p>This indicates an operation which needs to be carried out in the <a class="reference external" href="https://portal.azure.com"><code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Portal</span></code></a> using a web browser on your local machine.</p></li>
+<li><p>You will need to login to the portal using an account with administrative privileges on the <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Active</span> <span class="pre">Directory</span></code> that you are altering.</p></li>
+<li><p>Note that this might be different from the account which is able to create/alter resources in the Azure subscription where you are building the Safe Haven.</p></li>
+</ul>
+</div>
+<div class="admonition-os-dependent-steps admonition">
+<p class="admonition-title">OS-dependent steps</p>
+<p>The following icons indicate steps that depend on the OS you are using to deploy the SHM</p>
+<ul class="simple">
+<li><p><img alt="macOS" src="https://img.shields.io/badge/-555?&amp;logo=apple&amp;logoColor=white" /> <strong>MacOS</strong></p></li>
+<li><p><img alt="Windows" src="https://img.shields.io/badge/-555?&amp;logo=windows&amp;logoColor=white" /> <strong>Windows</strong></p></li>
+<li><p><img alt="Linux" src="https://img.shields.io/badge/-555?&amp;logo=linux&amp;logoColor=white" /> <strong>Linux</strong></p></li>
+</ul>
+</div>
+</section>
+<section id="prerequisites">
+<h2>1. 🌱 Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>An <code class="docutils literal notranslate"><span class="pre">Azure</span></code> subscription with sufficient credits to build the environment in</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Powershell</span></code> for <code class="docutils literal notranslate"><span class="pre">Azure</span></code></p>
+<ul>
+<li><p>Install <a class="reference external" href="https://docs.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-2.2.0">Powershell v6.0 or above</a></p></li>
+<li><p>Install the Azure <a class="reference external" href="https://docs.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-2.2.0&amp;viewFallbackFrom=azps-1.3.0">Powershell Module</a></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SSH</span></code> or <code class="docutils literal notranslate"><span class="pre">OpenSSH</span></code> (not tested on Windows)</p></li>
+<li><p>SHM configuration file</p>
+<ul>
+<li><p>The core properties for the environment must be present in the <code class="docutils literal notranslate"><span class="pre">environment_configs</span></code> folder as described in the <a class="reference internal" href="deploy_shm.html#deploy-shm"><span class="std std-ref">Safe Haven Management deployment instructions</span></a>.</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If you run:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">PS</span><span class="p">&gt;</span> <span class="nb">Start-Transcript</span> <span class="n">-Path</span> <span class="p">&lt;</span><span class="n">a</span> <span class="n">log</span> <span class="n">file</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>before you start your deployment and</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">PS</span><span class="p">&gt;</span> <span class="nb">Stop-Transcript</span>
+</pre></div>
+</div>
+<p>afterwards, you will automatically get a full log of the Powershell commands you have run.</p>
+</div>
+<section id="optional-verify-code-version">
+<h3>(Optional) Verify code version<a class="headerlink" href="#optional-verify-code-version" title="Permalink to this heading">#</a></h3>
+<p>If you have cloned/forked the code from our <code class="docutils literal notranslate"><span class="pre">GitHub</span></code> repository, you can confirm which version of the Data Safe Haven you are currently using by running the following commands:</p>
+<p><img alt="Powershell: a few seconds" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=powershell&amp;label=local&amp;color=blue&amp;message=a%20few%20seconds" /></p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">PS</span><span class="p">&gt;</span> <span class="n">git</span> <span class="n">tag</span> <span class="p">-</span><span class="n">-list</span> <span class="p">|</span> <span class="nb">Select-String</span> <span class="p">$(</span><span class="n">git</span> <span class="n">describe</span> <span class="p">-</span><span class="n">-tags</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will check the tag you are using against the list of known tags and print it out.
+You can include this confirmation in any record you keep of your deployment.</p>
+</section>
+</section>
+<section id="optional-customise-the-build-configuration">
+<h2>2. 🎁 (Optional) Customise the build configuration<a class="headerlink" href="#optional-customise-the-build-configuration" title="Permalink to this heading">#</a></h2>
+<p>Provisioning a VM with all the Safe Haven software is done using <a class="reference external" href="https://cloudinit.readthedocs.io/en/latest/">cloud-init</a>.
+This takes a basic Ubuntu image and installs and configures all the necessary software packages.
+In general, this image should cover most use cases, but it’s possible that you may want to customise it for your particular circumstances, for example if you want to add a new package or to update the version of an existing package.</p>
+<section id="adding-a-new-apt-package">
+<h3>Adding a new apt package<a class="headerlink" href="#adding-a-new-apt-package" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Add the name of the package to <code class="docutils literal notranslate"><span class="pre">deployment/secure_research_desktop/packages/packages-apt.list</span></code></p></li>
+<li><p>If this package adds a new executable that you would like to be available to the end user, you should also add a check for this to the end of <code class="docutils literal notranslate"><span class="pre">deployment/secure_research_desktop/cloud_init/cloud-init-buildimage-ubuntu-&lt;version&gt;.mustache.yaml</span></code></p></li>
+</ul>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>For example, to check for <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Data</span> <span class="pre">Studio</span></code>, the following line was added:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="k">$(</span>which azuredatastudio<span class="k">)</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nb">echo</span> <span class="s2">&quot;\n\n*azuredatastudio*\n\n</span><span class="k">$(</span>which azuredatastudio<span class="k">)</span><span class="s2">&quot;</span><span class="p">;</span> <span class="k">else</span> <span class="nb">echo</span> <span class="s2">&quot;ERROR azuredatastudio not found!&quot;</span><span class="p">;</span> <span class="nb">exit</span> <span class="m">1</span><span class="p">;</span> <span class="k">fi</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="adding-a-new-python-package">
+<h3>Adding a new Python package<a class="headerlink" href="#adding-a-new-python-package" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Add the name of the package as it appears on <code class="docutils literal notranslate"><span class="pre">PyPI</span></code> to the package list:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">deployment/secure_research_desktop/packages/packages-python.yaml</span></code></p></li>
+<li><p>If there are any restrictions on acceptable versions for this package (e.g. a minimum or exact version) then make sure to specify this</p></li>
+</ul>
+</li>
+<li><p>You should also add this package to the <strong>allow list</strong> used by <a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a> package mirrors in <code class="docutils literal notranslate"><span class="pre">environment_configs/package_lists/allowlist-core-python-pypi-tier3.list</span></code></p></li>
+</ul>
+</section>
+<section id="adding-a-new-r-package">
+<h3>Adding a new R package<a class="headerlink" href="#adding-a-new-r-package" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Add the name of the package as it appears on <code class="docutils literal notranslate"><span class="pre">CRAN</span></code> or <code class="docutils literal notranslate"><span class="pre">Bioconductor</span></code> to the appropriate package list:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">deployment/secure_research_desktop/packages/packages-r-bioconductor.list</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">deployment/secure_research_desktop/packages/packages-r-cran.list</span></code></p></li>
+</ul>
+</li>
+<li><p>If this <code class="docutils literal notranslate"><span class="pre">R</span></code> package is available as a pre-compiled apt binary (eg. <code class="docutils literal notranslate"><span class="pre">abind</span></code> is available as <code class="docutils literal notranslate"><span class="pre">r-cran-abind</span></code>) then also add it to <code class="docutils literal notranslate"><span class="pre">deployment/secure_research_desktop/packages/packages-apt.list</span></code>.</p></li>
+<li><p>You should also add this package to the <strong>allow list</strong> used by <a class="reference internal" href="../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a> package mirrors in <code class="docutils literal notranslate"><span class="pre">environment_configs/package_lists/allowlist-core-r-cran-tier3.list</span></code></p></li>
+</ul>
+<section id="adding-packages-to-the-package-allowlist">
+<h4>Adding packages to the package allowlist<a class="headerlink" href="#adding-packages-to-the-package-allowlist" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>When you add a new package to either the <code class="docutils literal notranslate"><span class="pre">PyPI</span></code> or <code class="docutils literal notranslate"><span class="pre">CRAN</span></code> allowlist you should also determine all of its dependencies (and their dependencies, recursively)</p></li>
+<li><p>Once you have the list of packages you should add them to:</p>
+<ul>
+<li><p><strong>PyPI:</strong> <code class="docutils literal notranslate"><span class="pre">environment_configs/package_lists/allowlist-full-python-pypi-tier3.list</span></code></p></li>
+<li><p><strong>CRAN:</strong> <code class="docutils literal notranslate"><span class="pre">environment_configs/package_lists/allowlist-full-r-cran-tier3.list</span></code></p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="changing-the-version-of-a-package">
+<h3>Changing the version of a package<a class="headerlink" href="#changing-the-version-of-a-package" title="Permalink to this heading">#</a></h3>
+<p>If you want to update the version of one of the packages we install from a <code class="docutils literal notranslate"><span class="pre">.deb</span></code> file (eg. <code class="docutils literal notranslate"><span class="pre">RStudio</span></code>), you will need to edit <code class="docutils literal notranslate"><span class="pre">deployment/secure_research_desktop/cloud_init/cloud-init-buildimage-ubuntu-&lt;version&gt;.mustache.yaml</span></code></p>
+<ul class="simple">
+<li><p>Find the appropriate <code class="docutils literal notranslate"><span class="pre">/installation/&lt;package</span> <span class="pre">name&gt;.debinfo</span></code> section under the <code class="docutils literal notranslate"><span class="pre">write_files:</span></code> key</p></li>
+<li><p>Update the version number and the <code class="docutils literal notranslate"><span class="pre">sha256</span></code> hash for the file</p></li>
+<li><p>Check that the file naming structure still matches the format described in this <code class="docutils literal notranslate"><span class="pre">.debinfo</span></code> file</p></li>
+</ul>
+</section>
+</section>
+<section id="build-a-release-candidate">
+<h2>3. 👷 Build a release candidate<a class="headerlink" href="#build-a-release-candidate" title="Permalink to this heading">#</a></h2>
+<p>In order to provision a candidate VM you will need to do the following:</p>
+<p><img alt="Powershell: two to three hours" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=powershell&amp;label=local&amp;color=blue&amp;message=two%20to%20three%20hours" /> at 📁 <code class="docutils literal notranslate"><span class="pre">./deployment/secure_research_desktop/setup</span></code></p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">PS</span><span class="p">&gt;</span> <span class="p">./</span><span class="n">Provision_Compute_VM</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-shmId</span> <span class="p">&lt;</span><span class="n">SHM</span> <span class="n">ID</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>where <code class="docutils literal notranslate"><span class="pre">&lt;SHM</span> <span class="pre">ID&gt;</span></code> is the <a class="reference internal" href="deploy_shm.html#roles-deployer-shm-id"><span class="std std-ref">management environment ID</span></a> for this SRE</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Although the <code class="docutils literal notranslate"><span class="pre">./Provision_Compute_VM.ps1</span></code> script will finish running in a few minutes, the build itself will take several hours.</p></li>
+<li><p>We recommend <strong>monitoring</strong> the build by accessing the machine using <code class="docutils literal notranslate"><span class="pre">ssh</span></code> (the ssh info should be printed at the end of the Provision_Compute_VM.ps1 script) and either reading through the full build log at <code class="docutils literal notranslate"><span class="pre">/var/log/cloud-init-output.log</span></code> or running the summary script using <code class="docutils literal notranslate"><span class="pre">/opt/verification/analyse_build.py</span></code>.</p></li>
+<li><p><strong>NB.</strong> You will need to connect from an approved administrator IP address</p></li>
+<li><p><strong>NB.</strong> the VM will automatically shutdown at the end of the cloud-init process - if you want to analyse the build after this point, you will need to turn it back on in the <code class="docutils literal notranslate"><span class="pre">Azure</span></code> portal.</p></li>
+</ul>
+</div>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<ul class="simple">
+<li><p>If you are unable to access the VM over <code class="docutils literal notranslate"><span class="pre">ssh</span></code> please check whether you are trying to connect from one of the approved IP addresses that you defined under <code class="docutils literal notranslate"><span class="pre">vmImages</span> <span class="pre">&gt;</span> <span class="pre">buildIpAddresses</span></code> in the SHM config file.</p></li>
+<li><p>You can check which IP addresses are currently allowed by looking at the <code class="docutils literal notranslate"><span class="pre">AllowBuildAdminSSH</span></code> inbound connection rule in the <code class="docutils literal notranslate"><span class="pre">RG_VMIMAGES_NETWORKING</span> <span class="pre">&gt;</span> <span class="pre">NSG_VMIMAGES_BUILD_CANDIDATES</span></code> network security group in the subscription where you are building the candidate VM</p></li>
+</ul>
+</div>
+</section>
+<section id="convert-candidate-vm-to-an-image">
+<h2>4. 📷 Convert candidate VM to an image<a class="headerlink" href="#convert-candidate-vm-to-an-image" title="Permalink to this heading">#</a></h2>
+<p>Once you are happy with a particular candidate, you can convert it into an image as follows:</p>
+<p><img alt="Powershell: ten minutes" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=powershell&amp;label=local&amp;color=blue&amp;message=ten%20minutes" /> at 📁 <code class="docutils literal notranslate"><span class="pre">./deployment/secure_research_desktop/setup</span></code></p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">PS</span><span class="p">&gt;</span> <span class="p">./</span><span class="n">Convert_VM_To_Image</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-shmId</span> <span class="p">&lt;</span><span class="n">SHM</span> <span class="n">ID</span><span class="p">&gt;</span> <span class="n">-vmName</span> <span class="p">&lt;</span><span class="n">VM</span> <span class="n">name</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>where <code class="docutils literal notranslate"><span class="pre">&lt;SHM</span> <span class="pre">ID&gt;</span></code> is the <a class="reference internal" href="deploy_shm.html#roles-deployer-shm-id"><span class="std std-ref">management environment ID</span></a> for this SRE</p></li>
+<li><p>where <code class="docutils literal notranslate"><span class="pre">&lt;VM</span> <span class="pre">name&gt;</span></code> is the name of the virtual machine created during the provisioning step</p></li>
+</ul>
+<p>This will build a new image in <code class="docutils literal notranslate"><span class="pre">RG_VMIMAGES_STORAGE</span></code> and delete the VM plus associated build artifacts (hard disk, network card and public IP address)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The first step of this script will run the remote build analysis script.
+Please <strong>check</strong> that everything has built correctly before proceeding.</p>
+</div>
+</section>
+<section id="register-image-in-the-gallery">
+<h2>5. 🎨 Register image in the gallery<a class="headerlink" href="#register-image-in-the-gallery" title="Permalink to this heading">#</a></h2>
+<p>Once you have created an image, it can be registered in the image gallery for future use using the <code class="docutils literal notranslate"><span class="pre">Register_Image_In_Gallery.ps1</span></code> script.</p>
+<p><img alt="Powershell: one hour" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=powershell&amp;label=local&amp;color=blue&amp;message=one%20hour" /> at 📁 <code class="docutils literal notranslate"><span class="pre">./deployment/secure_research_desktop/setup</span></code></p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">PS</span><span class="p">&gt;</span> <span class="p">./</span><span class="n">Register_Image_In_Gallery</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-shmId</span> <span class="p">&lt;</span><span class="n">SHM</span> <span class="n">ID</span><span class="p">&gt;</span> <span class="n">-imageName</span> <span class="p">&lt;</span><span class="n">Image</span> <span class="n">name</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>where <code class="docutils literal notranslate"><span class="pre">&lt;SHM</span> <span class="pre">ID&gt;</span></code> is the <a class="reference internal" href="deploy_shm.html#roles-deployer-shm-id"><span class="std std-ref">management environment ID</span></a> for this SRE</p></li>
+<li><p>where <code class="docutils literal notranslate"><span class="pre">&lt;Image</span> <span class="pre">Name&gt;</span></code> is the name of the VM image created during the conversion step</p></li>
+</ul>
+<p>This will register the image in the shared gallery as a new version of the relevant SRD image.
+This command can take between 30 minutes and 1 hour to complete, as it has to replicate the VM across 3 different regions.</p>
+</section>
+</section>
+
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="deploy_shm.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Deploy a Safe Haven Management Environment (SHM)</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="deploy_sre.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Deploy a Secure Research Environment (SRE)</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+
+<div class="tocsection editthispage">
+    <a href="https://github.com/alan-turing-institute/data-safe-haven/edit/develop/docs/deployment/build_srd_image.md">
+        <i class="fa-solid fa-pencil"></i> Edit this page
+    </a>
+</div>
+
+</div>
+
+<div class="toc-item">
+  
+<div class="tocsection sourcelink">
+    <a href="../_sources/deployment/build_srd_image.md.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright CC-BY-4.0 2022, The Alan Turing Institute..<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a> 5.2.3.
+    Hosted by <a href="https://pages.github.com/">GitHub Pages</a>.
+    <br>
+</p>
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

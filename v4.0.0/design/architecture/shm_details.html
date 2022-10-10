@@ -1,0 +1,550 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Safe Haven Management design &#8212; Data Safe Haven  documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/overrides.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'design/architecture/shm_details';</script>
+    <script src="../../_static/toggle.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Secure research environment design" href="sre_details.html" />
+    <link rel="prev" title="Architecture" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../_static/logo_turing_light.png" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/logo_turing_dark.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../overview/index.html">
+                        Overview
+                    </a>
+                </li>
+                
+
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        Design
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../deployment/index.html">
+                        Deployment
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../processes/index.html">
+                        Processes
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../roles/index.html">
+                        Roles
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/alan-turing-institute/data-safe-haven" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../overview/index.html">
+                        Overview
+                    </a>
+                </li>
+                
+
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        Design
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../deployment/index.html">
+                        Deployment
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../processes/index.html">
+                        Processes
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../roles/index.html">
+                        Roles
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/alan-turing-institute/data-safe-haven" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+    <div class="bd-toc-item navbar-nav">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Architecture</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Safe Haven Management design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sre_details.html">Secure research environment design</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../security/index.html">Security</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../security/objectives.html">Security objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security/technical_controls.html">Built-in technical controls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security/reference_configuration.html">Turing security configuration</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav>
+    </div>
+    <div class="sidebar-start-items__item">
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book fa-fw left"></span>
+      <span class="left">Currently reading: <strong>v4.0.0</strong></span>
+      <span class="fa fa-caret-down right"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+           <strong> 
+          <dd><a href="/data-safe-haven/v4.0.0/index.html">v4.0.0</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/data-safe-haven/develop/index.html">develop</a></dd>
+          
+        
+      </dl>
+      
+      
+    </div>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-downloads" role="note" aria-label="downloads">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-file-pdf fa-fw left"></span>
+      <span class="left">Download PDF resources</span>
+      <span class="fa fa-caret-down right"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        
+          <dd><a href="/data-safe-haven/v4.0.0/pdf/data_safe_haven_user_guide_guacamole.pdf">User guide (Apache Guacamole)</a></dd>
+        
+          <dd><a href="/data-safe-haven/v4.0.0/pdf/data_safe_haven_user_guide_msrds.pdf">User guide (Microsoft RDS)</a></dd>
+        
+      </dl>
+    </div>
+  </div>
+  
+
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="safe-haven-management-design">
+<h1>Safe Haven Management design<a class="headerlink" href="#safe-haven-management-design" title="Permalink to this heading">#</a></h1>
+<p>The user and machine management services for the Safe Haven are hosted on a separate subscription to any of the secure project environments.
+These services include the primary authentication providers, VM images, package mirrors and proxies, and other services that contribute to the smooth running of the service.
+This provides a centralised management facility, ensuring consistency across all secure project environments.</p>
+<section id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this heading">#</a></h2>
+<img alt="Safe Haven Management (SHM) component" class="align-center" src="../../_images/shm_architecture.png" />
+<p>Within the Management segment all authentication services are contained within a single virtual network (VNet).
+The Windows Servers are running Active Directory and are acting as Domain Controllers.
+They are configured within an Azure availability set to ensure maximum up time.
+The Domain Controllers synchronise user details to the Azure Active Directory that is associated with the Management subscription to support self-service account activation and password reset.</p>
+<p>In addition to the Domain Controllers there is a Windows Network Policy server, this server provides Multifactor Authentication services to the Remote Desktop Servers hosted within the SREs, connecting with Azure AD to provide this service.</p>
+<p>Network security is provided by Azure Network Security Groups that ensure that inbound connections from the SREs are limited to Active Directory and RADIUS traffic.</p>
+<p>For management of the environment there is an Azure point-to-site (P2S) VPN service configured.
+Access to this is limited to the Data Safe Haven administration team.</p>
+</section>
+<section id="package-proxies-and-mirrors">
+<h2>Package proxies and mirrors<a class="headerlink" href="#package-proxies-and-mirrors" title="Permalink to this heading">#</a></h2>
+<p>For <a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a> and <a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a> SREs, a selection of Python and R packages can be provided via a set of servers that provide access to some or all of the packages available from the public PyPI or CRAN package repositories.
+Depending on the configuration of the Data Safe Haven, these packages can be provided via either package proxies or package mirrors.</p>
+<ul class="simple">
+<li><p><strong>Package proxies:</strong> These make on-demand connections to the public package repositories for approved packages. The proxy server has access to all packages available on the upstream repositories but limits downstream access to the packages permitted for an SRE.</p></li>
+<li><p><strong>Package mirrors:</strong> These synchronise approved packages through a one-way airlock. This provides an additional level of security compared to package proxies. However, the mirrors must be regularly updated, which can take a long time when mirroring a large amount of package data.</p></li>
+</ul>
+<p><a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a> environments can access all packages available from the public PyPI and CRAN repositories.
+<a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a> environments can access only a pre-approved subset of PyPI or CRAN packages.
+Connection of SREs to either the appropriate proxy or mirror servers is achieved via VNet peering.
+While multiple SREs may be peered to the same proxy or mirror VNet, this does not permit communication between SREs.</p>
+<section id="package-proxy-security">
+<h3>Package proxy security<a class="headerlink" href="#package-proxy-security" title="Permalink to this heading">#</a></h3>
+<p>When using a package proxy, the proxy server has very restricted outbound internet access.
+It is only able to connect to the download endpoints for the upstream package repositories it is providing access to (in our case PyPI for Python packages and CRAN for R packages).
+While the proxy server has access to all packages from the upstream repositories, it can be configured to only provide access to a pre-approved subset of these packages and proxy servers for <a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a> environments are configured this way.</p>
+<p>If the proxy server was compromised from an SRE, an attacker could access all packages available on the upstream package repositories.
+In the Turing’s configuration, this would not provide any additional access for <a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a> environments, but would allow an attacker from a <a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a> environment to install packages not on the limited pre-approved package list.
+However, the upstream package repository download endpoints do not allow any data to be uploaded to them, so an attacker would have to separately compromise the upstream package repositories to be able to egress any data through a compromised package proxy.</p>
+</section>
+<section id="package-mirror-security">
+<h3>Package mirror security<a class="headerlink" href="#package-mirror-security" title="Permalink to this heading">#</a></h3>
+<p>Package mirrors provide an additional level of isolation at the network level, deploying two paired mirror servers for each upstream package repository.</p>
+<img alt="Package mirrors" class="align-center" src="../../_images/architecture_mirrors.png" />
+<p>The “external” mirror is protected by infrastructure level network controls that do not permit any <strong>inbound</strong> connections at all (not even from the “internal” mirror).
+It can call out to the internet to update itself from the official package server and can push updates to the “internal” mirror via rsync.</p>
+<p>The “internal” mirror is protected by infrastructure level network controls that do not permit any <strong>outbound</strong> connections at all (not even to the “external” mirror).
+It can receive inbound rsync connections from the “external” mirror to receive package updates and inbound connections from its associated SREs to install packages.</p>
+<p>Between them this pair of servers operate as a one-way “airlock” to allow packages to be pulled from the official package server on the internet and made available to Secure Research Desktops (SRDs) in project SREs, while not permitting the mirrors to be used to connect to the internet from a SRE.
+Even if the “internal” mirror was to be compromised, the infrastructure level network controls restricting outbound connections would prevent access to any other resources within the Data Safe Haven or outside of it.</p>
+</section>
+<section id="package-mirror-performance-considerations">
+<h3>Package mirror performance considerations<a class="headerlink" href="#package-mirror-performance-considerations" title="Permalink to this heading">#</a></h3>
+<p>As package mirrors need to copy <strong>all</strong> permitted packages, synchronising a large amount of package data can take a long time.
+In particular, a full initial download of all packages from PyPI for a <a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a> mirror can take two weeks.
+Newly approved packages will also only be available after the next mirror synchronisation is complete.</p>
+</section>
+</section>
+</section>
+
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="index.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Architecture</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="sre_details.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Secure research environment design</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+
+<div class="tocsection editthispage">
+    <a href="https://github.com/alan-turing-institute/data-safe-haven/edit/develop/docs/design/architecture/shm_details.md">
+        <i class="fa-solid fa-pencil"></i> Edit this page
+    </a>
+</div>
+
+</div>
+
+<div class="toc-item">
+  
+<div class="tocsection sourcelink">
+    <a href="../../_sources/design/architecture/shm_details.md.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright CC-BY-4.0 2022, The Alan Turing Institute..<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a> 5.2.3.
+    Hosted by <a href="https://pages.github.com/">GitHub Pages</a>.
+    <br>
+</p>
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

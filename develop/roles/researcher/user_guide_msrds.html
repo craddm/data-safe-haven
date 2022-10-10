@@ -1,0 +1,1871 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>User Guide: Microsoft Remote Desktop &#8212; Data Safe Haven  documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/overrides.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'roles/researcher/user_guide_msrds';</script>
+    <script src="../../_static/toggle.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Available software" href="available_software.html" />
+    <link rel="prev" title="User Guide: Apache Guacamole" href="user_guide_guacamole.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../_static/logo_turing_light.png" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/logo_turing_dark.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../overview/index.html">
+                        Overview
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../design/index.html">
+                        Design
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../deployment/index.html">
+                        Deployment
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../processes/index.html">
+                        Processes
+                    </a>
+                </li>
+                
+
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        Roles
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/alan-turing-institute/data-safe-haven" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../overview/index.html">
+                        Overview
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../design/index.html">
+                        Design
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../deployment/index.html">
+                        Deployment
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../processes/index.html">
+                        Processes
+                    </a>
+                </li>
+                
+
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        Roles
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/alan-turing-institute/data-safe-haven" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+    <div class="bd-toc-item navbar-nav">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../data_provider_representative/index.html">Dataset Provider Representative</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../investigator/index.html">Investigator</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../investigator/data_ingress.html">Data ingress process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../investigator/data_egress.html">Data egress process</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../programme_manager/index.html">Programme Manager</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../project_manager/index.html">Project Manager</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../project_manager/project_lifecycle.html">Project lifecycle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_manager/data_ingress.html">Data ingress process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_manager/data_egress.html">Data egress process</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../referee/index.html">Referee</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Researcher</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="user_guide.html">User guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="user_guide_guacamole.html">User Guide: Apache Guacamole</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">User Guide: Microsoft Remote Desktop</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="available_software.html">Available software</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../system_manager/index.html">System Manager</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../system_manager/manage_users.html">Managing Data Safe Haven users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system_manager/manage_data.html">Managing data ingress and egress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system_manager/manage_costs.html">Managing costs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system_manager/migrate_an_shm.html">Migrating an SHM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system_manager/manage_deployments.html">Managing Data Safe Haven deployments</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav>
+    </div>
+    <div class="sidebar-start-items__item">
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book fa-fw left"></span>
+      <span class="left">Currently reading: <strong>develop</strong></span>
+      <span class="fa fa-caret-down right"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+          
+          <dd><a href="/data-safe-haven/v4.0.0/index.html">v4.0.0</a></dd>
+          
+        
+           <strong> 
+          <dd><a href="/data-safe-haven/develop/index.html">develop</a></dd>
+           </strong> 
+        
+      </dl>
+      
+      
+    </div>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-downloads" role="note" aria-label="downloads">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-file-pdf fa-fw left"></span>
+      <span class="left">Download PDF resources</span>
+      <span class="fa fa-caret-down right"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        
+          <dd><a href="/data-safe-haven/develop/pdf/data_safe_haven_user_guide_guacamole.pdf">User guide (Apache Guacamole)</a></dd>
+        
+          <dd><a href="/data-safe-haven/develop/pdf/data_safe_haven_user_guide_msrds.pdf">User guide (Microsoft RDS)</a></dd>
+        
+      </dl>
+    </div>
+  </div>
+  
+
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="user-guide-microsoft-remote-desktop">
+<span id="role-researcher-user-guide-msrds"></span><h1>User Guide: Microsoft Remote Desktop<a class="headerlink" href="#user-guide-microsoft-remote-desktop" title="Permalink to this heading">#</a></h1>
+<section id="introduction">
+<h2>🔰 Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>🎉 Welcome to the Turing Data Safe Haven! 🎉</p>
+<p>Secure research environments (SREs) for analysis of sensitive datasets are essential to give data providers confidence that their datasets will be kept secure over the course of a project.
+The Data Safe Haven is a prescription for how to set up one or more SREs and give users access to them.
+The Data Safe Haven SRE design is aimed at allowing groups of researchers to work together on projects that involve sensitive or confidential datasets at scale.
+Our goal is to ensure that you are able to implement the most cutting edge data science techniques while maintaining all ethical and legal responsibilities of information governance and access.</p>
+<p>The data you are working on will have been classified into one of five sensitivity tiers, ranging from open data at Tier 0, to highly sensitive and high risk data at Tier 4.
+The tiers are defined by the most sensitive data in your project, and may be increased if the combination of data is deemed to be require additional levels of security.
+You can read more about this process in our policy paper: <em>Arenas et al, 2019</em>, <a class="reference external" href="https://arxiv.org/abs/1908.08737"><code class="docutils literal notranslate"><span class="pre">arXiv:1908.08737</span></code></a>.</p>
+<p>The level of sensitivity of your data determines whether you have access to the internet within the SRE and whether you are allowed to copy and paste between the secure research environment and other windows on your computer.
+This means you may be limited in which data science tools you are allowed to install.
+You will find that many software packages are already available, and the administrator of the SRE will ingress - bring into the environment - as many additional resources as possible.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Please read this user guide carefully and remember to refer back to it when you have questions.
+In many cases the answer is already here, but if you think this resource could be clearer, please let us know so we can improve the documentation for future users.</p>
+</div>
+<section id="definitions">
+<h3>Definitions<a class="headerlink" href="#definitions" title="Permalink to this heading">#</a></h3>
+<p>The following definitions might be useful during the rest of this guide</p>
+<dl class="simple myst">
+<dt>Secure Research Environment (SRE)</dt><dd><p>the environment that you will be using to access the sensitive data.</p>
+</dd>
+<dt>Data Safe Haven</dt><dd><p>the overall project that details how to create and manage one or more SREs.</p>
+</dd>
+</dl>
+<dl class="simple myst" id="user-guide-username-domain">
+<dt>Username domain</dt><dd><p>the domain (for example <code class="docutils literal notranslate"><span class="pre">projects.turingsafehaven.ac.uk</span></code>) which your user account will belong to. Multiple SREs can share the same domain for managing users in common.</p>
+</dd>
+</dl>
+<dl class="simple myst" id="user-guide-sre-id">
+<dt>SRE ID</dt><dd><p>each SRE has a unique short ID, for example <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> which your <a class="reference internal" href="../system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a> will use to distinguish different SREs in the same Data Safe Haven.</p>
+</dd>
+</dl>
+<dl class="simple myst" id="user-guide-sre-url">
+<dt>SRE URL</dt><dd><p>each SRE has a unique URL (for example <code class="docutils literal notranslate"><span class="pre">sandbox.projects.turingsafehaven.ac.uk</span></code>) which is used to access the data.</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="set-up-your-account">
+<h2>🚀 Set up your account<a class="headerlink" href="#set-up-your-account" title="Permalink to this heading">#</a></h2>
+<p>This section of the user guide will help you set up your new account on the SRE you’ll be using.</p>
+<section id="prerequisites">
+<h3>🌱 Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h3>
+<p>Make sure you have all of the following in front of you when connecting to the SRE.</p>
+<ul class="simple">
+<li><p>📧 The email from your <a class="reference internal" href="../system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a> with your account details.</p></li>
+<li><p>🔧 Your <span class="xref myst">username</span>, given in an email from your <a class="reference internal" href="../system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a>.</p></li>
+<li><p>🏰 The <span class="xref myst">domain name and URL</span> for the SRE, given in an email from your <a class="reference internal" href="../system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a>.</p></li>
+<li><p>💻 Your computer.</p></li>
+<li><p>📡 <span class="xref myst">Access</span> to the specific wired or wireless network detailed in the email from your <a class="reference internal" href="../system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a>.</p></li>
+<li><p>🔒 <span class="xref myst">Data security training</span> for those working on health datasets.</p></li>
+<li><p>📱 Your <span class="xref myst">phone</span>, with good signal connectivity.</p></li>
+</ul>
+<p>You should also know who the <strong>designated contact</strong> for your SRE is.
+This might be an administrator or one of the people working on the project with you.
+They will be your primary point of contact if you have any issues in connecting to or using the SRE.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For example, during the Turing Data Study Groups, the <strong>facilitator</strong> of each SRE is the designated contact</p>
+</div>
+<section id="username">
+<h4>Username<a class="headerlink" href="#username" title="Permalink to this heading">#</a></h4>
+<p>Your username will usually be in the format <code class="docutils literal notranslate"><span class="pre">firstname.lastname</span></code>.
+In some places, you will need to enter it in the form <code class="docutils literal notranslate"><span class="pre">username&#64;&lt;username</span> <span class="pre">domain&gt;</span></code></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can find your username in the email you received from your <a class="reference internal" href="../system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a>.</p>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>If you have a hyphenated last name, or multiple surnames, or a long family name, your assigned username may not follow the same pattern of <code class="docutils literal notranslate"><span class="pre">firstname.lastname</span></code>.
+Please check with the designated contact for your SRE if you are unsure about your username.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this document we will use <strong>Ada Lovelace</strong> as our example user.
+Her username is:</p>
+<ul class="simple">
+<li><p>short-form: <code class="docutils literal notranslate"><span class="pre">ada.lovelace</span></code></p></li>
+<li><p>long-form: <code class="docutils literal notranslate"><span class="pre">ada.lovelace&#64;projects.turingsafehaven.ac.uk</span></code></p></li>
+</ul>
+</div>
+</section>
+<section id="network-access">
+<h4>Network access<a class="headerlink" href="#network-access" title="Permalink to this heading">#</a></h4>
+<p>The SRE that you’re using may be configured to allow access only from a specific set of IP addresses.
+This may involve being connected to a specific wired or wireless network or using a VPN.
+You also may be required to connect from a specific, secure location.
+You will be told what these requirements are for your particular environment.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Make sure you know the networks from which you must connect to your SRE.
+This information will be available in the email you received with your connection information.</p>
+</div>
+</section>
+<section id="data-security-training-requirements">
+<h4>Data security training requirements<a class="headerlink" href="#data-security-training-requirements" title="Permalink to this heading">#</a></h4>
+<p>Depending on your project, you may be required to undertake <a class="reference internal" href="../../processes/data_handling.html#process-data-security-training"><span class="std std-ref">data security awareness training</span></a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Check with your designated contact to see whether this is the case for you.</p>
+</div>
+</section>
+<section id="your-phone-for-multi-factor-authentication">
+<h4>Your phone for multi-factor authentication<a class="headerlink" href="#your-phone-for-multi-factor-authentication" title="Permalink to this heading">#</a></h4>
+<p>Multi-factor authentication (MFA) is one of the most powerful ways of verifying user identity online.
+We therefore use MFA to protect the project data - specifically, we will use your phone number.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Make sure to have your phone with you and that you have good signal connectivity when you are connecting to the SRE.</p>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>You may encounter some connectivity challenges if your phone network has poor connectivity.
+The SRE is not set up to allow you to authenticate through other methods.</p>
+</div>
+</section>
+<section id="domain-names">
+<h4>Domain names<a class="headerlink" href="#domain-names" title="Permalink to this heading">#</a></h4>
+<p>You should be given the <a class="reference internal" href="#user-guide-username-domain"><span class="std std-ref">username domain</span></a> in the initial email from your <a class="reference internal" href="../system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a>.
+You might receive the <a class="reference internal" href="#user-guide-sre-url"><span class="std std-ref">SRE URL</span></a> at this time, or you might be assigned to a particular SRE at a later point.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this document Ada Lovelace - our example user - will be participating in the <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> project at a Turing Data Study Group.</p>
+<ul class="simple">
+<li><p>Her <strong><a class="reference internal" href="#user-guide-username-domain"><span class="std std-ref">username domain</span></a></strong> is <code class="docutils literal notranslate"><span class="pre">projects.turingsafehaven.ac.uk</span></code> .</p></li>
+<li><p>Her <strong><a class="reference internal" href="#user-guide-sre-url"><span class="std std-ref">SRE URL</span></a></strong> is <code class="docutils literal notranslate"><span class="pre">https://sandbox.projects.turingsafehaven.ac.uk</span></code></p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="set-a-password">
+<h3>🔐 Set a password<a class="headerlink" href="#set-a-password" title="Permalink to this heading">#</a></h3>
+<p>For security reasons, you must reset your password before you log in for the first time.
+Please follow these steps carefully.</p>
+<ul>
+<li><p>Open a private/incognito browser session on your computer.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>One of the most common problems that users have in connecting to the SRE is automatic completion of usernames and passwords from other accounts on their computer.
+This can be quite confusing, particularly for anyone who logs into Microsoft services for work or personal use.</p>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Look out for usernames or passwords that are automatically completed, and make sure that you’re using the correct details needed to access the SRE.</p>
+</div>
+</li>
+<li><p>Navigate to the following URL in your browser: <code class="docutils literal notranslate"><span class="pre">https://aka.ms/mfasetup</span></code> .
+This short link starts the process of logging into your account.</p></li>
+<li><p>At the login prompt enter <code class="docutils literal notranslate"><span class="pre">username&#64;&lt;username</span> <span class="pre">domain&gt;</span></code> and confirm/proceed.
+Remember that your username will probably be in the format <code class="docutils literal notranslate"><span class="pre">firstname.lastname</span></code> .</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Our example user, Ada Lovelace, participating in the <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> project at a Turing Data Study Group, would enter <code class="docutils literal notranslate"><span class="pre">ada.lovelace&#64;projects.turingsafehaven.ac.uk</span></code></p>
+</div>
+</li>
+<li><p>There will then be a password prompt.</p>
+<p>The first time you log in you need to click <strong>“Forgotten my password”</strong>.</p>
+<img alt="Forgotten my password" class="align-center" src="../../_images/account_setup_forgotten_password.png" />
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>If you reset your password, you will need to wait 5-10 mins before logging in again, to allow the user management system to sync up with the new password.</p>
+</div>
+</li>
+<li><p>Fill out the requested CAPTCHA (your username should be pre-filled).</p>
+<img alt="CAPTCHA" class="align-center" src="../../_images/account_setup_captcha.png" />
+</li>
+<li><p>Confirm your phone number, which you provided to the <a class="reference internal" href="../system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a> when you registered for access to the environment.</p>
+<img alt="Verify phone number" class="align-center" src="../../_images/account_setup_verify_phone.png" />
+</li>
+<li><p>Select a password.</p>
+<p>Your password must comply with the following requirements:</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul class="simple">
+<li><p>alphanumeric</p></li>
+<li><p>minimum 12 characters</p></li>
+<li><p>at least one each of:</p>
+<ul>
+<li><p>🔠 uppercase character</p></li>
+<li><p>🔡 lowercase character</p></li>
+<li><p>🔢 number</p></li>
+</ul>
+</li>
+<li><p>you should choose a unique password for the SRE to ensure it is secure</p></li>
+</ul>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Do not use special characters or symbols in your password!
+The virtual keyboard inside the SRE may not be the same as your physical keyboard and this can make it difficult to type some symbols.</p>
+</div>
+<p>Note that this will also ensure that it passes the <a class="reference external" href="https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-sspr-policy">Microsoft Azure AD password requirements</a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>We recommend using a password generator <a class="reference external" href="https://bitwarden.com/password-generator/">like this one</a> to create a password that meets these requirements.
+This will ensure that the password is different from any others that you might use and that it is unlikely to be on any list of commonly used passwords.</p>
+</div>
+<p>If your password is too difficult to memorise, we recommend using a password manager, for example <a class="reference external" href="https://bitwarden.com">BitWarden</a> or <a class="reference external" href="https://www.lastpass.com/">LastPass</a>, to store it securely.</p>
+</li>
+<li><p>Enter your password into the <code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">new</span> <span class="pre">password</span></code> and <code class="docutils literal notranslate"><span class="pre">Confirm</span> <span class="pre">new</span> <span class="pre">password</span></code> fields.</p>
+<img alt="New password" class="align-center" src="../../_images/account_setup_new_password.png" />
+</li>
+<li><p>Then continue to the next step</p>
+<img alt="Click to continue" class="align-center" src="../../_images/account_setup_new_password_sign_in.png" />
+</li>
+<li><p>Log into your account when prompted and at this point you will be asked for additional security verification.</p>
+<img alt="Click to continue" class="align-center" src="../../_images/account_setup_more_information_required.png" />
+</li>
+</ul>
+</section>
+<section id="set-up-multi-factor-authentication">
+<h3>🚪 Set up multi-factor authentication<a class="headerlink" href="#set-up-multi-factor-authentication" title="Permalink to this heading">#</a></h3>
+<p>The next step in setting up your account is to authenticate your account from your phone.
+This additional security verification is to make it harder for people to impersonate you and connect to the environment without permission.
+This is known as multi-factor authentication (MFA).</p>
+<section id="phone-number-registration">
+<h4>📞 Phone number registration<a class="headerlink" href="#phone-number-registration" title="Permalink to this heading">#</a></h4>
+<ul>
+<li><p>In order to set up MFA you will need to enter your phone number</p>
+<img alt="Additional security verification" class="align-center" src="../../_images/account_setup_mfa_additional_security_verification.png" />
+</li>
+<li><p>Once you click next you will receive a phone call straight away.</p>
+<img alt="Verifying phone number" class="align-center" src="../../_images/account_setup_mfa_verifying_phone.png" />
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The call might say <em>press the pound key</em> or <em>press the hash key</em> both mean hit the <code class="docutils literal notranslate"><span class="pre">#</span></code> button.</p>
+</div>
+</li>
+<li><p>After following the instructions you will see the following screen</p>
+<img alt="Verified phone number" class="align-center" src="../../_images/account_setup_mfa_verified_phone.png" />
+</li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Next</span></code> to register this phone number for MFA</p>
+<img alt="Registered phone number" class="align-center" src="../../_images/account_setup_mfa_registered_phone.png" />
+</li>
+<li><p>You should now see the Security Information dashboard that lists all your verified MFA methods</p>
+<img alt="Registered phone number" class="align-center" src="../../_images/account_setup_mfa_dashboard_phone_only.png" />
+</li>
+</ul>
+</section>
+<section id="authenticator-app-registration">
+<h4>📱 Authenticator app registration<a class="headerlink" href="#authenticator-app-registration" title="Permalink to this heading">#</a></h4>
+<ul>
+<li><p>If you want to use the Microsoft Authenticator app for MFA (which will work if you have wifi but no phone signal) then click on <code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">Add</span> <span class="pre">sign-in</span> <span class="pre">method</span></code> and select <code class="docutils literal notranslate"><span class="pre">Authenticator</span> <span class="pre">app</span></code></p>
+<img alt="Add Authenticator app" class="align-center" src="../../_images/account_setup_mfa_add_authenticator_app.png" />
+</li>
+<li><p>This will prompt you to download the <code class="docutils literal notranslate"><span class="pre">Microsoft</span> <span class="pre">Authenticator</span></code> phone app.</p>
+<img alt="Add Authenticator app" class="align-center" src="../../_images/account_setup_mfa_download_authenticator_app.png" />
+</li>
+<li><p>You can click on the link in the prompt or follow the appropriate link for your phone here:</p>
+<ul class="simple">
+<li><p>🍎 iOS: <code class="docutils literal notranslate"><span class="pre">https://bit.ly/iosauthenticator</span></code></p></li>
+<li><p>🤖 Android: <code class="docutils literal notranslate"><span class="pre">https://bit.ly/androidauthenticator</span></code></p></li>
+<li><p>🍱 Windows mobile: <code class="docutils literal notranslate"><span class="pre">https://bit.ly/windowsauthenticator</span></code></p></li>
+</ul>
+</li>
+<li><p>You will now be prompted to open the app and:</p>
+<ul class="simple">
+<li><p>To allow notifications</p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">an</span> <span class="pre">account</span></code></p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Work</span> <span class="pre">or</span> <span class="pre">School</span> <span class="pre">account</span></code></p></li>
+</ul>
+<img alt="Allow Authenticator notifications" class="align-center" src="../../_images/account_setup_mfa_allow_notifications.png" />
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>You must give permission for the authenticator app to send you notifications for the app to work as an MFA method.</p>
+</div>
+</li>
+<li><p>The next prompt will give you a QR code to scan, like the one shown below</p>
+<ul class="simple">
+<li><p>Scan the QR code on the screen</p></li>
+</ul>
+<img alt="Setup Authenticator app" class="align-center" src="../../_images/account_setup_mfa_app_qrcode.png" />
+</li>
+<li><p>Once this is completed, Microsoft will send you a test notification to respond to</p>
+<img alt="Authenticator app test notification" class="align-center" src="../../_images/account_setup_mfa_authenticator_app_test.png" />
+</li>
+<li><p>When you click <code class="docutils literal notranslate"><span class="pre">Approve</span></code> on the phone notification, you will get the following message in your browser</p>
+<img alt="Authenticator app test approved" class="align-center" src="../../_images/account_setup_mfa_authenticator_app_approved.png" />
+</li>
+<li><p>You should now be returned to the Security Information dashboard that lists two verified MFA methods</p>
+<img alt="Registered MFA methods" class="align-center" src="../../_images/account_setup_mfa_dashboard_two_methods.png" />
+</li>
+<li><p>Choose whichever you prefer to be your <code class="docutils literal notranslate"><span class="pre">Default</span> <span class="pre">sign-in</span> <span class="pre">methods</span></code>.</p></li>
+<li><p>You have now finished setting up MFA and you can close your browser</p></li>
+</ul>
+</section>
+<section id="troubleshooting-mfa">
+<h4>Troubleshooting MFA<a class="headerlink" href="#troubleshooting-mfa" title="Permalink to this heading">#</a></h4>
+<p>Sometimes setting up MFA can be problematic.
+You may find the following tips helpful:</p>
+<ul class="simple">
+<li><p>📥 Make sure you allow notifications on your authenticator app.</p></li>
+<li><p>😴 Check you don’t have <em>Do not Disturb</em> mode on.</p></li>
+<li><p>⚡ You have to be SUPER FAST at acknowledging the notification on your app, since the access codes update every 30 seconds.</p></li>
+<li><p>😕 Sometimes just going through the steps again solves the problem</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="access-the-secure-research-environment">
+<h2>🔓 Access the Secure Research Environment<a class="headerlink" href="#access-the-secure-research-environment" title="Permalink to this heading">#</a></h2>
+<section id="id1">
+<h3>🌱 Prerequisites<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>After going through the account setup procedure, you should have access to:</p>
+<ul class="simple">
+<li><p>Your <code class="docutils literal notranslate"><span class="pre">username</span></code></p></li>
+<li><p>Your <code class="docutils literal notranslate"><span class="pre">password</span></code></p></li>
+<li><p>The <a class="reference internal" href="#user-guide-sre-url"><span class="std std-ref">SRE URL</span></a></p></li>
+<li><p>Multifactor authentication</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you aren’t sure about any of these then please return to the <span class="xref myst"><strong>Set up your account</strong></span> section above.</p>
+</div>
+</section>
+<section id="log-into-the-research-environment">
+<h3>🏠 Log into the research environment<a class="headerlink" href="#log-into-the-research-environment" title="Permalink to this heading">#</a></h3>
+<ul>
+<li><p>Open a <strong>private/incognito</strong> browser session, so that you don’t pick up any existing Microsoft logins</p></li>
+<li><p>Go to the <a class="reference internal" href="#user-guide-sre-url"><span class="std std-ref">SRE URL</span></a> given by your <a class="reference internal" href="../system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Our example user, Ada Lovelace, participating in the <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> project at a Turing Data Study Group, would navigate to <code class="docutils literal notranslate"><span class="pre">https://sandbox.projects.turingsafehaven.ac.uk</span></code>.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Don’t forget the <strong>https://</strong> as you will not be able to login without it!</p>
+</div>
+</li>
+<li><p>You should arrive at a login page that needs you to enter:</p>
+<ul class="simple">
+<li><p>your <code class="docutils literal notranslate"><span class="pre">username</span></code></p></li>
+<li><p>your password</p></li>
+</ul>
+<p>then click <code class="docutils literal notranslate"><span class="pre">Sign</span> <span class="pre">in</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Our example user, Ada Lovelace, participating in the <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> project at a Turing Data Study Group, would enter <code class="docutils literal notranslate"><span class="pre">ada.lovelace</span></code> in the <code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">name</span></code> box, enter her password and then click <code class="docutils literal notranslate"><span class="pre">Sign</span> <span class="pre">in</span></code>.</p>
+<img alt="Research environment log in" class="align-center" src="../../_images/logon_environment_msrds.png" />
+</div>
+</li>
+<li><p>If you are successful, you’ll see the a screen with icons for the available apps.</p>
+<img alt="Research environment dashboard" class="align-center" src="../../_images/msrds_dashboard.png" />
+<p>Welcome to the Data Safe Haven! 👋</p>
+</li>
+</ul>
+</section>
+<section id="log-into-the-secure-research-desktop">
+<h3>🐧 Log into the Secure Research Desktop<a class="headerlink" href="#log-into-the-secure-research-desktop" title="Permalink to this heading">#</a></h3>
+<p>The primary method of performing data analysis in the SRE is using the Secure Research Desktop (SRD).</p>
+<p>This is a virtual machine (VM) with many different applications and programming languages pre-installed on it.
+Once connected to it, you can analyse the sensitive data belonging to your project while remaining completely isolated from the internet.</p>
+<ul>
+<li><p>Click on the <code class="docutils literal notranslate"><span class="pre">SRD</span> <span class="pre">Main</span> <span class="pre">(Desktop)</span></code> app to connect to the desktop.</p>
+<p>You will now <strong>receive a call or mobile app notification</strong> to authenticate using MFA.</p>
+<p>📞 For the call, you may have to move to an area with good reception and/or press the hash ( <code class="docutils literal notranslate"><span class="pre">#</span></code> ) key multiple times in-call.</p>
+<p>📱 For the app you will see a notification saying <em>“You have received a sign in verification request”</em>. Go to the app to approve the request.</p>
+<img alt="SRD connection attempt" class="align-center" src="../../_images/msrds_srd_connection.png" />
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>If you don’t respond to the MFA request quickly enough, or if it fails, you will likely get an error that looks like this:</p>
+<img alt="SRD connection failure" class="align-center" src="../../_images/msrds_srd_connection_failure.png" />
+<p>You can try again by clicking “Reconnect”.</p>
+</div>
+</li>
+<li><p>After verifying using MFA, you might get a security alert like this one. If you do, it is safe to tick the box and to click <code class="docutils literal notranslate"><span class="pre">Yes</span></code> .</p>
+<img alt="SRD security fingerprint" class="align-center" src="../../_images/msrds_srd_security_fingerprint.png" />
+</li>
+</ul>
+<ul>
+<li><p>Insert your username and password.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Our example user, Ada Lovelace, would enter <code class="docutils literal notranslate"><span class="pre">ada.lovelace</span></code> and her password.</p>
+<img alt="SRD login screen" class="align-center" src="../../_images/srd_login_screen.png" />
+</div>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>If you enter your username and/or password incorrectly you will see a warning like the one below.
+If this happens, please try again, entering your username and password carefully.</p>
+<img alt="SRD login failure" class="align-center" src="../../_images/srd_login_failure.png" />
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>We recommend <em>not</em> including special characters in your password as the keyboard layout expected by the login screen may be different from the one you’re using.</p>
+<ul class="simple">
+<li><p>if you want to reset your password, follow the steps defined in the <span class="xref myst"><strong>Set your password</strong></span> section above.</p></li>
+<li><p>if you want to continue with special characters in your password, please test that they are being entered correctly by typing them in the username field.</p></li>
+</ul>
+</div>
+</li>
+<li><p>You should now be greeted by a Linux desktop.</p>
+<img alt="SRD initial desktop" class="align-center" src="../../_images/srd_xfce_initial.png" />
+</li>
+</ul>
+<p>You are now logged into the Data Safe Haven SRE!
+Welcome 👋</p>
+</section>
+</section>
+<section id="analysing-sensitive-data">
+<h2>💻 Analysing sensitive data<a class="headerlink" href="#analysing-sensitive-data" title="Permalink to this heading">#</a></h2>
+<p>The SRD has several pre-installed applications and programming languages to help with your data analysis.</p>
+<section id="pre-installed-applications">
+<h3>📦 Pre-installed applications<a class="headerlink" href="#pre-installed-applications" title="Permalink to this heading">#</a></h3>
+<section id="programming-languages-compilers">
+<h4>Programming languages / compilers<a class="headerlink" href="#programming-languages-compilers" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">C</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">C++</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CMake</span></code> compiler</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Fortran</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gcc</span></code> compilers</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Java</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Julia</span></code> (plus common data science libraries)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Microsoft</span> <span class="pre">.NET</span></code> framework</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Python</span></code> [three most recent versions] (plus common data science libraries)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">R</span></code> (plus common data science libraries)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Rust</span></code> compiler with <code class="docutils literal notranslate"><span class="pre">cargo</span></code> package manager</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scala</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spark-shell</span></code></p></li>
+</ul>
+</section>
+<section id="editors-ides">
+<h4>Editors / IDEs<a class="headerlink" href="#editors-ides" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">emacs</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nano</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PyCharm</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RStudio</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Spyder</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vim</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Visual</span> <span class="pre">Studio</span> <span class="pre">Code</span></code></p></li>
+</ul>
+</section>
+<section id="writing-presentation-tools">
+<h4>Writing / presentation tools<a class="headerlink" href="#writing-presentation-tools" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TeXStudio</span></code> for technical writing</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LaTeX</span></code> / <code class="docutils literal notranslate"><span class="pre">pdflatex</span></code> / <code class="docutils literal notranslate"><span class="pre">xelatex</span></code> for producing different document outputs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LibreOffice</span></code> for creating presentations</p></li>
+</ul>
+</section>
+<section id="database-access-tools">
+<h4>Database access tools<a class="headerlink" href="#database-access-tools" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Data</span> <span class="pre">Studio</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DBeaver</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">psql</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sqlcmd</span></code></p></li>
+</ul>
+</section>
+<section id="other-useful-software">
+<h4>Other useful software<a class="headerlink" href="#other-useful-software" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Firefox</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">weka</span></code></p></li>
+</ul>
+<p>If you need anything that is not already installed, please discuss this with the designated contact for your SRE.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>This secure research desktop SRD is your interface to a single computer running in the cloud.
+You may have access to <span class="xref myst">additional SRDs</span> so be careful to check which machine you are working in as files and installed packages may not be the same across the machines.</p>
+</div>
+</section>
+</section>
+<section id="keyboard-mapping">
+<h3>🎹 Keyboard mapping<a class="headerlink" href="#keyboard-mapping" title="Permalink to this heading">#</a></h3>
+<p>When you access the SRD you are actually connecting through the cloud to another computer - via a few intermediate computers/servers that monitor and maintain the security of the SRE.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>You may find that the keyboard mapping on your computer is not the same as the one set for the SRD.</p>
+</div>
+<p>Click on <code class="docutils literal notranslate"><span class="pre">Desktop</span></code> and <code class="docutils literal notranslate"><span class="pre">Applications</span> <span class="pre">&gt;</span> <span class="pre">Settings</span> <span class="pre">&gt;</span> <span class="pre">Keyboard</span></code> to change the layout.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>We recommend opening a text editor (such as <code class="docutils literal notranslate"><span class="pre">Atom</span></code> , see <span class="xref myst">Access applications</span> below) to check what keys the remote desktop thinks you’re typing – especially if you need to use special characters.</p>
+</div>
+</section>
+<section id="access-applications">
+<h3>🔓 Access applications<a class="headerlink" href="#access-applications" title="Permalink to this heading">#</a></h3>
+<p>You can access applications from the desktop in two ways: the terminal or via a drop down menu.</p>
+<p>Applications can be accessed from the dropdown menu.
+For example:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Applications</span> <span class="pre">&gt;</span> <span class="pre">Development</span> <span class="pre">&gt;</span> <span class="pre">Atom</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Applications</span> <span class="pre">&gt;</span> <span class="pre">Development</span> <span class="pre">&gt;</span> <span class="pre">Jupyter</span> <span class="pre">Notebook</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Applications</span> <span class="pre">&gt;</span> <span class="pre">Development</span> <span class="pre">&gt;</span> <span class="pre">PyCharm</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Applications</span> <span class="pre">&gt;</span> <span class="pre">Development</span> <span class="pre">&gt;</span> <span class="pre">RStudio</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Applications</span> <span class="pre">&gt;</span> <span class="pre">Education</span> <span class="pre">&gt;</span> <span class="pre">QGIS</span> <span class="pre">Desktop</span></code></p></li>
+</ul>
+<p>Applications can be accessed from a terminal.
+For example:</p>
+<ul class="simple">
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">Terminal</span></code> and run <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span> <span class="pre">&amp;</span></code> if you want to use <code class="docutils literal notranslate"><span class="pre">Python</span></code> within a jupyter notebook.</p></li>
+</ul>
+<img alt="How to access applications from the desktop" class="align-center" src="../../_images/access_desktop_applications.png" />
+</section>
+<section id="available-python-and-r-versions">
+<h3>🐍 Available Python and R versions<a class="headerlink" href="#available-python-and-r-versions" title="Permalink to this heading">#</a></h3>
+<p>Typing <code class="docutils literal notranslate"><span class="pre">R</span></code> at the command line will give you the system version of <code class="docutils literal notranslate"><span class="pre">R</span></code> with many custom packages pre-installed.</p>
+<p>There are several versions of <code class="docutils literal notranslate"><span class="pre">Python</span></code> installed, which are managed through <a class="reference external" href="https://github.com/pyenv/pyenv">pyenv</a>.
+You can see the default version (indicated by a ‘*’) and all other installed versions using the following command:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt; pyenv versions
+</pre></div>
+</div>
+<p>This will give output like:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  system
+  3.8.12
+* 3.9.10 (set by /home/ada.lovelace/.pyenv_version)
+  3.10.2
+</pre></div>
+</div>
+<p>You can change your preferred Python version globally or on a folder-by-folder basis using</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pyenv</span> <span class="pre">global</span> <span class="pre">&lt;version</span> <span class="pre">number&gt;</span></code> (to change the version globally)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pyenv</span> <span class="pre">local</span> <span class="pre">&lt;version</span> <span class="pre">number&gt;</span></code> (to change the version for the folder you are currently in)</p></li>
+</ul>
+<section id="creating-virtual-environments">
+<h4>Creating virtual environments<a class="headerlink" href="#creating-virtual-environments" title="Permalink to this heading">#</a></h4>
+<p>We recommend that you use a dedicated <a class="reference external" href="https://docs.python.org/3/tutorial/venv.html">virtual environment</a> for developing your code in <code class="docutils literal notranslate"><span class="pre">Python</span></code>.
+You can easily create a new virtual environment based on any of the available <code class="docutils literal notranslate"><span class="pre">Python</span></code> versions</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt; pyenv virtualenv 3.8.12 myvirtualenv
+</pre></div>
+</div>
+<p>You can then activate it with:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt; pyenv shell myvirtualenv
+</pre></div>
+</div>
+<p>or if you want to automatically switch to it whenever you are in the current directory</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt; pyenv local myvirtualenv
+</pre></div>
+</div>
+</section>
+</section>
+<section id="install-r-and-python-packages">
+<h3>🎁 Install R and python packages<a class="headerlink" href="#install-r-and-python-packages" title="Permalink to this heading">#</a></h3>
+<p>There are local copies of the <code class="docutils literal notranslate"><span class="pre">PyPI</span></code> and <code class="docutils literal notranslate"><span class="pre">CRAN</span></code> package repositories available within the SRE.
+You can install packages you need from these copies in the usual way, for example <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> and <code class="docutils literal notranslate"><span class="pre">install.packages</span></code> for Python and R respectively.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>You <strong>will not</strong> have access to install packages system-wide and will therefore need to install packages in a user directory.</p>
+</div>
+<ul class="simple">
+<li><p>For <code class="docutils literal notranslate"><span class="pre">CRAN</span></code> you will be prompted to make a user package directory when you <span class="xref myst">install your first package</span>.</p></li>
+<li><p>For <code class="docutils literal notranslate"><span class="pre">PyPI</span></code> you will need to <span class="xref myst">install using the <code class="docutils literal notranslate"><span class="pre">--user</span></code> argument to <code class="docutils literal notranslate"><span class="pre">pip</span></code></span>.</p></li>
+</ul>
+<section id="r-packages">
+<h4>R packages<a class="headerlink" href="#r-packages" title="Permalink to this heading">#</a></h4>
+<p>You can install <code class="docutils literal notranslate"><span class="pre">R</span></code> packages from inside <code class="docutils literal notranslate"><span class="pre">R</span></code> (or <code class="docutils literal notranslate"><span class="pre">RStudio</span></code>):</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nf">install.packages</span><span class="p">(</span><span class="o">&lt;</span><span class="n">package</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You will see something like the following:</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">Installing</span> <span class="n">package</span> <span class="n">into</span> <span class="s">&#39;/usr/local/lib/R/site-library&#39;</span>
+<span class="p">(</span><span class="n">as</span> <span class="s">&#39;lib&#39;</span> <span class="n">is</span> <span class="n">unspecified</span><span class="p">)</span>
+<span class="n">Warning</span> <span class="n">in</span> <span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;cluster&quot;</span><span class="p">)</span> <span class="o">:</span>
+  <span class="s">&#39;lib = &quot;/usr/local/lib/R/site-library&quot;&#39;</span> <span class="n">is</span> <span class="n">not</span> <span class="n">writable</span>
+<span class="n">Would</span> <span class="n">you</span> <span class="n">like</span> <span class="n">to</span> <span class="n">use</span> <span class="n">a</span> <span class="n">personal</span> <span class="n">library</span> <span class="n">instead</span><span class="o">?</span> <span class="p">(</span><span class="n">yes</span><span class="o">/</span><span class="n">No</span><span class="o">/</span><span class="n">cancel</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Enter <code class="docutils literal notranslate"><span class="pre">yes</span></code>, which prompts you to confirm the name of the library:</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">Would</span> <span class="n">you</span> <span class="n">like</span> <span class="n">to</span> <span class="n">create</span> <span class="n">a</span> <span class="n">personal</span> <span class="n">library</span>
+<span class="s">&#39;~/R/x86_64-pc-linux-gnu-library/3.5&#39;</span>
+<span class="n">to</span> <span class="n">install</span> <span class="n">packages</span> <span class="n">into</span><span class="o">?</span> <span class="p">(</span><span class="n">yes</span><span class="o">/</span><span class="n">No</span><span class="o">/</span><span class="n">cancel</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Enter <code class="docutils literal notranslate"><span class="pre">yes</span></code>, to install the packages.</p>
+</section>
+<section id="python-packages">
+<h4>Python packages<a class="headerlink" href="#python-packages" title="Permalink to this heading">#</a></h4>
+<p>You can install <code class="docutils literal notranslate"><span class="pre">python</span></code> packages from a terminal.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install --user &lt;package-name&gt;
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you are using a virtual environment as recommended above, you will not need the <code class="docutils literal notranslate"><span class="pre">--user</span></code> flag.</p>
+</div>
+</section>
+<section id="package-availability">
+<h4>Package availability<a class="headerlink" href="#package-availability" title="Permalink to this heading">#</a></h4>
+<p>Depending on the type of data you are accessing, different <code class="docutils literal notranslate"><span class="pre">R</span></code> and <code class="docutils literal notranslate"><span class="pre">python</span></code> packages will be available to you (in addition to the ones that are pre-installed):</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-2"><span class="std std-ref">Tier 2</span></a> (medium security) environments have full mirrors of <code class="docutils literal notranslate"><span class="pre">PyPI</span></code> and <code class="docutils literal notranslate"><span class="pre">CRAN</span></code> available.</p></li>
+<li><p><a class="reference internal" href="../../overview/sensitivity_tiers.html#policy-tier-3"><span class="std std-ref">Tier 3</span></a> (high security) environments only have pre-authorised packages available.</p></li>
+</ul>
+<p>If you need to use a package that is not on the allowlist see the section on how to <span class="xref myst">bring software or data into the environment</span> below.</p>
+</section>
+</section>
+</section>
+<section id="share-files-with-collaborators">
+<h2>🔗 Share files with collaborators<a class="headerlink" href="#share-files-with-collaborators" title="Permalink to this heading">#</a></h2>
+<section id="shared-directories-within-the-sre">
+<h3>📂 Shared directories within the SRE<a class="headerlink" href="#shared-directories-within-the-sre" title="Permalink to this heading">#</a></h3>
+<p>There are several shared areas on the SRD that all collaborators within a research project team can see and access:</p>
+<ul class="simple">
+<li><p><span class="xref myst">input data</span>: <code class="docutils literal notranslate"><span class="pre">/data/</span></code></p></li>
+<li><p><span class="xref myst">shared space</span>: <code class="docutils literal notranslate"><span class="pre">/shared/</span></code></p></li>
+<li><p><span class="xref myst">scratch space</span>: <code class="docutils literal notranslate"><span class="pre">/scratch/</span></code></p></li>
+<li><p><span class="xref myst">backup space</span>: <code class="docutils literal notranslate"><span class="pre">/backup/</span></code></p></li>
+<li><p><span class="xref myst">output resources</span>: <code class="docutils literal notranslate"><span class="pre">/output/</span></code></p></li>
+</ul>
+<section id="input-data-data">
+<h4>Input data: <code class="docutils literal notranslate"><span class="pre">/data/</span></code><a class="headerlink" href="#input-data-data" title="Permalink to this heading">#</a></h4>
+<p>Data that has been “ingressed” - approved and brought into the secure research environment - can be found in the <code class="docutils literal notranslate"><span class="pre">/data/</span></code> folder.</p>
+<p>Everyone in your group will be able to access it, but it is <strong>read-only</strong>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>You will not be able to change any of the files in <code class="docutils literal notranslate"><span class="pre">/data/</span></code> .
+If you want to make derived datasets, for example cleaned and reformatted data, please add those to the <code class="docutils literal notranslate"><span class="pre">/shared/</span></code> or <code class="docutils literal notranslate"><span class="pre">/output/</span></code> directories.</p>
+</div>
+<p>The contents of <code class="docutils literal notranslate"><span class="pre">/data/</span></code> will be <strong>identical</strong> on all SRDs in your SRE.
+For example, if your group requests a GPU-enabled machine, this will contain an identical <code class="docutils literal notranslate"><span class="pre">/data/</span></code> folder.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you are using the Data Safe Haven as part of an organised event, you might find example slides or document templates in the <code class="docutils literal notranslate"><span class="pre">/data/</span></code> drive.</p>
+</div>
+</section>
+<section id="shared-space-shared">
+<h4>Shared space: <code class="docutils literal notranslate"><span class="pre">/shared/</span></code><a class="headerlink" href="#shared-space-shared" title="Permalink to this heading">#</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">/shared/</span></code> folder should be used for any work that you want to share with your group.
+Everyone in your group will be able to access it, and will have <strong>read-and-write access</strong>.</p>
+<p>The contents of <code class="docutils literal notranslate"><span class="pre">/shared/</span></code> will be <strong>identical</strong> on all SRDs in your SRE.</p>
+</section>
+<section id="scratch-space-scratch">
+<h4>Scratch space: <code class="docutils literal notranslate"><span class="pre">/scratch/</span></code><a class="headerlink" href="#scratch-space-scratch" title="Permalink to this heading">#</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">/scratch/</span></code> folder should be used for any work-in-progress that isn’t ready to share yet.
+Although everyone in your group will have <strong>read-and-write access</strong>, you can create your own folders inside <code class="docutils literal notranslate"><span class="pre">/scratch</span></code> and choose your own permissions for them.</p>
+<p>The contents of <code class="docutils literal notranslate"><span class="pre">/scratch/</span></code> will be <strong>different</strong> on different VMs in your SRE.</p>
+</section>
+<section id="backup-space-backup">
+<h4>Backup space: <code class="docutils literal notranslate"><span class="pre">/backup/</span></code><a class="headerlink" href="#backup-space-backup" title="Permalink to this heading">#</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">/backup/</span></code> folder should be used for any work-in-progress that you want to have backed up.
+In the event of any accidental data loss, your system administrator can restore the <code class="docutils literal notranslate"><span class="pre">/backup</span></code> folder to the state it was in at an earlier time.
+This <strong>cannot</strong> be used to recover individual files - only the complete contents of the folder.
+Everyone in your group will have <strong>read-and-write access</strong> to all folders on <code class="docutils literal notranslate"><span class="pre">/backup</span></code>.</p>
+<p>The contents of <code class="docutils literal notranslate"><span class="pre">/backup/</span></code> will be <strong>identical</strong> on all SRDs in your SRE.</p>
+</section>
+<section id="output-resources-output">
+<h4>Output resources: <code class="docutils literal notranslate"><span class="pre">/output/</span></code><a class="headerlink" href="#output-resources-output" title="Permalink to this heading">#</a></h4>
+<p>Any outputs that you want to extract from the secure environment should be placed in the <code class="docutils literal notranslate"><span class="pre">/output/</span></code> folder on the SRD.
+Everyone in your group will be able to access it, and will have <strong>read-and-write access</strong>.
+Anything placed in here will be considered for data egress - removal from the secure research environment - by the project’s principal investigator together with the data provider.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You may want to consider having subfolders of <code class="docutils literal notranslate"><span class="pre">/output/</span></code> to make the review of this directory easier.</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>For the Turing Data Study Groups, we recommend the following categories:</p>
+<ul class="simple">
+<li><p>Presentation</p></li>
+<li><p>Transformed data/derived data</p></li>
+<li><p>Report</p></li>
+<li><p>Code</p></li>
+<li><p>Images</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="bring-in-new-files-to-the-sre">
+<h3>📰 Bring in new files to the SRE<a class="headerlink" href="#bring-in-new-files-to-the-sre" title="Permalink to this heading">#</a></h3>
+<p>Bringing software into a secure research environment may constitute a security risk.
+Bringing new data into the SRE may mean that the environment needs to be updated to a more secure tier.</p>
+<p>The review of the “ingress” of new code or data will be coordinated by the designated contact for your SRE.
+They will have to discuss whether this is an acceptable risk to the data security with the project’s principle investigator and data provider and the decision might be “no”.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You can make the process as easy as possible by providing as much information as possible about the code or data you’d like to bring into the environment and about how it is to be used.</p>
+</div>
+</section>
+</section>
+<section id="collaborate-on-code-using-cocalc">
+<h2>👫 Collaborate on code using CoCalc<a class="headerlink" href="#collaborate-on-code-using-cocalc" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">CoCalc</span></code> is a collaborative calculation and data science environment.
+It lets you work with others on projects, using <code class="docutils literal notranslate"><span class="pre">Jupyter</span></code>, <code class="docutils literal notranslate"><span class="pre">LaTeX</span></code>, <code class="docutils literal notranslate"><span class="pre">Octave</span></code>, <code class="docutils literal notranslate"><span class="pre">Python</span></code> or <code class="docutils literal notranslate"><span class="pre">R</span></code> in collaborative notebooks.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">CoCalc</span></code> instance within the SRE is the easiest way to work directly with others in your team (for example pair-programming) who might not be physically near you.
+You do not need to worry about the security of the information you upload there as it is fully contained within the SRE and there is no access to the internet and / or external servers.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">CoCalc</span></code> instance within the SRE is entirely separate from the https://cocalc.com service.</p>
+</div>
+<section id="access-cocalc">
+<h3>🔓 Access CoCalc<a class="headerlink" href="#access-cocalc" title="Permalink to this heading">#</a></h3>
+<p>You can access <code class="docutils literal notranslate"><span class="pre">CoCalc</span></code> from an internet browser in the SRD using the desktop shortcut.
+The first time that you login, you will see a security warning.
+This is expected, please click on <code class="docutils literal notranslate"><span class="pre">Advanced</span></code> and then <code class="docutils literal notranslate"><span class="pre">Accept</span> <span class="pre">the</span> <span class="pre">Risk</span> <span class="pre">and</span> <span class="pre">Continue</span></code>.</p>
+<img alt="CoCalc security warning" class="align-center" src="../../_images/cocalc_security_warning.png" />
+<p>You will then get to the CoCalc homepage where you should click on <code class="docutils literal notranslate"><span class="pre">Sign</span> <span class="pre">In</span></code></p>
+<img alt="CoCalc homepage" class="align-center" src="../../_images/cocalc_homepage.png" />
+<p>You will need to create a new account.
+You can use any username/password here - it is not connected to your main Safe Haven account.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Our example user, Ada Lovelace has used <code class="docutils literal notranslate"><span class="pre">ada.lovelace&#64;projects.turingsafehaven.ac.uk</span></code> as her username and set her own password</p>
+<img alt="CoCalc account creation" class="align-center" src="../../_images/cocalc_account_creation.png" />
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can also access <code class="docutils literal notranslate"><span class="pre">CoCalc</span></code> from the <code class="docutils literal notranslate"><span class="pre">CoCalc</span></code> icon on the <code class="docutils literal notranslate"><span class="pre">Work</span> <span class="pre">Resources</span></code> dashboard page.</p>
+</div>
+</section>
+</section>
+<section id="versioning-code-using-gitlab">
+<h2>💊 Versioning code using GitLab<a class="headerlink" href="#versioning-code-using-gitlab" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">GitLab</span></code> is a code hosting platform for version control and collaboration - similar to <code class="docutils literal notranslate"><span class="pre">GitHub</span></code>.
+It allows you to use <code class="docutils literal notranslate"><span class="pre">git</span></code> to <strong>version control</strong> your work, coordinate tasks using <code class="docutils literal notranslate"><span class="pre">GitLab</span></code> <strong>issues</strong> and review work using <code class="docutils literal notranslate"><span class="pre">GitLab</span></code> <strong>merge requests</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">GitLab</span></code> is a fully open source project.
+This information doesn’t matter at all for how you use <code class="docutils literal notranslate"><span class="pre">GitLab</span></code> within the SRE, but we do want to thank the community for maintaining free and open source software for us to use and reuse.
+You can read more about <code class="docutils literal notranslate"><span class="pre">GitLab</span></code> at <a class="reference external" href="https://gitlab.com/gitlab-org/gitlab">their code repository</a>.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">GitLab</span></code> instance within the SRE can contain code, documentation and results from your team’s analyses.
+You do not need to worry about the security of the information you upload there as it is fully contained within the SRE and there is no access to the internet and/or external servers.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">GitLab</span></code> instance within the SRE is entirely separate from the https://gitlab.com service.</p>
+</div>
+<section id="maintaining-an-archive-of-the-project">
+<h3>📚 Maintaining an archive of the project<a class="headerlink" href="#maintaining-an-archive-of-the-project" title="Permalink to this heading">#</a></h3>
+<p>The Data Safe Haven SRE is hosted on the Microsoft Azure cloud platform.
+One of the benefits of having cloud based infastructure is that it can be deleted forever when the project is over.
+Deleting the infrastructure ensures that neither sensitive data nor insights derived from the data or modelling techniques persist.</p>
+<p>Make sure that every piece of code you think might be useful is stored in a <code class="docutils literal notranslate"><span class="pre">GitLab</span></code> repository within the secure environment.
+Any other work should be transferred to the shared <code class="docutils literal notranslate"><span class="pre">/shared/</span></code> drive.
+Anything that you think should be considered for <strong>egress</strong> from the environment (eg. images or processed datasets) should be transferred to the shared <code class="docutils literal notranslate"><span class="pre">/output/</span></code> drive.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>If you are participating in a Turing Data Study Group, everything that is not stored in a GitLab repository or on the shared <code class="docutils literal notranslate"><span class="pre">/shared/</span></code> or <code class="docutils literal notranslate"><span class="pre">/output/</span></code> drives by Friday lunchtime will be <strong>DESTROYED FOR EVER</strong>.</p>
+</div>
+</section>
+<section id="access-gitlab">
+<h3>🔓 Access GitLab<a class="headerlink" href="#access-gitlab" title="Permalink to this heading">#</a></h3>
+<p>You can access <code class="docutils literal notranslate"><span class="pre">GitLab</span></code> from an internet browser in the SRD using the desktop shortcut.
+Login with username <code class="docutils literal notranslate"><span class="pre">firstname.lastname</span></code> (the domain is not needed) and <code class="docutils literal notranslate"><span class="pre">password</span></code> .</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Our example user, Ada Lovelace would enter <code class="docutils literal notranslate"><span class="pre">ada.lovelace</span></code> in the <code class="docutils literal notranslate"><span class="pre">LDAP</span> <span class="pre">Username</span></code> box, enter her password and then click <code class="docutils literal notranslate"><span class="pre">Sign</span> <span class="pre">in</span></code> .</p>
+<img alt="GitLab login" class="align-center" src="../../_images/gitlab_screenshot_login.png" />
+</div>
+<p>Accessing <code class="docutils literal notranslate"><span class="pre">GitLab</span></code> from the browser on the SRD is an easy way to switch between analysis work and documenting the process or results.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not use your username and password from a pre-existing <code class="docutils literal notranslate"><span class="pre">GitLab</span></code> account!
+The <code class="docutils literal notranslate"><span class="pre">GitLab</span></code> instance within the SRE is entirely separate from the https://gitlab.com service and is expecting the same username and password that you used to log into the SRE.</p>
+</div>
+</section>
+<section id="public-repositories-within-the-sre">
+<h3>👐 Public repositories within the SRE<a class="headerlink" href="#public-repositories-within-the-sre" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">GitLab</span></code> instance inside the secure research environment is entirely contained <em>inside</em> the SRE.</p>
+<p>When you make a repository inside the SRE “public” it is visible to your collaborators who also have access to the SRE.
+A “public” repository within the SRE is only visible to others with the same data access approval, it is not open to the general public via the internet.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>We recommend that you make your repositories public to facilitate collaboration within the secure research environment.</p>
+</div>
+</section>
+<section id="support-for-gitlab-use">
+<h3>👷 Support for GitLab use<a class="headerlink" href="#support-for-gitlab-use" title="Permalink to this heading">#</a></h3>
+<p>If you have not used GitLab before:</p>
+<ul class="simple">
+<li><p>There is a small tutorial available as an <span class="xref myst">Appendix</span> to this user guide.</p></li>
+<li><p>You can find the official documentation on the <a class="reference external" href="https://docs.gitlab.com/ee/gitlab-basics/">GitLab website</a>.</p></li>
+<li><p>Ask your team mates for help.</p></li>
+<li><p>Ask the designated contact for your SRE.</p></li>
+<li><p>There may be a dedicated discussion channel, for example during Turing Data Study Groups you can ask in the Slack channel.</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can also access <code class="docutils literal notranslate"><span class="pre">GitLab</span></code> from the <code class="docutils literal notranslate"><span class="pre">GitLab</span></code> icon on the <code class="docutils literal notranslate"><span class="pre">Work</span> <span class="pre">Resources</span></code> dashboard page.</p>
+</div>
+</section>
+</section>
+<section id="collaborate-on-documents-using-codimd">
+<h2>📖 Collaborate on documents using CodiMD<a class="headerlink" href="#collaborate-on-documents-using-codimd" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">CodiMD</span></code> is a locally installed tool that allows you to collaboratively write reports.
+It uses <code class="docutils literal notranslate"><span class="pre">Markdown</span></code> which is a simple way to format your text so that it renders nicely in full HTML.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">CodiMD</span></code> is a fully open source version of the <code class="docutils literal notranslate"><span class="pre">HackMD</span></code> software.
+This information doesn’t matter at all for how you use <code class="docutils literal notranslate"><span class="pre">CodiMD</span></code> within the SRE, but we do want to thank the community for maintaining free and open source software for us to use and reuse.
+You can read more about <code class="docutils literal notranslate"><span class="pre">CodiMD</span></code> at <a class="reference external" href="https://github.com/hackmdio/codimd#codimd">their GitHub repository</a>.</p>
+</div>
+<p>We recommend <a class="reference external" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">this Markdown cheat sheet</a>.</p>
+<section id="access-codimd">
+<h3>🔓 Access CodiMD<a class="headerlink" href="#access-codimd" title="Permalink to this heading">#</a></h3>
+<p>You can access <code class="docutils literal notranslate"><span class="pre">CodiMD</span></code> from an internet browser from the SRD using the desktop shortcut.
+Login with username <code class="docutils literal notranslate"><span class="pre">firstname.lastname</span></code> (the domain is not needed) and <code class="docutils literal notranslate"><span class="pre">password</span></code> .</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Our example user, Ada Lovelace would enter <code class="docutils literal notranslate"><span class="pre">ada.lovelace</span></code> in the <code class="docutils literal notranslate"><span class="pre">Username</span></code> box, enter her password and then click <code class="docutils literal notranslate"><span class="pre">Sign</span> <span class="pre">in</span></code> .</p>
+<img alt="CodiMD login" class="align-center" src="../../_images/codimd_logon.png" />
+</div>
+<p>Accessing CodiMD from the browser on the SRD is an easy way to switch between analysis work and documenting the process or results.</p>
+</section>
+<section id="editing-other-people-s-documents">
+<h3>👥 Editing other people’s documents<a class="headerlink" href="#editing-other-people-s-documents" title="Permalink to this heading">#</a></h3>
+<p>The CodiMD instance inside the secure research environment is entirely contained <em>inside</em> the SRE.</p>
+<p>When you make a markdown document inside the SRE “editable” your collaborators who also have access to the SRE can access it via the URL at the top of the page.
+They will have the right to change the file if they are signed into the CodiMD instance.</p>
+<p>The link will only work for people who have the same data access approval, it is not open to the general public via the internet.</p>
+<img alt="CodiMD access options" class="align-center" src="../../_images/codimd_access_options.png" />
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>We recommend that you make your documents <strong>editable</strong> to facilitate collaboration within the secure research environment.
+Alternatively, the <strong>locked</strong> option allows others to read but not edit the document.</p>
+</div>
+<p>The default URL is quite long and difficult to share with your collaborators.
+We recommend <strong>publishing</strong> the document to get a much shorter URL which is easier to share with others.</p>
+<p>Click the <code class="docutils literal notranslate"><span class="pre">Publish</span></code> button to publish the document and generate the short URL.
+Click the pen button (shown in the image below) to return to the editable markdown view.</p>
+<img alt="CodiMD publishing" class="align-center" src="../../_images/codimd_publishing.png" />
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Remember that the document is not published to the internet, it is only available to others within the SRE.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you are attending a Turing Data Study Group you will be asked to write a report describing the work your team undertook over the five days of the projects.
+Store a copy of the CodiMD URL in a text file in the outputs folder.
+You will find some example report templates that outline the recommended structure.
+We recommend writing the report in CodiMD - rather than GitLab - so that everyone can edit and contribute quickly.</p>
+</div>
+</section>
+<section id="troubleshooting-codimd">
+<h3>🔬 Troubleshooting CodiMD<a class="headerlink" href="#troubleshooting-codimd" title="Permalink to this heading">#</a></h3>
+<p>We have noticed that a lower case <code class="docutils literal notranslate"><span class="pre">L</span></code> and an upper case <code class="docutils literal notranslate"><span class="pre">I</span></code> look very similar and often trip up users in the SRE.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Double check the characters in the URL, and if there are ambiguous ones try the one you haven’t tried yet!</p>
+</div>
+<p>Rather than proliferate lots of documents, we recommend that one person is tasked with creating the file and sharing the URL with other team members.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You could use the GitLab wiki or <code class="docutils literal notranslate"><span class="pre">README</span></code> file to share links to collaboratively written documents.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can also access <code class="docutils literal notranslate"><span class="pre">CodiMD</span></code> from the <code class="docutils literal notranslate"><span class="pre">CodiMD</span></code> icon on the <code class="docutils literal notranslate"><span class="pre">Work</span> <span class="pre">Resources</span></code> dashboard page.</p>
+</div>
+</section>
+</section>
+<section id="access-additional-srds">
+<h2>🔓 Access additional SRDs<a class="headerlink" href="#access-additional-srds" title="Permalink to this heading">#</a></h2>
+<p>Your project might make use of further SRDs in addition to the main shared desktop.
+Usually this is because of a requirement for a different type of computing resource, such as access to one or more GPUs (graphics processing units).</p>
+<p>You will access this machine in a similar way to the main shared desktop, but by using the <code class="docutils literal notranslate"><span class="pre">SRD</span> <span class="pre">Other</span> <span class="pre">(Desktop)</span></code> icon inside of the usual <code class="docutils literal notranslate"><span class="pre">SRD</span> <span class="pre">Main</span> <span class="pre">(Desktop)</span></code> icon.
+You will need to know the IP address of the new machine, which you will be told by the designated contact for your SRE.</p>
+<ul class="simple">
+<li><p>When you click on the <code class="docutils literal notranslate"><span class="pre">SRD</span> <span class="pre">Other</span> <span class="pre">(Desktop)</span></code> icon you will see a screen asking you to identify the computer you wish to connect to.</p></li>
+<li><p>Enter the IP address of the desired SRD.</p></li>
+</ul>
+<img alt="SRD IP address input" class="align-center" src="../../_images/msrds_srd_rdc_screen.png" />
+<ul class="simple">
+<li><p>After entering the IP address, you will get the normal login screen, where you use the same <code class="docutils literal notranslate"><span class="pre">username</span></code> and <code class="docutils literal notranslate"><span class="pre">password</span></code> credentials as before.</p></li>
+<li><p>Any local files that you have created in the <code class="docutils literal notranslate"><span class="pre">/output/</span></code> folder on other VMs (e.g. analysis scripts, notes, derived data) will be automatically available in the new VM.</p></li>
+</ul>
+</section>
+<section id="access-databases">
+<h2>📗 Access databases<a class="headerlink" href="#access-databases" title="Permalink to this heading">#</a></h2>
+<p>Your project might use a database for holding the input data.
+You might also/instead be provided with a database for use in analysing the data.
+The database server will use either <code class="docutils literal notranslate"><span class="pre">Microsoft</span> <span class="pre">SQL</span></code> or <code class="docutils literal notranslate"><span class="pre">PostgreSQL</span></code>.</p>
+<p>If you have access to one or more databases, you can access them using the following details, replacing <code class="docutils literal notranslate"><span class="pre">&lt;SRE</span> <span class="pre">ID&gt;</span></code> with the <a class="reference internal" href="#user-guide-sre-id"><span class="std std-ref">SRE ID</span></a> for your project.</p>
+<section id="microsoft-sql">
+<h3>🍱 Microsoft SQL<a class="headerlink" href="#microsoft-sql" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Server name: <code class="docutils literal notranslate"><span class="pre">MSSQL-&lt;SRE</span> <span class="pre">ID&gt;</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">MSSQL-SANDBOX</span></code> )</p></li>
+<li><p>Database name: &lt;provided by your <a class="reference internal" href="../system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a>&gt;</p></li>
+<li><p>Port: 1433</p></li>
+</ul>
+</section>
+<section id="postgresql">
+<h3>📮 PostgreSQL<a class="headerlink" href="#postgresql" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Server name: <code class="docutils literal notranslate"><span class="pre">PSTGRS-&lt;SRE</span> <span class="pre">ID&gt;</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">PSTGRS-SANDBOX</span></code> )</p></li>
+<li><p>Database name: &lt;provided by your <a class="reference internal" href="../system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a>&gt;</p></li>
+<li><p>Port: 5432</p></li>
+</ul>
+<p>Examples are given below for connecting using <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Data</span> <span class="pre">Studio</span></code>, <code class="docutils literal notranslate"><span class="pre">DBeaver</span></code>, <code class="docutils literal notranslate"><span class="pre">Python</span></code> and <code class="docutils literal notranslate"><span class="pre">R</span></code>.
+The instructions for using other graphical interfaces or programming languages will be similar.</p>
+</section>
+<section id="connecting-using-azure-data-studio">
+<h3>🎨 Connecting using Azure Data Studio<a class="headerlink" href="#connecting-using-azure-data-studio" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Data</span> <span class="pre">Studio</span></code> is currently only able to connect to <code class="docutils literal notranslate"><span class="pre">Microsoft</span> <span class="pre">SQL</span></code> databases.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Our example user Ada Lovelace, working in the <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> SRE on the <code class="docutils literal notranslate"><span class="pre">projects.turingsafehaven.ac.uk</span></code> Safe Haven, would connect using Azure Data Studio as follows:</p>
+<img alt="Azure Data Studio connection details" class="align-center" src="../../_images/db_azure_data_studio.png" />
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Be sure to select <code class="docutils literal notranslate"><span class="pre">Windows</span> <span class="pre">authentication</span></code> here so that your username and password will be passed through to the database.</p>
+</div>
+</section>
+<section id="connecting-using-dbeaver">
+<h3>🐻 Connecting using DBeaver<a class="headerlink" href="#connecting-using-dbeaver" title="Permalink to this heading">#</a></h3>
+<p>Click on the <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">database</span> <span class="pre">connection</span></code> button (which looks a bit like an electrical plug with a plus sign next to it)</p>
+<section id="id2">
+<h4>Microsoft SQL<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">SQL</span> <span class="pre">Server</span></code> as the database type</p></li>
+<li><p>Enter the necessary information in the <code class="docutils literal notranslate"><span class="pre">Host</span></code> and <code class="docutils literal notranslate"><span class="pre">Port</span></code> boxes and set <code class="docutils literal notranslate"><span class="pre">Authentication</span></code> to <code class="docutils literal notranslate"><span class="pre">Kerberos</span></code></p></li>
+<li><p>Tick <code class="docutils literal notranslate"><span class="pre">Show</span> <span class="pre">All</span> <span class="pre">Schemas</span></code> otherwise you will not be able to see the input data</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Our example user Ada Lovelace, working in the <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> SRE on the <code class="docutils literal notranslate"><span class="pre">projects.turingsafehaven.ac.uk</span></code> Safe Haven, would connect using DBeaver as follows:</p>
+<img alt="DBeaver connection details for Microsoft SQL" class="align-center" src="../../_images/db_dbeaver_mssql.png" />
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Be sure to select <code class="docutils literal notranslate"><span class="pre">Kerberos</span> <span class="pre">authentication</span></code> so that your username and password will be passed through to the database</p>
+</div>
+</section>
+<section id="id3">
+<h4>PostgreSQL<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">PostgreSQL</span></code> as the database type</p></li>
+<li><p>Enter the necessary information in the <code class="docutils literal notranslate"><span class="pre">Host</span></code> and <code class="docutils literal notranslate"><span class="pre">Port</span></code> boxes and set <code class="docutils literal notranslate"><span class="pre">Authentication</span></code> to <code class="docutils literal notranslate"><span class="pre">Database</span> <span class="pre">Native</span></code></p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>You do not need to enter any information in the <code class="docutils literal notranslate"><span class="pre">Username</span></code> or <code class="docutils literal notranslate"><span class="pre">Password</span></code> fields</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Our example user Ada Lovelace, working in the <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> SRE on the <code class="docutils literal notranslate"><span class="pre">projects.turingsafehaven.ac.uk</span></code> Safe Haven, would connect using DBeaver as follows:</p>
+<img alt="DBeaver connection details for PostgreSQL" class="align-center" src="../../_images/db_dbeaver_postgres_connection.png" />
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you are prompted for <code class="docutils literal notranslate"><span class="pre">Username</span></code> or <code class="docutils literal notranslate"><span class="pre">Password</span></code> when connecting, you can leave these blank and the correct username and password will be automatically passed through to the database</p>
+<img alt="DBeaver username/password prompt" class="align-center" src="../../_images/db_dbeaver_postgres_ignore.png" />
+</div>
+</section>
+</section>
+<section id="connecting-using-python">
+<h3>🐍 Connecting using Python<a class="headerlink" href="#connecting-using-python" title="Permalink to this heading">#</a></h3>
+<p>Database connections can be made using <code class="docutils literal notranslate"><span class="pre">pyodbc</span></code> or <code class="docutils literal notranslate"><span class="pre">psycopg2</span></code> depending on which database flavour is being used.
+The data can be read into a dataframe for local analysis.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Our example user Ada Lovelace, working in the <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> SRE on the <code class="docutils literal notranslate"><span class="pre">projects.turingsafehaven.ac.uk</span></code> Safe Haven, would connect using DBeaver as follows:</p>
+</div>
+<section id="id4">
+<h4>Microsoft SQL<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyodbc</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="s2">&quot;MSSQL-SANDBOX.projects.turingsafehaven.ac.uk&quot;</span>
+<span class="n">port</span> <span class="o">=</span> <span class="s2">&quot;1433&quot;</span>
+<span class="n">db_name</span> <span class="o">=</span> <span class="s2">&quot;master&quot;</span>
+
+<span class="n">cnxn</span> <span class="o">=</span> <span class="n">pyodbc</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;DRIVER={ODBC Driver 17 for SQL Server};SERVER=&quot;</span> <span class="o">+</span> <span class="n">server</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span> <span class="o">+</span> <span class="n">port</span> <span class="o">+</span> <span class="s2">&quot;;DATABASE=&quot;</span> <span class="o">+</span> <span class="n">db_name</span> <span class="o">+</span> <span class="s2">&quot;;Trusted_Connection=yes;&quot;</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM information_schema.tables;&quot;</span><span class="p">,</span> <span class="n">cnxn</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h4>PostgreSQL<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">psycopg2</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="s2">&quot;PSTGRS-SANDBOX.projects.turingsafehaven.ac.uk&quot;</span>
+<span class="n">port</span> <span class="o">=</span> <span class="mi">5432</span>
+<span class="n">db_name</span> <span class="o">=</span> <span class="s2">&quot;postgres&quot;</span>
+
+<span class="n">cnxn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="n">db_name</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM information_schema.tables;&quot;</span><span class="p">,</span> <span class="n">cnxn</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="connecting-using-r">
+<h3>🌹 Connecting using R<a class="headerlink" href="#connecting-using-r" title="Permalink to this heading">#</a></h3>
+<p>Database connections can be made using <code class="docutils literal notranslate"><span class="pre">odbc</span></code> or <code class="docutils literal notranslate"><span class="pre">RPostgres</span></code> depending on which database flavour is being used.
+The data can be read into a dataframe for local analysis.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Our example user Ada Lovelace, working in the <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> SRE on the <code class="docutils literal notranslate"><span class="pre">projects.turingsafehaven.ac.uk</span></code> Safe Haven, would connect using DBeaver as follows:</p>
+</div>
+<section id="id6">
+<h4>Microsoft SQL<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h4>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">DBI</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">odbc</span><span class="p">)</span>
+
+<span class="c1"># Connect to the databases</span>
+<span class="n">cnxn</span> <span class="o">&lt;-</span> <span class="n">DBI</span><span class="o">::</span><span class="nf">dbConnect</span><span class="p">(</span>
+    <span class="n">odbc</span><span class="o">::</span><span class="nf">odbc</span><span class="p">(),</span>
+    <span class="n">Driver</span> <span class="o">=</span> <span class="s">&quot;ODBC Driver 17 for SQL Server&quot;</span><span class="p">,</span>
+    <span class="n">Server</span> <span class="o">=</span> <span class="s">&quot;MSSQL-SANDBOX.projects.turingsafehaven.ac.uk,1433&quot;</span><span class="p">,</span>
+    <span class="n">Database</span> <span class="o">=</span> <span class="s">&quot;master&quot;</span><span class="p">,</span>
+    <span class="n">Trusted_Connection</span> <span class="o">=</span> <span class="s">&quot;yes&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Run a query and save the output into a dataframe</span>
+<span class="n">df</span> <span class="o">&lt;-</span> <span class="nf">dbGetQuery</span><span class="p">(</span><span class="n">cnxn</span><span class="p">,</span> <span class="s">&quot;SELECT * FROM information_schema.tables;&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h4>PostgreSQL<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h4>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">DBI</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">RPostgres</span><span class="p">)</span>
+
+<span class="c1"># Connect to the databases</span>
+<span class="n">cnxn</span> <span class="o">&lt;-</span> <span class="n">DBI</span><span class="o">::</span><span class="nf">dbConnect</span><span class="p">(</span>
+    <span class="n">RPostgres</span><span class="o">::</span><span class="nf">Postgres</span><span class="p">(),</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;PSTGRS-SANDBOX.projects.turingsafehaven.ac.uk&quot;</span><span class="p">,</span>
+    <span class="n">port</span> <span class="o">=</span> <span class="m">5432</span><span class="p">,</span>
+    <span class="n">dbname</span> <span class="o">=</span> <span class="s">&quot;postgres&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Run a query and save the output into a dataframe</span>
+<span class="n">df</span> <span class="o">&lt;-</span> <span class="nf">dbGetQuery</span><span class="p">(</span><span class="n">cnxn</span><span class="p">,</span> <span class="s">&quot;SELECT * FROM information_schema.tables;&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="report-a-bug">
+<h2>🐛 Report a bug<a class="headerlink" href="#report-a-bug" title="Permalink to this heading">#</a></h2>
+<p>The Data Safe Haven SRE has been developed in close collaboration with our users: you!</p>
+<p>We try to make the user experience as smooth as possible and this document has been greatly improved by feedback from project participants and researchers going through the process for the first time.
+We are constantly working to improve the SRE and we really appreciate your input and support as we develop the infrastructure.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If you find problems with the IT infrastructure, please contact the designated contact for your SRE.</p>
+</div>
+<section id="help-us-to-help-you">
+<h3>🔧 Help us to help you<a class="headerlink" href="#help-us-to-help-you" title="Permalink to this heading">#</a></h3>
+<p>To help us fix your issues please do the following:</p>
+<ul>
+<li><p>Make sure you have <strong>read this document</strong> and checked if it answers your query.</p>
+<ul class="simple">
+<li><p>Please do not log an issue before you have read all of the sections in this document.</p></li>
+</ul>
+</li>
+<li><p>Log out of the SRE and log back in again at least once</p>
+<ul class="simple">
+<li><p>Re-attempt the process leading to the bug/error at least twice.</p></li>
+<li><p>We know that “turn it off and turn it back on again” is a frustrating piece of advice to receive, but in our experience it works rather well! (Particularly when there are lots of folks trying these steps at the same time.)</p></li>
+<li><p>The multi-factor authentication step in particular is known to have quite a few gremlins.</p></li>
+<li><p>If you are getting frustrated, log out of everything, turn off your computer, take a 15 minute coffee break, and then start the process from the beginning.</p></li>
+</ul>
+</li>
+<li><p>Write down a comprehensive summary of the issue.</p>
+<ul class="simple">
+<li><p>A really good bug report makes it much easier to pin down what the problem is.</p></li>
+</ul>
+<p>Please include:</p>
+<ul class="simple">
+<li><p>Your computer’s operating system and operating system version.</p></li>
+<li><p>Precise condition under which the error occurs.</p>
+<ul>
+<li><p>What steps would someone need to take to get the exact same error?</p></li>
+</ul>
+</li>
+<li><p>A precise description of the problem.</p>
+<ul>
+<li><p>What happens? What would you expect to happen if there were no error?</p></li>
+</ul>
+</li>
+<li><p>Any workarounds/fixes you have found.</p></li>
+</ul>
+</li>
+<li><p>Send the bug report to the designated contact for your SRE.</p></li>
+</ul>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>We very strongly recommend “rubber ducking” this process before you talk to the designated contact for your SRE.
+Either talk through to your imaginary rubber duck, or find a team member to describe the error to, as you write down the steps you have taken.
+It is amazing how often working through your problem out loud helps you realise what the answer might be.</p>
+</div>
+</section>
+</section>
+<section id="acknowledgments">
+<h2>🙏 Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permalink to this heading">#</a></h2>
+<p>This user guide is based on an initial document written in March/April 2018 by Kirstie Whitaker.</p>
+<p>Updates:</p>
+<ul class="simple">
+<li><p>December 2018 by Catherine Lawrence, Franz Király, Martin O’Reilly, and Sebastian Vollmer.</p></li>
+<li><p>March/April 2019 by Miguel Morin, Catherine Lawrence, Alvaro Cabrejas Egea, Kirstie Whitaker, James Robinson and Martin O’Reilly.</p></li>
+<li><p>November 2019 by Ben Walden, James Robinson and Daisy Parry.</p></li>
+<li><p>April 2020 by Jules Manser, James Robinson and Kirstie Whitaker.</p></li>
+<li><p>November 2021 by James Robinson</p></li>
+</ul>
+</section>
+<section id="appendix-a-command-line-basics">
+<h2>🛂 Appendix A: Command Line Basics<a class="headerlink" href="#appendix-a-command-line-basics" title="Permalink to this heading">#</a></h2>
+<p>If you have never used a Linux desktop before, you might find some of the following commands useful if you are using a terminal.</p>
+<p>Go into a project directory to work in it</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> NAME-OF-PROJECT
+</pre></div>
+</div>
+<p>Go back one directory</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ..
+</pre></div>
+</div>
+<p>List what’s in the current directory</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls
+</pre></div>
+</div>
+<p>Create a new directory</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir NAME-OF-YOUR-DIRECTORY
+</pre></div>
+</div>
+<p>Remove a file</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm NAME-OF-FILE
+</pre></div>
+</div>
+<p>Remove a directory and all of its contents</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm -r NAME-OF-DIRECTORY
+</pre></div>
+</div>
+<p>View command history</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">history</span>
+</pre></div>
+</div>
+<p>Show which directory I am in</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">pwd</span>
+</pre></div>
+</div>
+<p>Clear the shell window</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>clear
+</pre></div>
+</div>
+</section>
+<section id="appendix-b-gitlab-tutorial-notes">
+<h2>📓 Appendix B: Gitlab tutorial notes<a class="headerlink" href="#appendix-b-gitlab-tutorial-notes" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">GitLab</span></code> can be thought of as a local version of <code class="docutils literal notranslate"><span class="pre">GitHub</span></code> - that is a git server along with useful features such as:</p>
+<ul class="simple">
+<li><p><strong>Project wiki</strong> - exactly what it says</p></li>
+<li><p><strong>Project pastebin</strong> - share bits of code</p></li>
+<li><p><strong>Project issue tracker</strong> - track things TODO and bugs</p></li>
+<li><p><strong>Pull requests</strong> - Way to keep track of changes individuals have made to be included in master</p></li>
+</ul>
+<p>Some teams design their entire workflows around these things.
+A comparison in terms of features can be found <a class="reference external" href="https://usersnap.com/blog/gitlab-github/">here</a>.</p>
+<section id="getting-started-with-git">
+<h3>Getting started with Git<a class="headerlink" href="#getting-started-with-git" title="Permalink to this heading">#</a></h3>
+<p>If you have never used <code class="docutils literal notranslate"><span class="pre">git</span></code> before, you might want to take a look at an introductory guide.
+There are multiple <code class="docutils literal notranslate"><span class="pre">git</span></code> cheat sheets such as<a class="reference external" href="https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet">this one from the JIRA authors</a> and <a class="reference external" href="https://ndpsoftware.com/git-cheatsheet.html">this interactive one</a> and .</p>
+</section>
+<section id="repositories">
+<h3>Repositories<a class="headerlink" href="#repositories" title="Permalink to this heading">#</a></h3>
+<p>A repository is usually used to organize a single project.
+Repositories can contain folders and files, images, videos, spreadsheets, and data sets – anything your project needs.
+We recommend including a README, or a file with information about your project.
+Over the course of the work that you do in your SRE, you will often be accessing and adding files to the same project repository.</p>
+</section>
+<section id="add-your-git-username-and-set-your-email">
+<h3>Add your Git username and set your email<a class="headerlink" href="#add-your-git-username-and-set-your-email" title="Permalink to this heading">#</a></h3>
+<p>It is important to configure your <code class="docutils literal notranslate"><span class="pre">git</span></code> username and email address, since every <code class="docutils literal notranslate"><span class="pre">git</span></code> commit will use this information to identify you as the author.
+On your shell, type the following command to add your username:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git config --global user.name <span class="s2">&quot;YOUR_USERNAME&quot;</span>
+</pre></div>
+</div>
+<p>Then verify that you have the correct username:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git config --global user.name
+</pre></div>
+</div>
+<p>To set your email address, type the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git config --global user.email <span class="s2">&quot;your_email_address@example.com&quot;</span>
+</pre></div>
+</div>
+<p>To verify that you entered your email correctly, type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git config --global user.email
+</pre></div>
+</div>
+<p>You’ll need to do this only once, since you are using the <code class="docutils literal notranslate"><span class="pre">--global</span></code> option.
+It tells Git to always use this information for anything you do on that system.
+If you want to override this with a different username or email address for specific projects, you can run the command without the <code class="docutils literal notranslate"><span class="pre">--global</span></code> option when you’re in that project.</p>
+</section>
+<section id="cloning-projects">
+<h3>Cloning projects<a class="headerlink" href="#cloning-projects" title="Permalink to this heading">#</a></h3>
+<p>In <code class="docutils literal notranslate"><span class="pre">git</span></code>, when you copy a project you say you “clone” it.
+To work on a <code class="docutils literal notranslate"><span class="pre">git</span></code> project in the SRD, you will need to clone it.
+To do this, sign in to <code class="docutils literal notranslate"><span class="pre">GitLab</span></code>.</p>
+<p>When you are on your Dashboard, click on the project that you’d like to clone.
+To work in the project, you can copy a link to the <code class="docutils literal notranslate"><span class="pre">git</span></code> repository through a SSH or a HTTPS protocol.
+SSH is easier to use after it’s been set up, <a class="reference external" href="https://docs.gitlab.com/ee/ssh/">you can find the details here</a>.
+While you are at the Project tab, select HTTPS or SSH from the dropdown menu and copy the link using the Copy URL to clipboard button (you’ll have to paste it on your shell in the next step&gt;).</p>
+<img alt="Clone GitLab project" class="align-center" src="../../_images/gitlab_clone_url.png" />
+<p>Go to your computer’s shell and type the following command with your SSH or HTTPS URL:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone &lt;PASTE HTTPS OR SSH HERE&gt;
+</pre></div>
+</div>
+</section>
+<section id="branches">
+<h3>Branches<a class="headerlink" href="#branches" title="Permalink to this heading">#</a></h3>
+<p>Branching is the way to work on different versions of a repository at one time.
+By default your repository has one branch usually named <code class="docutils literal notranslate"><span class="pre">master</span></code> or <code class="docutils literal notranslate"><span class="pre">main</span></code> which is considered to be the definitive branch.
+We use branches to experiment and make edits before committing them to <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p>
+<p>When you create a branch off the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch, you’re making a copy, or snapshot, of <code class="docutils literal notranslate"><span class="pre">main</span></code> as it was at that point in time.
+If someone else made changes to the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch while you were working on your branch, you could pull in those updates.</p>
+<p>To create a branch:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout -b NAME-OF-BRANCH
+</pre></div>
+</div>
+<p>Work on an existing branch:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout NAME-OF-BRANCH
+</pre></div>
+</div>
+<p>To merge the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch into a created branch you need to be on the created branch.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout NAME-OF-BRANCH
+git merge main
+</pre></div>
+</div>
+<p>To merge a created branch into the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch you need to be on the created branch.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout main
+git merge NAME-OF-BRANCH
+</pre></div>
+</div>
+</section>
+<section id="downloading-the-latest-changes-in-a-project">
+<h3>Downloading the latest changes in a project<a class="headerlink" href="#downloading-the-latest-changes-in-a-project" title="Permalink to this heading">#</a></h3>
+<p>This is for you to work on an up-to-date copy (it is important to do this every time you start working on a project), while you set up tracking branches.
+You pull from remote repositories to get all the changes made by users since the last time you cloned or pulled the project.
+Later, you can push your local commits to the remote repositories.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git pull REMOTE NAME-OF-BRANCH
+</pre></div>
+</div>
+<p>When you first clone a repository, REMOTE is typically <code class="docutils literal notranslate"><span class="pre">origin</span></code>.
+This is where the repository came from, and it indicates the SSH or HTTPS URL of the repository on the remote server.
+NAME-OF-BRANCH is usually <code class="docutils literal notranslate"><span class="pre">main</span></code>, but it may be any existing branch.</p>
+</section>
+<section id="add-and-commit-local-changes">
+<h3>Add and commit local changes<a class="headerlink" href="#add-and-commit-local-changes" title="Permalink to this heading">#</a></h3>
+<p>You’ll see your local changes in red when you type <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>.
+These changes may be new, modified, or deleted files/folders.
+Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> to stage a local file/folder for committing.
+Then use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> to commit the staged files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git add FILE OR FOLDER
+git commit -m <span class="s2">&quot;COMMENT TO DESCRIBE THE INTENTION OF THE COMMIT&quot;</span>
+</pre></div>
+</div>
+<p>To add and commit all local changes in one command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git add .
+git commit -m <span class="s2">&quot;COMMENT TO DESCRIBE THE INTENTION OF THE COMMIT&quot;</span>
+</pre></div>
+</div>
+<p>To push all local commits to the remote repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git push REMOTE NAME-OF-BRANCH
+</pre></div>
+</div>
+<p>For example, to push your local commits to the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch of the origin remote:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git push origin main
+</pre></div>
+</div>
+<p>To delete all local changes in the repository that have not been added to the staging area, and leave unstaged files/folders, type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout .
+</pre></div>
+</div>
+<p><strong>Note:</strong> The . character typically means all in Git.</p>
+</section>
+<section id="how-to-create-a-merge-request">
+<h3>How to create a Merge Request<a class="headerlink" href="#how-to-create-a-merge-request" title="Permalink to this heading">#</a></h3>
+<p>Merge requests are useful to integrate separate changes that you’ve made to a project, on different branches.
+This is a brief guide on how to create a merge request.
+For more information, check the <a class="reference external" href="https://docs.gitlab.com/ee/user/project/merge_requests/index.html">merge requests documentation</a>.</p>
+<ul class="simple">
+<li><p>Before you start, you should have already created a branch and pushed your changes to <code class="docutils literal notranslate"><span class="pre">GitLab</span></code>.</p></li>
+<li><p>Go to the project where you’d like to merge your changes and click on the <code class="docutils literal notranslate"><span class="pre">Merge</span> <span class="pre">requests</span></code> tab.</p></li>
+<li><p>Click on <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">merge</span> <span class="pre">request</span></code> on the right side of the screen.</p></li>
+<li><p>From there on, you have the option to select the source branch and the target branch you’d like to compare to.</p></li>
+</ul>
+<p>The default target project is the upstream repository, but you can choose to compare across any of its forks.</p>
+<img alt="New GitLab merge request" class="align-center" src="../../_images/gitlab_new_merge_request.png" />
+<ul class="simple">
+<li><p>When ready, click on the Compare branches and continue button.</p></li>
+<li><p>At a minimum, add a title and a description to your merge request.</p></li>
+<li><p>Optionally, select a user to review your merge request and to accept or close it. You may also select a milestone and labels.</p></li>
+</ul>
+<img alt="GitLab merge request details" class="align-center" src="../../_images/gitlab_merge_request_details.png" />
+<ul class="simple">
+<li><p>When ready, click on the <code class="docutils literal notranslate"><span class="pre">Submit</span> <span class="pre">merge</span> <span class="pre">request</span></code> button.</p></li>
+</ul>
+<p>Your merge request will be ready to be approved and merged.</p>
+</section>
+</section>
+<section id="appendix-c-troubleshooting">
+<h2>🔬 Appendix C: Troubleshooting<a class="headerlink" href="#appendix-c-troubleshooting" title="Permalink to this heading">#</a></h2>
+<section id="no-applications-available">
+<h3>❗ No applications available<a class="headerlink" href="#no-applications-available" title="Permalink to this heading">#</a></h3>
+<section id="symptom">
+<h4>Symptom<a class="headerlink" href="#symptom" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>You can successfully log into the remote desktop web interface</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For our example user, Ada Lovelace, this would be <code class="docutils literal notranslate"><span class="pre">https://sandbox.projects.turingsafehaven.ac.uk</span></code> .</p>
+</div>
+<ul>
+<li><p>You do not see any available connections</p>
+<img alt="No connections available" class="align-center" src="../../_images/msrds_no_work_resources.png" />
+</li>
+</ul>
+</section>
+<section id="cause">
+<h4>Cause<a class="headerlink" href="#cause" title="Permalink to this heading">#</a></h4>
+<p>You have not been added to the correct SRE security group.</p>
+</section>
+<section id="solution">
+<h4>Solution<a class="headerlink" href="#solution" title="Permalink to this heading">#</a></h4>
+<p>Ask your <a class="reference internal" href="../system_manager/index.html#role-system-manager"><span class="std std-ref">System Manager</span></a> to add you to the appropriate SRE security group.</p>
+</section>
+</section>
+<section id="unexpected-certificate-error">
+<h3>❗ Unexpected certificate error<a class="headerlink" href="#unexpected-certificate-error" title="Permalink to this heading">#</a></h3>
+<section id="id8">
+<h4>Symptom<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h4>
+<ul>
+<li><p>You can successfully log into the remote desktop web interface</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For our example user, Ada Lovelace, this would be <code class="docutils literal notranslate"><span class="pre">https://sandbox.projects.turingsafehaven.ac.uk</span></code>.</p>
+</div>
+</li>
+<li><p>You can see several apps, but when you try to launch one of them, you receive an error saying “Your session ended because an unexpected server authentication certificate was received from the remote PC.”</p></li>
+<li><p>When you click on the padlock icon in the address bar and view the SSL certificate, the “SHA-1 Fingerprint” in the certificate matches the “SHA-1 Thumbprint” in the error message.</p>
+<img alt="Unexpected certificate error" class="align-center" src="../../_images/msrds_unexpected_certificate_error.png" />
+</li>
+</ul>
+</section>
+<section id="id9">
+<h4>Cause<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h4>
+<p>The SSL certificate protecting your connection to the RDS webclient expires every three months and is renewed every two months.
+The new SSL certificate is seamlessly picked up by your browser when connecting to the web page.
+However, the webclient downloads a separate copy of the certificate for its own use to validate connections to the apps it serves.
+This downloaded certificate is cached by your browser, which means that the old certificate will continue to be used by the web app when the browser is allowed to load things from its cache.</p>
+</section>
+<section id="id10">
+<h4>Solution<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h4>
+<p>Get your browser to do a <a class="reference external" href="https://www.getfilecloud.com/blog/2015/03/tech-tip-how-to-do-hard-refresh-in-browsers/">hard reload</a> of the page (instructions vary by browser and operating system).
+You may also need to <a class="reference external" href="https://www.refreshyourcache.com/en/home/">clear your cache</a> for this site.
+In either case, removing locally cached data should mean that you retrieve a copy of the new certificate.</p>
+</section>
+</section>
+</section>
+</section>
+
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="user_guide_guacamole.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">User Guide: Apache Guacamole</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="available_software.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Available software</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+
+<div class="tocsection editthispage">
+    <a href="https://github.com/alan-turing-institute/data-safe-haven/edit/develop/docs/roles/researcher/user_guide_msrds.md">
+        <i class="fa-solid fa-pencil"></i> Edit this page
+    </a>
+</div>
+
+</div>
+
+<div class="toc-item">
+  
+<div class="tocsection sourcelink">
+    <a href="../../_sources/roles/researcher/user_guide_msrds.md.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright CC-BY-4.0 2022, The Alan Turing Institute..<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a> 5.2.3.
+    Hosted by <a href="https://pages.github.com/">GitHub Pages</a>.
+    <br>
+</p>
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

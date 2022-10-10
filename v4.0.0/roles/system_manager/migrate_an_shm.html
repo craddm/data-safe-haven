@@ -1,0 +1,803 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Migrating an SHM &#8212; Data Safe Haven  documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/overrides.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'roles/system_manager/migrate_an_shm';</script>
+    <script src="../../_static/toggle.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Managing Data Safe Haven deployments" href="manage_deployments.html" />
+    <link rel="prev" title="Managing costs" href="manage_costs.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../_static/logo_turing_light.png" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/logo_turing_dark.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../overview/index.html">
+                        Overview
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../design/index.html">
+                        Design
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../deployment/index.html">
+                        Deployment
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../processes/index.html">
+                        Processes
+                    </a>
+                </li>
+                
+
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        Roles
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/alan-turing-institute/data-safe-haven" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../overview/index.html">
+                        Overview
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../design/index.html">
+                        Design
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../deployment/index.html">
+                        Deployment
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../processes/index.html">
+                        Processes
+                    </a>
+                </li>
+                
+
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        Roles
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/alan-turing-institute/data-safe-haven" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+    <div class="bd-toc-item navbar-nav">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../data_provider_representative/index.html">Dataset Provider Representative</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../investigator/index.html">Investigator</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../investigator/data_ingress.html">Data ingress process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../investigator/data_egress.html">Data egress process</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../programme_manager/index.html">Programme Manager</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../project_manager/index.html">Project Manager</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../project_manager/project_lifecycle.html">Project lifecycle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_manager/data_ingress.html">Data ingress process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_manager/data_egress.html">Data egress process</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../referee/index.html">Referee</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../researcher/index.html">Researcher</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../researcher/user_guide.html">User guide</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../researcher/user_guide_guacamole.html">User Guide: Apache Guacamole</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../researcher/user_guide_msrds.html">User Guide: Microsoft Remote Desktop</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../researcher/available_software.html">Available software</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">System Manager</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="manage_users.html">Managing Data Safe Haven users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage_data.html">Managing data ingress and egress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage_costs.html">Managing costs</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Migrating an SHM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage_deployments.html">Managing Data Safe Haven deployments</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav>
+    </div>
+    <div class="sidebar-start-items__item">
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book fa-fw left"></span>
+      <span class="left">Currently reading: <strong>v4.0.0</strong></span>
+      <span class="fa fa-caret-down right"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+           <strong> 
+          <dd><a href="/data-safe-haven/v4.0.0/index.html">v4.0.0</a></dd>
+           </strong> 
+        
+          
+          <dd><a href="/data-safe-haven/develop/index.html">develop</a></dd>
+          
+        
+      </dl>
+      
+      
+    </div>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-downloads" role="note" aria-label="downloads">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-file-pdf fa-fw left"></span>
+      <span class="left">Download PDF resources</span>
+      <span class="fa fa-caret-down right"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        
+          <dd><a href="/data-safe-haven/v4.0.0/pdf/data_safe_haven_user_guide_guacamole.pdf">User guide (Apache Guacamole)</a></dd>
+        
+          <dd><a href="/data-safe-haven/v4.0.0/pdf/data_safe_haven_user_guide_msrds.pdf">User guide (Microsoft RDS)</a></dd>
+        
+      </dl>
+    </div>
+  </div>
+  
+
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="migrating-an-shm">
+<h1>Migrating an SHM<a class="headerlink" href="#migrating-an-shm" title="Permalink to this heading">#</a></h1>
+<p>These instructions will walk you through migrating an existing Safe Haven Management (SHM) environment to a newer <strong>Data Safe Haven</strong> release and migrating the users to it.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This document assumes that you have already deployed a <a class="reference internal" href="../../deployment/deploy_shm.html#deploy-shm"><span class="std std-ref">Safe Haven Management (SHM) environment</span></a> and one or more <a class="reference internal" href="../../deployment/deploy_sre.html#deploy-sre"><span class="std std-ref">Secure Research Environments (SREs)</span></a> that are linked to it.</p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>This is a complex operation and may not always work. You may lose data or user accounts in the migration process.</p>
+</div>
+<section id="explanation-of-symbols-used-in-this-guide">
+<h2>Explanation of symbols used in this guide<a class="headerlink" href="#explanation-of-symbols-used-in-this-guide" title="Permalink to this heading">#</a></h2>
+<div class="admonition-powershell-command admonition">
+<p class="admonition-title">Powershell command</p>
+<p><img alt="Powershell: estimate of time needed" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=powershell&amp;label=local&amp;color=blue&amp;message=estimate%20of%20time%20needed" /></p>
+<ul>
+<li><p>This indicates a <code class="docutils literal notranslate"><span class="pre">Powershell</span></code> command which you will need to run locally on your machine</p></li>
+<li><p>Ensure you have checked out (or downloaded) the appropriate tag of the Safe Haven repository from <a class="github reference external" href="https://github.com/alan-turing-institute/data-safe-haven">alan-turing-institute/data-safe-haven</a>.</p></li>
+<li><p>Open a <code class="docutils literal notranslate"><span class="pre">Powershell</span></code> terminal and navigate to the indicated directory of your locally checked-out version of the Safe Haven repository</p></li>
+<li><p>Ensure that you are logged into Azure by running the <code class="docutils literal notranslate"><span class="pre">Connect-AzAccount</span></code> command</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If your account is a guest in additional Azure tenants, you may need to add the <code class="docutils literal notranslate"><span class="pre">-Tenant</span> <span class="pre">&lt;Tenant</span> <span class="pre">ID&gt;</span></code> flag, where <code class="docutils literal notranslate"><span class="pre">&lt;Tenant</span> <span class="pre">ID&gt;</span></code> is the ID of the Azure tenant you want to deploy into.</p>
+</div>
+</li>
+<li><p>This command will give you a URL and a short alphanumeric code.</p></li>
+<li><p>Go to URL in a web browser, enter the code and log in to your account on Azure.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you have several Azure accounts, make sure you use one that has permissions to make changes to the subscription you are using</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonition-remote-command admonition">
+<p class="admonition-title">Remote command</p>
+<p><img alt="Remote: estimate of time needed" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=microsoft-onedrive&amp;label=remote&amp;color=blue&amp;message=estimate%20of%20time%20needed" /></p>
+<ul class="simple">
+<li><p>This indicates a command which you will need to run remotely on an Azure virtual machine (VM) using <code class="docutils literal notranslate"><span class="pre">Microsoft</span> <span class="pre">Remote</span> <span class="pre">Desktop</span></code></p></li>
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">Microsoft</span> <span class="pre">Remote</span> <span class="pre">Desktop</span></code> and click <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Desktop</span></code> / <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">PC</span></code></p></li>
+<li><p>Enter the private IP address of the VM that you need to connect to in the <code class="docutils literal notranslate"><span class="pre">PC</span> <span class="pre">name</span></code> field (this can be found by looking in the Azure portal)</p></li>
+<li><p>Enter the name of the VM (for example <code class="docutils literal notranslate"><span class="pre">DC1-SHM-PROJECT</span></code>) in the <code class="docutils literal notranslate"><span class="pre">Friendly</span> <span class="pre">name</span></code> field</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Add</span></code></p></li>
+<li><p>Ensure you are connected to the SHM VPN that you have set up</p></li>
+<li><p>Double click on the desktop that appears under <code class="docutils literal notranslate"><span class="pre">Saved</span> <span class="pre">Desktops</span></code> or <code class="docutils literal notranslate"><span class="pre">PCs</span></code>.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">username</span></code> and <code class="docutils literal notranslate"><span class="pre">password</span></code> specified by the appropriate section of the guide</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you see a warning dialog that the certificate cannot be verified as root, accept this and continue.</p>
+</div>
+</div>
+<div class="admonition-azure-portal-operation admonition">
+<p class="admonition-title">Azure Portal operation</p>
+<p><img alt="Portal: estimate of time needed" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=microsoft-azure&amp;label=portal&amp;color=blue&amp;message=estimate%20of%20time%20needed" /></p>
+<ul class="simple">
+<li><p>This indicates an operation which needs to be carried out in the <a class="reference external" href="https://portal.azure.com"><code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Portal</span></code></a> using a web browser on your local machine.</p></li>
+<li><p>You will need to login to the portal using an account with privileges to make the necessary changes to the resources you are altering</p></li>
+</ul>
+</div>
+<div class="admonition-azure-active-directory-operation admonition">
+<p class="admonition-title">Azure Active Directory operation</p>
+<p><img alt="Azure AD: estimate of time needed" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=microsoft-academic&amp;label=Azure%20AD&amp;color=blue&amp;message=estimate%20of%20time%20needed" /></p>
+<ul class="simple">
+<li><p>This indicates an operation which needs to be carried out in the <a class="reference external" href="https://portal.azure.com"><code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Portal</span></code></a> using a web browser on your local machine.</p></li>
+<li><p>You will need to login to the portal using an account with administrative privileges on the <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Active</span> <span class="pre">Directory</span></code> that you are altering.</p></li>
+<li><p>Note that this might be different from the account which is able to create/alter resources in the Azure subscription where you are building the Safe Haven.</p></li>
+</ul>
+</div>
+<div class="admonition-os-dependent-steps admonition">
+<p class="admonition-title">OS-dependent steps</p>
+<p>The following icons indicate steps that depend on the OS you are using to deploy the SHM</p>
+<ul class="simple">
+<li><p><img alt="macOS" src="https://img.shields.io/badge/-555?&amp;logo=apple&amp;logoColor=white" /> <strong>MacOS</strong></p></li>
+<li><p><img alt="Windows" src="https://img.shields.io/badge/-555?&amp;logo=windows&amp;logoColor=white" /> <strong>Windows</strong></p></li>
+<li><p><img alt="Linux" src="https://img.shields.io/badge/-555?&amp;logo=linux&amp;logoColor=white" /> <strong>Linux</strong></p></li>
+</ul>
+</div>
+</section>
+<section id="prerequisites">
+<h2>1. 🌱 Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>All of the <a class="reference internal" href="../../deployment/deploy_shm.html#deploy-shm-prerequisites"><span class="std std-ref">Safe Haven Management (SHM) environment</span></a> prerequisites</p></li>
+</ul>
+<p>The following variables will be used during deploying</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;old</span> <span class="pre">SHM</span> <span class="pre">ID&gt;</span></code>: the <a class="reference internal" href="../../deployment/deploy_shm.html#roles-deployer-shm-id"><span class="std std-ref">management environment ID</span></a> for the previously deployed SHM</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;SHM</span> <span class="pre">ID&gt;</span></code>: the <a class="reference internal" href="../../deployment/deploy_shm.html#roles-deployer-shm-id"><span class="std std-ref">management environment ID</span></a> for the new SHM you want to deploy</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;AAD</span> <span class="pre">tenant</span> <span class="pre">ID&gt;</span></code>: the <a class="reference internal" href="../../deployment/deploy_shm.html#roles-deployer-aad-tenant-id"><span class="std std-ref">Tenant ID</span></a> for the <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Active</span> <span class="pre">Directory</span></code> that your previously deployed SHM is connected to</p></li>
+</ul>
+</section>
+<section id="disconnect-the-old-domain-controller-from-the-azure-active-directory">
+<h2>2. 🔓 Disconnect the old domain controller from the Azure Active Directory<a class="headerlink" href="#disconnect-the-old-domain-controller-from-the-azure-active-directory" title="Permalink to this heading">#</a></h2>
+<p><img alt="Remote: one minute" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=microsoft-onedrive&amp;label=remote&amp;color=blue&amp;message=one%20minute" /></p>
+<ul class="simple">
+<li><p>Log into the <strong>SHM primary domain controller</strong> for the old SHM (<code class="docutils literal notranslate"><span class="pre">DC1-SHM-&lt;old</span> <span class="pre">SHM</span> <span class="pre">ID&gt;</span></code>) VM using the <code class="docutils literal notranslate"><span class="pre">private</span> <span class="pre">IP</span> <span class="pre">address</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;admin</span> <span class="pre">login&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;admin</span> <span class="pre">password&gt;</span></code> from the portal</p></li>
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">Powershell</span></code> as an administrator</p>
+<ul>
+<li><p>Navigate to <code class="docutils literal notranslate"><span class="pre">C:\Installation</span></code></p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">.\Disconnect_AD.ps1</span></code></p></li>
+<li><p>You will need to provide login credentials (including MFA if set up) for <code class="docutils literal notranslate"><span class="pre">&lt;admin</span> <span class="pre">username&gt;&#64;&lt;SHM</span> <span class="pre">domain&gt;</span></code></p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not attempt to add users to the old SHM after this point as they will not be synchronised to the <code class="docutils literal notranslate"><span class="pre">Azure</span></code> Active Directory!</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Full disconnection of the <code class="docutils literal notranslate"><span class="pre">Azure</span></code> Active Directory can take up to 72 hours but will typically take around one day.</p>
+</div>
+</section>
+<section id="safe-haven-management-configuration">
+<h2>3. 📋 Safe Haven Management configuration<a class="headerlink" href="#safe-haven-management-configuration" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Create a copy of the configuration file for your previous SHM</p></li>
+<li><p>You may want to change some of the following attributes:</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;azure&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;subscriptionName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Azure subscription to deploy the SHM into. You might want to use a different subscription than for your previous SHM.&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;shmId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The &lt;SHM ID&gt; for the new SHM. If you try to deploy two SHMs with the same ID into the same subscription some resources will not deploy correctly.&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="configure-dns-for-the-custom-domain">
+<h2>4. 🚪 Configure DNS for the custom domain<a class="headerlink" href="#configure-dns-for-the-custom-domain" title="Permalink to this heading">#</a></h2>
+<p><img alt="Powershell: a few minutes" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=powershell&amp;label=local&amp;color=blue&amp;message=a%20few%20minutes" /> at 📁 <code class="docutils literal notranslate"><span class="pre">./deployment/safe_haven_management_environment/setup</span></code></p>
+<p>See the <a class="reference internal" href="../../deployment/deploy_shm.html#roles-deployer-deploy-shm"><span class="std std-ref">Safe Haven Management documentation</span></a> for more details.</p>
+</section>
+<section id="ensure-the-azure-active-directory-domain-is-registered">
+<h2>5. 📁 Ensure the Azure Active Directory domain is registered<a class="headerlink" href="#ensure-the-azure-active-directory-domain-is-registered" title="Permalink to this heading">#</a></h2>
+<p><img alt="Powershell: a few minutes" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=powershell&amp;label=local&amp;color=blue&amp;message=a%20few%20minutes" /> at 📁 <code class="docutils literal notranslate"><span class="pre">./deployment/safe_haven_management_environment/setup</span></code></p>
+<p>See the <a class="reference internal" href="../../deployment/deploy_shm.html#roles-deployer-deploy-shm"><span class="std std-ref">Safe Haven Management documentation</span></a> for more details.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You will need to use an AAD global admin when the <code class="docutils literal notranslate"><span class="pre">AzureAD</span></code> module asks you to sign-in.</p>
+</div>
+</section>
+<section id="deploy-key-vault-for-shm-secrets-and-create-emergency-admin-account">
+<h2>6. 🔑 Deploy Key Vault for SHM secrets and create emergency admin account<a class="headerlink" href="#deploy-key-vault-for-shm-secrets-and-create-emergency-admin-account" title="Permalink to this heading">#</a></h2>
+<p><img alt="Powershell: ten minutes" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=powershell&amp;label=local&amp;color=blue&amp;message=ten%20minutes" /> at 📁 <code class="docutils literal notranslate"><span class="pre">./deployment/safe_haven_management_environment/setup</span></code></p>
+<p>See the <a class="reference internal" href="../../deployment/deploy_shm.html#roles-deployer-deploy-shm"><span class="std std-ref">Safe Haven Management documentation</span></a> for more details.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You will need to use an AAD global admin when the <code class="docutils literal notranslate"><span class="pre">AzureAD</span></code> module asks you to sign-in.</p>
+</div>
+</section>
+<section id="deploy-network-and-vpn-gateway">
+<h2>7. 🚉 Deploy network and VPN gateway<a class="headerlink" href="#deploy-network-and-vpn-gateway" title="Permalink to this heading">#</a></h2>
+<p><img alt="Powershell: twenty minutes" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=powershell&amp;label=local&amp;color=blue&amp;message=twenty%20minutes" /> at 📁 <code class="docutils literal notranslate"><span class="pre">./deployment/safe_haven_management_environment/setup</span></code></p>
+<p>See the <a class="reference internal" href="../../deployment/deploy_shm.html#roles-deployer-deploy-shm"><span class="std std-ref">Safe Haven Management documentation</span></a> for more details.</p>
+</section>
+<section id="deploy-the-domain-controllers">
+<h2>8. 🏡 Deploy the domain controllers<a class="headerlink" href="#deploy-the-domain-controllers" title="Permalink to this heading">#</a></h2>
+<p><img alt="Powershell: one hour" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=powershell&amp;label=local&amp;color=blue&amp;message=one%20hour" /> at 📁 <code class="docutils literal notranslate"><span class="pre">./deployment/safe_haven_management_environment/setup</span></code></p>
+<p>See the <a class="reference internal" href="../../deployment/deploy_shm.html#roles-deployer-deploy-shm"><span class="std std-ref">Safe Haven Management documentation</span></a> for more details.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Do <strong>not</strong> run any of the domain controller configuration steps yet</p>
+</div>
+</section>
+<section id="configure-the-new-domain-controllers">
+<h2>9. ⚡ Configure the new domain controllers<a class="headerlink" href="#configure-the-new-domain-controllers" title="Permalink to this heading">#</a></h2>
+<section id="suspend-mfa-for-all-users">
+<h3>🔏 Suspend MFA for all users<a class="headerlink" href="#suspend-mfa-for-all-users" title="Permalink to this heading">#</a></h3>
+<p><img alt="Azure AD: under a minute" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=microsoft-academic&amp;label=Azure%20AD&amp;color=blue&amp;message=under%20a%20minute" /></p>
+<ul class="simple">
+<li><p>From the <code class="docutils literal notranslate"><span class="pre">Azure</span></code> portal, navigate to the AAD.</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Security</span></code> in the left hand sidebar</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Conditional</span> <span class="pre">access</span></code> in the left hand sidebar</p></li>
+<li><p>Click the <code class="docutils literal notranslate"><span class="pre">Require</span> <span class="pre">MFA</span></code> policy from the policy list</p>
+<ul>
+<li><p>Toggle <code class="docutils literal notranslate"><span class="pre">Enable</span> <span class="pre">policy</span></code> to <code class="docutils literal notranslate"><span class="pre">Off</span></code></p></li>
+<li><p>Click the <code class="docutils literal notranslate"><span class="pre">Save</span></code> button</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="copy-shm-users-from-old-domain-controller">
+<h3>👥 Copy SHM users from old domain controller<a class="headerlink" href="#copy-shm-users-from-old-domain-controller" title="Permalink to this heading">#</a></h3>
+<p><img alt="Powershell: five minutes" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=powershell&amp;label=local&amp;color=blue&amp;message=five%20minutes" /> at 📁 <code class="docutils literal notranslate"><span class="pre">./deployment/safe_haven_management_environment/setup</span></code></p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">PS</span><span class="p">&gt;</span> <span class="p">./</span><span class="n">Copy_SHM_Users</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-oldShmId</span> <span class="p">&lt;</span><span class="n">old</span> <span class="n">SHM</span> <span class="n">ID</span><span class="p">&gt;</span> <span class="n">-newShmId</span> <span class="p">&lt;</span><span class="n">SHM</span> <span class="n">ID</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>where <code class="docutils literal notranslate"><span class="pre">&lt;old</span> <span class="pre">SHM</span> <span class="pre">ID&gt;</span></code> is the <a class="reference internal" href="../../deployment/deploy_shm.html#roles-deployer-shm-id"><span class="std std-ref">management environment ID</span></a> for the previously deployed SHM</p></li>
+<li><p>where <code class="docutils literal notranslate"><span class="pre">&lt;SHM</span> <span class="pre">ID&gt;</span></code> is the <a class="reference internal" href="../../deployment/deploy_shm.html#roles-deployer-shm-id"><span class="std std-ref">management environment ID</span></a> for this SHM</p></li>
+</ul>
+</section>
+<section id="reset-azure-ad-source-anchors">
+<h3>⚓ Reset Azure AD source anchors<a class="headerlink" href="#reset-azure-ad-source-anchors" title="Permalink to this heading">#</a></h3>
+<p><img alt="Remote: ten minutes" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=microsoft-onedrive&amp;label=remote&amp;color=blue&amp;message=ten%20minutes" /></p>
+<ul class="simple">
+<li><p>Log into the <strong>SHM primary domain controller</strong> (<code class="docutils literal notranslate"><span class="pre">DC1-SHM-&lt;SHM</span> <span class="pre">ID&gt;</span></code>) VM that you have just deployed using the <code class="docutils literal notranslate"><span class="pre">private</span> <span class="pre">IP</span> <span class="pre">address</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;admin</span> <span class="pre">login&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;admin</span> <span class="pre">password&gt;</span></code> that you obtained from the portal</p></li>
+</ul>
+<p>Run the following <code class="docutils literal notranslate"><span class="pre">Powershell</span></code> commands</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># Get local users</span>
+<span class="nv">$userOuPath</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-ADObject</span> <span class="n">-Filter</span> <span class="p">*</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;Safe Haven Research Users&quot;</span> <span class="p">}).</span><span class="n">DistinguishedName</span>
+<span class="nv">$users</span> <span class="p">=</span> <span class="nb">Get-ADUser</span> <span class="n">-Filter</span> <span class="p">*</span> <span class="n">-SearchBase</span> <span class="s2">&quot;$userOuPath&quot;</span> <span class="n">-Properties</span> <span class="p">*</span>
+
+<span class="c"># Connect to AzureAD</span>
+<span class="c"># Use the credentials for an AzureAD global admin (eg. `aad.admin.firstname.surname@&lt;SHM domain&gt;`)</span>
+<span class="nb">Connect-MsolService</span>
+
+<span class="c"># Reset source anchor for AzureAD users</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$user</span> <span class="k">in</span> <span class="nv">$users</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nv">$immutableId</span> <span class="p">=</span> <span class="no">[System.Convert]</span><span class="p">::</span><span class="n">ToBase64String</span><span class="p">(</span><span class="nv">$user</span><span class="p">.</span><span class="n">ObjectGUID</span><span class="p">.</span><span class="n">ToByteArray</span><span class="p">())</span>
+  <span class="nb">Set-MsolUser</span> <span class="n">-UserPrincipalName</span> <span class="p">$(</span><span class="nv">$user</span><span class="p">.</span><span class="n">UserPrincipalName</span><span class="p">)</span> <span class="n">-immutableID</span> <span class="nv">$immutableId</span>
+  <span class="nb">Write-Output</span> <span class="s2">&quot;Set source anchor for </span><span class="p">$(</span><span class="nv">$user</span><span class="p">.</span><span class="n">UserPrincipalName</span><span class="p">)</span><span class="s2"> to $immutableId&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All research users in this SHM will have to go to <code class="docutils literal notranslate"><span class="pre">https://aka.ms/sspr</span></code> to reset their passwords although their MFA configuration will stay the same.</p>
+</div>
+</section>
+<section id="install-azure-active-directory-connect">
+<h3>🚋 Install Azure Active Directory Connect<a class="headerlink" href="#install-azure-active-directory-connect" title="Permalink to this heading">#</a></h3>
+<p><img alt="Remote: ten minutes" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=microsoft-onedrive&amp;label=remote&amp;color=blue&amp;message=ten%20minutes" /></p>
+<p>See the <a class="reference internal" href="../../deployment/deploy_shm.html#roles-deployer-shm-aad-connect"><span class="std std-ref">Safe Haven Management documentation</span></a> for more details.</p>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>Since you are trying to connect the new SHM to an <code class="docutils literal notranslate"><span class="pre">Azure</span></code> Active Directory that was already synchronised, you may find the <code class="docutils literal notranslate"><span class="pre">AzureADConnect</span></code> installation fails due to a <code class="docutils literal notranslate"><span class="pre">Directory</span> <span class="pre">synchronisation</span> <span class="pre">failure</span></code>.</p>
+<img alt="AAD connection failure" class="align-center" src="../../_images/aad_connection_failure.png" />
+<p>If this happens then you will need to wait for the previous disconnection to complete, which may take up to 72 hours.</p>
+</div>
+</section>
+<section id="update-azure-active-directory-connect-rules">
+<h3>♻️ Update Azure Active Directory Connect rules<a class="headerlink" href="#update-azure-active-directory-connect-rules" title="Permalink to this heading">#</a></h3>
+<p><img alt="Remote: one minute" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=microsoft-onedrive&amp;label=remote&amp;color=blue&amp;message=one%20minute" /></p>
+<p>See the <a class="reference internal" href="../../deployment/deploy_shm.html#roles-system-deployer-shm-aad-connect-rules"><span class="std std-ref">Safe Haven Management documentation</span></a> for more details.</p>
+</section>
+<section id="unregister-the-old-domain-controller-in-azure-active-directory">
+<h3>🚮 Unregister the old domain controller in <code class="docutils literal notranslate"><span class="pre">Azure</span></code> Active Directory<a class="headerlink" href="#unregister-the-old-domain-controller-in-azure-active-directory" title="Permalink to this heading">#</a></h3>
+<p><img alt="Azure AD: one minute" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=microsoft-academic&amp;label=Azure%20AD&amp;color=blue&amp;message=one%20minute" /></p>
+<ul class="simple">
+<li><p>From the <code class="docutils literal notranslate"><span class="pre">Azure</span></code> portal, navigate to the AAD you have created.</p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">AD</span> <span class="pre">Connect</span></code> from the left hand menu</p></li>
+<li><p>Under <code class="docutils literal notranslate"><span class="pre">Health</span> <span class="pre">And</span> <span class="pre">Analytics</span></code> click <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">AD</span> <span class="pre">Connect</span> <span class="pre">Health</span></code></p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Sync</span> <span class="pre">services</span></code> from the left hand menu</p></li>
+<li><p>Click on <code class="docutils literal notranslate"><span class="pre">&lt;Safe</span> <span class="pre">Haven</span> <span class="pre">identifier&gt;.onmicrosoft.com</span></code></p></li>
+<li><p>Click on the <code class="docutils literal notranslate"><span class="pre">Azure</span> <span class="pre">Active</span> <span class="pre">Directory</span> <span class="pre">Connect</span> <span class="pre">Server</span></code> that corresponds to the <strong>old</strong> DC (marked as <code class="docutils literal notranslate"><span class="pre">Unhealthy</span></code>)</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Delete</span></code> in the top bar, type the server name when prompted then click <code class="docutils literal notranslate"><span class="pre">Delete</span></code></p></li>
+</ul>
+</section>
+<section id="validate-active-directory-synchronisation">
+<h3>☑️ Validate Active Directory synchronisation<a class="headerlink" href="#validate-active-directory-synchronisation" title="Permalink to this heading">#</a></h3>
+<p><img alt="Remote: one minute" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=microsoft-onedrive&amp;label=remote&amp;color=blue&amp;message=one%20minute" /></p>
+<p>See the <a class="reference internal" href="../../deployment/deploy_shm.html#roles-deployer-deploy-shm"><span class="std std-ref">Safe Haven Management documentation</span></a> for more details.</p>
+</section>
+</section>
+<section id="deploy-and-configure-network-policy-server">
+<h2>10. 🚓 Deploy and configure network policy server<a class="headerlink" href="#deploy-and-configure-network-policy-server" title="Permalink to this heading">#</a></h2>
+<p><img alt="Powershell: twenty minutes" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=powershell&amp;label=local&amp;color=blue&amp;message=twenty%20minutes" /> at 📁 <code class="docutils literal notranslate"><span class="pre">./deployment/safe_haven_management_environment/setup</span></code></p>
+<p>See the <a class="reference internal" href="../../deployment/deploy_shm.html#roles-deployer-deploy-shm"><span class="std std-ref">Safe Haven Management documentation</span></a> for more details.</p>
+</section>
+<section id="require-mfa-for-all-users">
+<h2>11. 🔐 Require MFA for all users<a class="headerlink" href="#require-mfa-for-all-users" title="Permalink to this heading">#</a></h2>
+<p><img alt="Azure AD: a few minutes" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=microsoft-academic&amp;label=Azure%20AD&amp;color=blue&amp;message=a%20few%20minutes" /></p>
+<p>See the <a class="reference internal" href="../../deployment/deploy_shm.html#roles-deployer-deploy-shm"><span class="std std-ref">Safe Haven Management documentation</span></a> for more details.</p>
+</section>
+<section id="block-portal-access-for-normal-users">
+<h2>12. 🚷 Block portal access for normal users<a class="headerlink" href="#block-portal-access-for-normal-users" title="Permalink to this heading">#</a></h2>
+<p><img alt="Azure AD: a few minutes" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=microsoft-academic&amp;label=Azure%20AD&amp;color=blue&amp;message=a%20few%20minutes" /></p>
+<p>See the <a class="reference internal" href="../../deployment/deploy_shm.html#roles-deployer-deploy-shm"><span class="std std-ref">Safe Haven Management documentation</span></a> for more details.</p>
+</section>
+<section id="deploy-python-r-package-repositories">
+<h2>13. 📦 Deploy Python/R package repositories<a class="headerlink" href="#deploy-python-r-package-repositories" title="Permalink to this heading">#</a></h2>
+<p><img alt="Powershell: thirty minutes" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=powershell&amp;label=local&amp;color=blue&amp;message=thirty%20minutes" /> at 📁 <code class="docutils literal notranslate"><span class="pre">./deployment/safe_haven_management_environment/setup</span></code></p>
+<p>See the <a class="reference internal" href="../../deployment/deploy_shm.html#roles-deployer-deploy-shm"><span class="std std-ref">Safe Haven Management documentation</span></a> for more details.</p>
+</section>
+<section id="deploy-logging">
+<h2>14. 📈 Deploy logging<a class="headerlink" href="#deploy-logging" title="Permalink to this heading">#</a></h2>
+<p><img alt="Powershell: a few minutes" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=powershell&amp;label=local&amp;color=blue&amp;message=a%20few%20minutes" /> at 📁 <code class="docutils literal notranslate"><span class="pre">./deployment/safe_haven_management_environment/setup</span></code></p>
+<p>See the <a class="reference internal" href="../../deployment/deploy_shm.html#roles-deployer-deploy-shm"><span class="std std-ref">Safe Haven Management documentation</span></a> for more details.</p>
+</section>
+<section id="deploy-firewall">
+<h2>15. 🚒 Deploy firewall<a class="headerlink" href="#deploy-firewall" title="Permalink to this heading">#</a></h2>
+<p><img alt="Powershell: ten minutes" src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=powershell&amp;label=local&amp;color=blue&amp;message=ten%20minutes" /> at 📁 <code class="docutils literal notranslate"><span class="pre">./deployment/safe_haven_management_environment/setup</span></code></p>
+<p>See the <a class="reference internal" href="../../deployment/deploy_shm.html#roles-deployer-deploy-shm"><span class="std std-ref">Safe Haven Management documentation</span></a> for more details.</p>
+</section>
+</section>
+
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="manage_costs.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Managing costs</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="manage_deployments.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Managing Data Safe Haven deployments</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+
+<div class="tocsection editthispage">
+    <a href="https://github.com/alan-turing-institute/data-safe-haven/edit/develop/docs/roles/system_manager/migrate_an_shm.md">
+        <i class="fa-solid fa-pencil"></i> Edit this page
+    </a>
+</div>
+
+</div>
+
+<div class="toc-item">
+  
+<div class="tocsection sourcelink">
+    <a href="../../_sources/roles/system_manager/migrate_an_shm.md.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright CC-BY-4.0 2022, The Alan Turing Institute..<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a> 5.2.3.
+    Hosted by <a href="https://pages.github.com/">GitHub Pages</a>.
+    <br>
+</p>
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>
