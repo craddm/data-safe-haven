@@ -10,13 +10,13 @@ Import-Module $PSScriptRoot/common/Logging -Force -ErrorAction Stop
 # Requirements
 $PowershellSupportedVersion = "7.4.1"
 $ModuleVersionRequired = @{
-    "Az.Accounts"                                  = @("ge", "2.11.1")
+    "Az.Accounts"                                  = @("ge", "2.17.0")
     "Az.Automation"                                = @("ge", "1.9.0")
     "Az.Compute"                                   = @("ge", "5.3.0")
     "Az.DataProtection"                            = @("ge", "0.4.0")
     "Az.Dns"                                       = @("ge", "1.1.2")
     "Az.KeyVault"                                  = @("ge", "4.9.1")
-    "Az.Monitor"                                   = @("ge", "4.2.0")
+    "Az.Monitor"                                   = @("ge", "5.1.1")
     "Az.MonitoringSolutions"                       = @("ge", "0.1.0")
     "Az.Network"                                   = @("ge", "5.3.0")
     "Az.OperationalInsights"                       = @("ge", "3.1.0")
