@@ -1,0 +1,149 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "dcrName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the Data Collection Rule as it will appear in the portal."
+            }
+        },
+        "dcrLocation": {
+            "type": "string",
+            "metadata": {
+                "description": "The location of the DCR. DCR is a regional resource."
+            }
+        },
+        "logAnalyticsWorkspaceArmId": {
+            "type": "string",
+            "metadata": {
+                "description": "The ARM Id of the log analytics workspace destination"
+            }
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Insights/dataCollectionRules",
+            "apiVersion": "2022-06-01",
+            "name": "[parameters('dcrName')]",
+            "location": "[parameters('dcrLocation')]",
+            "properties": {
+                "description": "Azure monitor migration script generated extensions rule",
+                "dataSources": {
+                    "performanceCounters": [
+                        {
+                            "name": "DS_WindowsPerformanceCounter_1",
+                            "streams": [
+                                "Microsoft-Perf"
+                            ],
+                            "samplingFrequencyInSeconds": 60,
+                            "counterSpecifiers": [
+                                "\\LogicalDisk(*)\\Avg. Disk sec/Read",
+                                "\\LogicalDisk(*)\\Avg. Disk sec/Write",
+                                "\\LogicalDisk(*)\\Current Disk Queue Length",
+                                "\\LogicalDisk(*)\\Disk Reads/sec",
+                                "\\LogicalDisk(*)\\Disk Transfers/sec",
+                                "\\LogicalDisk(*)\\Disk Writes/sec",
+                                "\\LogicalDisk(*)\\Free Megabytes",
+                                "\\LogicalDisk(*)\\% Free Space",
+                                "\\Memory(*)\\Available MBytes",
+                                "\\Memory(*)\\% Committed Bytes In Use",
+                                "\\Processor(*)\\% Processor Time",
+                                "\\System(*)\\Processor Queue Length"
+                            ]
+                        }
+                    ],
+                    "windowsEventLogs": [
+                        {
+                            "name": "DS_WindowsEventLogs",
+                            "streams": [
+                                "Microsoft-Event"
+                            ],
+                            "xPathQueries": [
+                                "Active Directory Web Services!*[System[(Level=1 or Level=2 or Level=3 or Level=4 or Level=0)]]",
+                                "DFS Replication!*[System[(Level=1 or Level=2 or Level=3 or Level=4 or Level=0)]]",
+                                "Directory Service!*[System[(Level=1 or Level=2 or Level=3 or Level=4 or Level=0)]]",
+                                "DNS Server!*[System[(Level=1 or Level=2 or Level=3 or Level=4 or Level=0)]]",
+                                "Microsoft-Windows-Security-Netlogon/Operational!*[System[(Level=1 or Level=2 or Level=3 or Level=4 or Level=0)]]",
+                                "Microsoft-Windows-Winlogon/Operational!*[System[(Level=1 or Level=2 or Level=3 or Level=4 or Level=0)]]",
+                                "System!*[System[(Level=1 or Level=2 or Level=3 or Level=4 or Level=0)]]"
+                            ]
+                        }
+                    ],
+                    "sysLog": [
+                        {
+                            "name": "DS_LinuxSyslog_1",
+                            "streams": [
+                                "Microsoft-Syslog"
+                            ],
+                            "facilityNames": [
+                                "auth",
+                                "authpriv",
+                                "cron",
+                                "daemon",
+                                "ftp",
+                                "kern",
+                                "lpr",
+                                "mail",
+                                "news",
+                                "syslog",
+                                "user",
+                                "uucp"
+                            ],
+                            "logLevels": [
+                                "Debug",
+                                "Info",
+                                "Notice",
+                                "Warning",
+                                "Error",
+                                "Critical",
+                                "Alert",
+                                "Emergency"
+                            ]
+                        }
+                    ]
+                },
+                "destinations": {
+                    "logAnalytics": [
+                        {
+                            "workspaceResourceId": "[parameters('logAnalyticsWorkspaceArmId')]",
+                            "name": "myloganalyticsworkspace"
+                        }
+                    ]
+                },
+                "dataFlows": [
+                    {
+                        "streams": [
+                            "Microsoft-Perf"
+                        ],
+                        "destinations": [
+                            "myloganalyticsworkspace"
+                        ],
+                        "transformKql": "source",
+                        "outputStream": "Microsoft-Perf"
+                    },
+                    {
+                        "streams": [
+                            "Microsoft-Event"
+                        ],
+                        "destinations": [
+                            "myloganalyticsworkspace"
+                        ],
+                        "transformKql": "source",
+                        "outputStream": "Microsoft-Event"
+                    },
+                    {
+                        "streams": [
+                            "Microsoft-Syslog"
+                        ],
+                        "destinations": [
+                            "myloganalyticsworkspace"
+                        ],
+                        "transformKql": "source",
+                        "outputStream": "Microsoft-Syslog"
+                    }
+                ]
+            }
+        }
+    ]
+}
