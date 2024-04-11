@@ -16,6 +16,7 @@ $ModuleVersionRequired = @{
     "Az.DataProtection"                            = @("ge", "0.4.0")
     "Az.Dns"                                       = @("ge", "1.1.2")
     "Az.KeyVault"                                  = @("ge", "4.9.1")
+    "Az.Maintenance"                               = @("ge", "1.4.1")
     "Az.Monitor"                                   = @("ge", "5.1.1")
     "Az.MonitoringSolutions"                       = @("ge", "0.1.0")
     "Az.Network"                                   = @("ge", "5.3.0")
