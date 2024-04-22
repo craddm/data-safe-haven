@@ -320,6 +320,10 @@ function Get-ShmConfig {
         loggingWorkspace  = [ordered]@{
             name = "shm-$($shm.id)-loganalytics".ToLower()
         }
+        dataCollection = [ordered]@{
+            ruleName = "shm-$($shm.id)-dcr".ToLower()
+            endpointName = "shm-$($shm.id)-dce".ToLower()
+        }
         privatelink       = [ordered]@{
             name = "shm-$($shm.id)-privatelinkscope".ToLower()
         }
