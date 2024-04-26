@@ -259,14 +259,16 @@ function Deploy-VirtualMachineMonitoringExtension {
     )
     if ($VM.OSProfile.WindowsConfiguration) {
         # Install Monitoring Agent - Replacement is Azure Monitor Agent (https://docs.microsoft.com/en-us/azure/azure-monitor/agents/agents-overview?tabs=PowerShellWindows)
-        Set-VirtualMachineExtensionIfNotInstalled -VM $VM -Publisher "Microsoft.EnterpriseCloud.Monitoring" -Type "MicrosoftMonitoringAgent" -Version 1.0 -WorkspaceId $WorkspaceId -WorkspaceKey $WorkspaceKey
+        #Set-VirtualMachineExtensionIfNotInstalled -VM $VM -Publisher "Microsoft.EnterpriseCloud.Monitoring" -Type "MicrosoftMonitoringAgent" -Version 1.0 -WorkspaceId $WorkspaceId -WorkspaceKey $WorkspaceKey
+        Set-VirtualMachineExtensionIfNotInstalled -VM $VM -Publisher "Microsoft.Azure.Monitor" -Type "AzureMonitorWindowsAgent" -Version 1.25 -WorkspaceId $WorkspaceId -WorkspaceKey $WorkspaceKey
+        #Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWindowsAgent -Publisher Microsoft.Azure.Monitor -ResourceGroupName <resource-group-name> -VMName <virtual-machine-name> -Location <location> -TypeHandlerVersion <version-number> -EnableAutomaticUpgrade $true -SettingString '{"authentication":{"managedIdentity":{"identifier-name":"mi_res_id","identifier-value":"/subscriptions/<my-subscription-id>/resourceGroups/<my-resource-group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<my-user-assigned-identity>"}}}'
         # # Install Dependency Agent
         # Set-VirtualMachineExtensionIfNotInstalled -VM $VM -Publisher "Microsoft.Azure.Monitoring.DependencyAgent" -Type "DependencyAgentWindows" -Version 9.10 -WorkspaceId $WorkspaceId -WorkspaceKey $WorkspaceKey
     } elseif ($VM.OSProfile.LinuxConfiguration) {
         # Install Monitoring Agent - does not support Ubuntu 22.04. Replacement is Azure Monitor Agent (https://docs.microsoft.com/en-us/azure/azure-monitor/agents/agents-overview?tabs=PowerShellWindows)
-        Set-VirtualMachineExtensionIfNotInstalled -VM $VM -Publisher "Microsoft.EnterpriseCloud.Monitoring" -Type "OmsAgentForLinux" -EnableAutomaticUpgrade $true -Version 1.14 -WorkspaceId $WorkspaceId -WorkspaceKey $WorkspaceKey
-        # # Install Dependency Agent - not working with current Ubuntu 20.04 (https://docs.microsoft.com/en-us/answers/questions/938560/unable-to-enable-insights-on-ubuntu-2004-server.html)
-        # Set-VirtualMachineExtensionIfNotInstalled -VM $VM -Publisher "Microsoft.Azure.Monitoring.DependencyAgent" -Type "DependencyAgentLinux" -Version 9.10 -WorkspaceId $WorkspaceId -WorkspaceKey $WorkspaceKey
+        #Set-VirtualMachineExtensionIfNotInstalled -VM $VM -Publisher "Microsoft.EnterpriseCloud.Monitoring" -Type "OmsAgentForLinux" -EnableAutomaticUpgrade $true -Version 1.14 -WorkspaceId $WorkspaceId -WorkspaceKey $WorkspaceKey
+        Set-VirtualMachineExtensionIfNotInstalled -VM $VM -Publisher "Microsoft.Azure.Monitor" -Type "AzureMonitorLinuxAgent" -EnableAutomaticUpgrade $true -Version 1.30 -WorkspaceId $WorkspaceId -WorkspaceKey $WorkspaceKey
+        #Set-AzVMExtension -Name AzureMonitorLinuxAgent -ExtensionType AzureMonitorLinuxAgent -Publisher Microsoft.Azure.Monitor -ResourceGroupName <resource-group-name> -VMName <virtual-machine-name> -Location <location> -TypeHandlerVersion <version-number> -EnableAutomaticUpgrade $true -SettingString '{"authentication":{"managedIdentity":{"identifier-name":"mi_res_id","identifier-value":/subscriptions/<my-subscription-id>/resourceGroups/<my-resource-group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<my-user-assigned-identity>"}}}'
     } else {
         Add-LogMessage -Level Fatal "VM OSProfile not recognised. Cannot activate logging for VM '$($vm.Name)'!"
     }
