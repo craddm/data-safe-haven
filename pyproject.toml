@@ -116,7 +116,7 @@ pre-install-commands = ["pip install -r requirements.txt"]
 [tool.hatch.envs.test.scripts]
 test = "pytest {args:-vvv tests}"
 test-coverage = "coverage run -m pytest tests"
-test-report = "coverage report"
+test-report = "coverage xml"
 cov = ["test-coverage", "test-report"]
 
 [tool.coverage.paths]
