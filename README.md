@@ -13,12 +13,12 @@
 | data\_safe\_haven/administration/users/user\_handler.py                           |      105 |       83 |     21% |24-29, 37-73, 77-84, 88, 94-104, 112-133, 141-146, 154-168, 176-215, 223-228 |
 | data\_safe\_haven/commands/\_\_init\_\_.py                                        |        2 |        0 |    100% |           |
 | data\_safe\_haven/commands/cli.py                                                 |       36 |       14 |     61% |56-63, 99-104 |
-| data\_safe\_haven/commands/config.py                                              |       38 |        0 |    100% |           |
+| data\_safe\_haven/commands/config.py                                              |       39 |        0 |    100% |           |
 | data\_safe\_haven/commands/context.py                                             |       64 |        0 |    100% |           |
 | data\_safe\_haven/commands/pulumi.py                                              |       30 |        4 |     87% |     56-68 |
 | data\_safe\_haven/commands/shm.py                                                 |       46 |       27 |     41% |44-73, 83-84, 93-117 |
 | data\_safe\_haven/commands/sre.py                                                 |       62 |       47 |     24% |32-131, 139-173 |
-| data\_safe\_haven/commands/users.py                                               |      100 |       79 |     21% |29-51, 57-75, 96-134, 149-168, 189-231 |
+| data\_safe\_haven/commands/users.py                                               |      120 |       51 |     58% |40-56, 73-85, 123-149, 175-188, 225-256 |
 | data\_safe\_haven/config/\_\_init\_\_.py                                          |        4 |        0 |    100% |           |
 | data\_safe\_haven/config/config.py                                                |      104 |        7 |     93% |71, 77, 89, 166, 216, 228-229 |
 | data\_safe\_haven/config/pulumi.py                                                |       40 |        0 |    100% |           |
@@ -101,10 +101,10 @@
 | data\_safe\_haven/utility/logger.py                                               |      108 |       54 |     50% |28-30, 35-37, 41-42, 87-88, 92-93, 117-120, 129-132, 159, 167-180, 184-190, 194, 200-201, 215-223, 232-234 |
 | data\_safe\_haven/utility/singleton.py                                            |        8 |        0 |    100% |           |
 | data\_safe\_haven/validators/\_\_init\_\_.py                                      |        3 |        0 |    100% |           |
-| data\_safe\_haven/validators/typer.py                                             |       19 |        0 |    100% |           |
-| data\_safe\_haven/validators/validators.py                                        |       49 |        0 |    100% |           |
+| data\_safe\_haven/validators/typer.py                                             |       20 |        0 |    100% |           |
+| data\_safe\_haven/validators/validators.py                                        |       54 |        0 |    100% |           |
 | data\_safe\_haven/version.py                                                      |        2 |        0 |    100% |           |
-|                                                                         **TOTAL** | **4332** | **2463** | **43%** |           |
+|                                                                         **TOTAL** | **4359** | **2435** | **44%** |           |
 
 
 ## Setup coverage badge
