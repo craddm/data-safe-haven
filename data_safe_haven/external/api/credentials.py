@@ -208,13 +208,20 @@ class GraphApiCredential(DeferredCredential):
             f_auth.write(new_auth_record.serialize())
 
         # Confirm that these are the desired credentials
-        self.confirm_credentials_interactive(
-            "Microsoft Graph API",
-            user_name=new_auth_record.username,
-            user_id=new_auth_record._home_account_id.split(".")[0],
-            tenant_name=new_auth_record._username.split("@")[1],
-            tenant_id=new_auth_record._tenant_id,
-        )
+        try:
+            self.confirm_credentials_interactive(
+                "Microsoft Graph API",
+                user_name=new_auth_record.username,
+                user_id=new_auth_record._home_account_id.split(".")[0],
+                tenant_name=new_auth_record._username.split("@")[1],
+                tenant_id=new_auth_record._tenant_id,
+            )
+        except (CredentialUnavailableError, DataSafeHavenValueError) as exc:
+            self.logger.error(
+                f"Please delete the cached credentials and try again: remove the file [green]{authentication_record_path}"
+            )
+            msg = "Error getting account information from Graph API."
+            raise DataSafeHavenAzureError(msg) from exc
 
         # Return the credential
         return credential
