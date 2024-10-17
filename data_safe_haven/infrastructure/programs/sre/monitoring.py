@@ -186,7 +186,9 @@ class SREMonitoringComponent(ComponentResource):
             resource_group_name=props.resource_group_name,
             opts=ResourceOptions.merge(
                 child_opts,
-                ResourceOptions(parent=self.log_analytics),
+                ResourceOptions(
+                    depends_on=self.log_analytics, parent=self.log_analytics
+                ),
             ),
             tags=child_tags,
         )
@@ -294,7 +296,9 @@ class SREMonitoringComponent(ComponentResource):
             resource_group_name=props.resource_group_name,
             opts=ResourceOptions.merge(
                 child_opts,
-                ResourceOptions(parent=self.log_analytics),
+                ResourceOptions(
+                    depends_on=self.log_analytics, parent=self.log_analytics
+                ),
             ),
             tags=child_tags,
         )
